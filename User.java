@@ -1,18 +1,18 @@
+import java.util.ArrayList;
 import java.util.UUID;
 
 /**
- * @author Cam Osterholt
+ * @author Evelyn Ellis & Cam Osterholt
  * @version v1.0
  * Date: 10/10/2023
  */
-
 public class User {
-    private UUID id; 
+    private UUID id;
     private String email;
     private String password;
     private String firstName;
     private String lastName;
-    private ArrayList<Company> companies;
+    private ArrayList<Company>[] companies;
     private String role;
 
     public User(String firstName, String lastName, String email, String password) {  
@@ -23,6 +23,7 @@ public class User {
         init(id, firstName, lastName, email, password);
     }
     private void init(UUID id, String firstName, String lastName, String email, String password) {
+        companies = new ArrayList<Company>[];
         setUUID(id);
         setFirstName(firstName);
         setLastName(lastName);
@@ -94,4 +95,3 @@ public class User {
         this.password = password;
         return true; 
     }
-}
