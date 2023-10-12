@@ -12,7 +12,7 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-    private ArrayList<Company>[] companies;
+    private ArrayList<Company> companies;
     private String role;
 
     public User(String firstName, String lastName, String email, String password) {  
@@ -23,7 +23,7 @@ public class User {
         init(id, firstName, lastName, email, password);
     }
     private void init(UUID id, String firstName, String lastName, String email, String password) {
-        companies = new ArrayList<Company>[];
+        this.companies = new ArrayList<Company>();
         setUUID(id);
         setFirstName(firstName);
         setLastName(lastName);
@@ -38,6 +38,7 @@ public class User {
         if(company == null)
             return false;
         companies.add(company); //TODO: Fix when add Company class
+        return true;
     }
     private boolean removeCompany(Company company) {
         return true; //TODO: Implement
@@ -78,6 +79,7 @@ public class User {
         if(id == null)
             id = UUID.randomUUID();
         this.id = id;
+        return true;
     }
     private boolean setEmail(String email) {
         if(email == null) {
@@ -95,3 +97,4 @@ public class User {
         this.password = password;
         return true; 
     }
+}
