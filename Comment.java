@@ -14,7 +14,7 @@ public class Comment {
 
     public Comment(User author, String comment) {
         init();
-        setUser(author);
+        setAuthor(author);
         editComment(comment);
     }
 
@@ -43,11 +43,15 @@ public class Comment {
         return author;
     }
 
-    public void setAuthor(User author) {
-        if(author != null) {}
+    public boolean setAuthor(User author) {
+        if(author != null) {
             this.author = author;
-        else
-            this.author = new User();
+            return true;
+        }
+        else {
+            System.out.println("Invalid Author.");
+            return false;
+        }
     }
 
     public Date getDate() {
