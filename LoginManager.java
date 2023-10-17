@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.UUID;
 /**
  * @author Cam Osterholt
  * @version v1.0
@@ -27,5 +28,13 @@ public class LoginManager {
     }
     public boolean addUser(User newUser) {
         return true;
+    }
+    public static User getUser(UUID id) {
+        for(User user : userList) {
+            if(id.equals(user.getId()))
+                return user;
+        }
+        Test.print("No User Found.");
+        return null;
     }
 }
