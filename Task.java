@@ -57,4 +57,7 @@ public class Task {
     public UUID getID() {
         return this.id;
     }
+    public String getName() {
+        return this.name;
+    }
 }
