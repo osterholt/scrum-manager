@@ -18,4 +18,14 @@ public class Test {
         debug = !debug;
         return debug;
     }
+
+    public static void printUsers() {
+        LoginManager logManager = LoginManager.getInstance();
+        print(logManager);
+    }
+
+    public static void printCompanies() {
+        CompanyManager compManager = CompanyManager.getInstance();
+        
+    }
 }
