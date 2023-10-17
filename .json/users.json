@@ -1,18 +1,23 @@
 [
     {
-        "id": "5b234d00-f114-4b39-9919-ccd1eb8ae9a5",
-        "first-name": "Joshua",
-        "last-name": "Dietrich",
-        "email": "jdietrich@gmail.com",
-        "password": "12345",
-        "role": "Developer",
-        "Company": ["UUID", "Horizon"]
-    } , {
-        "id": "cd6afc55-0fac-490c-9e21-26101ae0a656",
-        "first-name": "Sherry",
-        "last-name": "Begay",
-        "email": "sbegay@gmail.com",
-        "role": "Administrator",
-        "company": ["USC Ltd", "Horizon"]
+        "firstName": "Josh",
+        "lastName": "Dietrich",
+        "password": "password1",
+        "id": "0996291e-9a05-46bd-8417-96bb30174e64",
+        "email": "jdd@email.com"
+    },
+    {
+        "firstName": "Sherry",
+        "lastName": "begay",
+        "password": "password2",
+        "id": "5b24cc7e-3c32-4806-8d4c-f29d3bcdd0c8",
+        "email": "shb@email.com"
+    },
+    {
+        "firstName": "evie",
+        "lastName": "ellis",
+        "password": "password3",
+        "id": "0967e3a6-f260-492d-9169-5b1f1ebf12a1",
+        "email": "ee@email.com"
     }
 ]

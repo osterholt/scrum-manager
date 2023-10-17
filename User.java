@@ -89,6 +89,9 @@ public class User {
         this.email = email;
         return true;
     }
+    public String getPassword() {
+        return password;
+    }
     private boolean setPassword(String password) {
        if(password == null) {
             System.out.println("Invalid Password. Login Failed.");
