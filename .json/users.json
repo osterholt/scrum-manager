@@ -3,21 +3,36 @@
         "firstName": "Josh",
         "lastName": "Dietrich",
         "password": "password1",
-        "id": "0996291e-9a05-46bd-8417-96bb30174e64",
+        "companies": [
+            "570ad1c0-f34f-4ccb-b42b-f5fee9f11a5a",
+            "fb0bd647-70af-4b58-b776-593d401759e6",
+            "ee33c519-c195-4e04-8ac0-d19e47cab62b"
+        ],
+        "id": "61e051aa-3187-4cb1-99eb-73c4bbe2c92b",
         "email": "jdd@email.com"
     },
     {
         "firstName": "Sherry",
         "lastName": "begay",
         "password": "password2",
-        "id": "5b24cc7e-3c32-4806-8d4c-f29d3bcdd0c8",
+        "companies": [
+            "570ad1c0-f34f-4ccb-b42b-f5fee9f11a5a",
+            "fb0bd647-70af-4b58-b776-593d401759e6",
+            "ee33c519-c195-4e04-8ac0-d19e47cab62b"
+        ],
+        "id": "c74c7e7b-70db-4757-b8c1-49c987170ef6",
         "email": "shb@email.com"
     },
     {
         "firstName": "evie",
         "lastName": "ellis",
         "password": "password3",
-        "id": "0967e3a6-f260-492d-9169-5b1f1ebf12a1",
+        "companies": [
+            "570ad1c0-f34f-4ccb-b42b-f5fee9f11a5a",
+            "fb0bd647-70af-4b58-b776-593d401759e6",
+            "ee33c519-c195-4e04-8ac0-d19e47cab62b"
+        ],
+        "id": "9cd5a29f-ca44-4ebf-9e37-ebe238dda9cf",
         "email": "ee@email.com"
     }
 ]

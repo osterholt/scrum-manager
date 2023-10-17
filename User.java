@@ -34,16 +34,17 @@ public class User {
     public boolean isPassword(String password) {
         return this.password.equals(password);
     }
-    public boolean addCompany(Company company) {
+    public void addCompany(Company company) {
         if(company == null)
-            return false;
+            return;
         companies.add(company); //TODO: Fix when add Company class
-        return true;
     }
     private boolean removeCompany(Company company) {
         return true; //TODO: Implement
     }
-
+    public ArrayList<Company> getCompanies() {
+        return this.companies; 
+    }
     public UUID getId() {
         return id;
     }

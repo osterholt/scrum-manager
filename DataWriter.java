@@ -18,6 +18,13 @@ public class DataWriter extends DataConstants{
         userDetails.put(USER_EMAIL, user.getEmail());
         userDetails.put(USER_PASSWORD, user.getPassword());
 
+        JSONArray companyList = new JSONArray();
+        for (Company company : user.getCompanies()) {
+            companyList.add(company.getID().toString());
+        }
+
+        userDetails.put(USER_COMPANIES, companyList);
+
         return userDetails;
     }
 
@@ -27,7 +34,19 @@ public class DataWriter extends DataConstants{
         User user1 = new User("Josh", "Dietrich", "jdd@email.com", "password1");
         User user2 = new User("Sherry", "begay", "shb@email.com", "password2");
         User user3 = new User("evie", "ellis", "ee@email.com", "password3");
+        Company company1 = new Company("USC Ltd", user3, null, null);
+        Company company2 = new Company("Company 2", user3, null, null);
+        Company company3 = new Company("COmpany 3", user3, null, null);
 
+        user1.addCompany(company1);
+        user1.addCompany(company2);
+        user1.addCompany(company3);
+        user2.addCompany(company1);
+        user2.addCompany(company2);
+        user2.addCompany(company3);
+        user3.addCompany(company1);
+        user3.addCompany(company2);
+        user3.addCompany(company3);
         users.add(user1);
         users.add(user2);
         users.add(user3);
