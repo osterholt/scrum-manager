@@ -1,0 +1,50 @@
+[
+    {
+        "taskid" : "485ab81b-1fe4-4688-8828-4c8aa8cd39a0",
+        "name" : "Bugfix UI",
+        "description" : "UI is broken, needs to be debugged",
+        "date": "10/12/2023",
+        "authorId" : "cd6afc55-0fac-490c-9e21-26101ae0a656",
+        "assigneeID" : "5b234d00-f114-4b39-9919-ccd1eb8ae9a5",
+        "category" : "FUNCTIONAL_BUG",
+        "resolved" : false,
+        "priority" : 3,
+        "time-required" : 1.5,
+        "history" : [{
+            "author": "",
+            "change": "",
+            "date": ""
+        }],
+        "comments" : [{
+            "authorId" : "5b234d00-f114-4b39-9919-ccd1eb8ae9a5",
+            "comment" : "Attempted fix but didn't have time to finish",
+            "date":"10/12/2023",
+            "comments": [{
+                "authorId" : "5b234d00-f114-4b39-9919-ccd1eb8ae9a5",
+                "comment" : "Attempted fix but didn't have time to finish",
+                "date":"10/12/2023",
+                "comments":[]
+                }]
+        }]
+    },{
+        "taskid" : "7da80356-c2f0-4099-9a12-b4eca98b8a3b",
+        "name" : "Leaderboard update",
+        "description" : "Leaderboard doesn't update properly, needs fixing",
+        "date":"10/12/2023",
+        "authorId" : "cd6afc55-0fac-490c-9e21-26101ae0a656",
+        "assigneeID" : "5b234d00-f114-4b39-9919-ccd1eb8ae9a5",
+        "category" : "FUNCTIONAL_BUG",
+        "resolved" : false,
+        "priority" : 1,
+        "time-required" : 0.5,
+        "history" : [{
+            
+            }],
+        "comments" : [{
+            "authorId" : "5b234d00-f114-4b39-9919-ccd1eb8ae9a5",
+            "comment" : "Tried something but don't know why its not working",
+            "date" : "10/12/2023",
+            "comments": ["trying to fix", "couldn't fix"]
+        }]
+    }
+]
