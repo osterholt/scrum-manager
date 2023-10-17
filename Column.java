@@ -24,5 +24,14 @@ public class Column {
     public boolean taskReorder(int index, Task task){
         return false;
     }
+
+    /**
+     * Returns title of the column.
+     * @return String representing the title.
+     * @autor Cam Osterholt
+     */
+    public String getTitle() {
+        return title;
+    }
     
 }
