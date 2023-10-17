@@ -29,7 +29,7 @@ public class Task {
     }
 
     private void init(UUID id, String name, String description, User author, User assignee, Category category, boolean resolved, float timeRequired) {
-        
+
 
 
     }
@@ -52,5 +52,9 @@ public class Task {
 
     public boolean deleteComment(Comment comment) {
         return false;
+    }
+
+    public UUID getID() {
+        return this.id;
     }
 }
