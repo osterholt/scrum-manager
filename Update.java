@@ -12,7 +12,25 @@ public class Update {
     private UUID id;
 
     public Update(Date timestamp, User user, String changelog, UUID id){
-        
+        this.id = UUID.randomUUID();
+		this.user = user;
+		this.timestamp = timestamp;
+		this.changelog= changelog;
+    }
+    public UUID getId() {
+        return id;
+    }
+    public Date getTimeStamp() {
+        return timestamp;
+    }
+    public User getUser() {
+        return user;
+    }
+    public String getChangeLog() {
+        return changelog;
+    }
+    public Date setTimeStamp() {
+        this.timestamp = timestamp;
     }
     
 }
