@@ -19,8 +19,22 @@ public class Leaderboard {
    public int getRank(User user){
         return 0;
    }
-    public int updateScore(User user, int increment){
-        return 0;
-    }
+
+     /**
+      * Increments User score for one completed task.
+     * @param user User to update.
+     * @return User's current score.
+     */
+     public int updateScore(User user) {
+          return updateScore(user, 1);
+     }
+     /**
+      * Increments User score for one completed task.
+     * @param user User to update.
+     * @return User's current score.
+     */
+     public int updateScore(User user, int increment){
+          return 0;
+     }
     
 }

@@ -1,3 +1,5 @@
+import java.util.UUID;
+
 /**
  * @author Cam Osterholt
  * @version v1.0
@@ -43,5 +45,8 @@ public class AppFacade {
         return true;
     }
 
+    public static User getUser(UUID id) {
+        return LoginManager.getUser(id);
+    }
 
 }
