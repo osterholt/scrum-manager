@@ -27,15 +27,20 @@ public class Task {
 
     }
 
-    public Task(UUID id, String name, String description, User author, User assignee, Category category, boolean resolved, float timeRequired) {
-        init(id, name, description, author, assignee, category, resolved, timeRequired);
+    public Task(UUID id, String name, String description, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
+        init(id, name, description, date, author, assignee, category, resolved, priority, timeRequired);
     }
 
-    private void init(UUID id, String name, String description, User author, User assignee, Category category, boolean resolved, float timeRequired) {
-
-
-
+    private void init(UUID id, String name, String description, String date, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
+        setUUID(id);
     }
+    private boolean setUUID(UUID id) {
+        if(id == null)
+            id = UUID.randomUUID();
+        this.id = id;
+        return true;
+    }
+    
 
     public boolean changeCategory() {
         return false;
