@@ -5,6 +5,7 @@
  */
 
 public class UI {
+    private static final String[] USER_CAM = {"Cam", "Osterholt", "banana@osterholt.us", "p33y0urp@nt$"};
     public static void main(String args[]) {
         UI ui  = new UI();
         ui.run();
@@ -19,6 +20,11 @@ public class UI {
 
         // AppFacade.signUp("Portia", "Plante", "plante@gmail.com", "password4");
         // AppFacade.logOut();
-
+      
+        //TODO:
+        //ADD USER with data above
+        //Signup
+        //Add to json file - test
+        //Make sure we can save
     }
 }
