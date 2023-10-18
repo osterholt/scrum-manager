@@ -46,7 +46,7 @@ public class AppFacade {
     }
 
     private boolean signUp(String firstName, String lastName, String email, String password) {
-        activeUser = new User(firstName, lastName,email, password);
+        LoginManager.getInstance().addUser(firstName, lastName, email, password);
         return true;
     }
 
