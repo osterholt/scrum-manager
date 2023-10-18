@@ -38,5 +38,13 @@ public class Test {
         }
         lb.print();
         //TODO: In progress by Cam
+    public static void printUsers() {
+        LoginManager logManager = LoginManager.getInstance();
+        print(logManager);
+    }
+    public static void printCompanies() {
+        CompanyManager compManager = CompanyManager.getInstance();
+        
+
     }
 }

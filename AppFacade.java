@@ -37,7 +37,11 @@ public class AppFacade {
         return activeBoard;
     }
 
-    private boolean login() { //TODO: Determine parameters
+    private boolean login(String username, String password) { //TODO: Determine parameters
+        activeUser = LoginManager.getInstance().getUser(username, password);
+        if(activeUser == null){
+            return false;
+        }
         return true;
     }
 

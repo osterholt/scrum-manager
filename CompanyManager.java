@@ -7,21 +7,48 @@ import java.util.ArrayList;
 
 public class CompanyManager {
   private static CompanyManager companyManager;
-  private ArrayList<Company> companies;
+  private static ArrayList<Company> companies;
 
   private CompanyManager() {
-
+    companies = new ArrayList<Company>();
   }
 
-  public CompanyManager getInstance() {
+  public static CompanyManager getInstance() {
+    if(companyManager == null)
+      companyManager = new CompanyManager();
     return companyManager;
   }
 
+  /**
+   * Checks if Company to be added is present in list and a valid company and
+   * adds to the list of Companies if true.
+   * @param company Company to be added
+   * @return boolean if successfully added
+   */
   public boolean addCompany(Company company) {
-    return false;
+    for(Company currCompany : companies) {
+      if(currCompany.equals(company) || !company.isValid())
+        return false;
+    }
+    companies.add(company);
+    return true;
   }
 
+  /**
+   * Iterates through ArrayList of Company objects and removes the specified
+   * Company if present.
+   * @param company Company to be removed
+   * @return Company removed
+   */
   public Company removeCompany(Company company) {
-    return company;
-  }
+    if(!company.isValid())
+      return null;
+    for(Company currCompany : companies) {
+      if(currCompany.equals(company)) {
+        companies.remove(currCompany);
+        return currCompany;
+      }
+    }
+    return null;
+  } 
 }
