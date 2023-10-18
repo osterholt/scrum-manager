@@ -9,18 +9,13 @@ public class Update {
     private Date timestamp;
     private User user;
     private String changelog;
-    private UUID id;
 
     public Update(Date timeStamp, User user, String changeLog, UUID id){
-        this.id = UUID.randomUUID();
         this.user = user;
         this.changelog = changeLog;
         this.timestamp = timeStamp;
       }
   
-      public UUID getId() {
-          return id;
-      }
       public Date getTimeStamp() {
           return timestamp;
       }
