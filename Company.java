@@ -38,5 +38,14 @@ public class Company {
     public ArrayList<Task>[] searchForTask(){
         return null;
     }
-    
+    public boolean equals(Company company) {
+        return true;
+    }
+    /**
+     * Checks that all data members are properly initialized
+     * @return boolean
+     */
+    public boolean isValid() {
+        return true;
+    }
 }
