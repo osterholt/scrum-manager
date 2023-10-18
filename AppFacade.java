@@ -37,7 +37,7 @@ public class AppFacade {
         return activeBoard;
     }
 
-    private boolean login(String username, String password) { //TODO: Determine parameters
+    public static boolean login(String username, String password) { //TODO: Determine parameters
         activeUser = LoginManager.getInstance().getUser(username, password);
         if(activeUser == null){
             return false;
@@ -45,12 +45,21 @@ public class AppFacade {
         return true;
     }
 
-    private boolean signUp() {
+    public static User getCurrentUser(){
+        return activeUser;
+    }
+
+    public static boolean signUp(String firstName, String lastName, String email, String password) {
+        LoginManager.getInstance().addUser(firstName, lastName, email, password);
         return true;
     }
 
     public static User getUser(UUID id) {
         return LoginManager.getUser(id);
+    }
+
+    public static void logOut() {
+        LoginManager.saveUsers();
     }
 
 }

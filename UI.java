@@ -7,11 +7,20 @@
 public class UI {
     private static final String[] USER_CAM = {"Cam", "Osterholt", "banana@osterholt.us", "p33y0urp@nt$"};
     public static void main(String args[]) {
-        UI ui = new UI();
+        UI ui  = new UI();
         ui.run();
     }
-    public void run() {
-        AppFacade ap = AppFacade.getInstance();
+    public static void run() {
+        if(AppFacade.login("plante@gmail.com", "password4")) {
+            System.out.println("Successfully logged in");
+            System.out.println(AppFacade.getCurrentUser().getFirstName());
+        } else {
+            System.out.println("Not able to login");
+        }
+
+        // AppFacade.signUp("Portia", "Plante", "plante@gmail.com", "password4");
+        // AppFacade.logOut();
+      
         //TODO:
         //ADD USER with data above
         //Signup
