@@ -17,18 +17,19 @@ public class User {
 
     public User(String firstName, String lastName, String email, String password) {  
         UUID tempid = UUID.randomUUID();
-        init(tempid, firstName, lastName, email, password);
+        init(tempid, firstName, lastName, email, password, role);
     }
-    public User(UUID id, String firstName, String lastName, String email, String password) {
-        init(id, firstName, lastName, email, password);
+    public User(UUID id, String firstName, String lastName, String email, String password, String role) {
+        init(id, firstName, lastName, email, password, role);
     }
-    private void init(UUID id, String firstName, String lastName, String email, String password) {
+    private void init(UUID id, String firstName, String lastName, String email, String password, String role) {
         this.companies = new ArrayList<Company>();
         setUUID(id);
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
         setPassword(password);
+        setRole(role);
     }
     
     public boolean isPassword(String password) {

@@ -24,7 +24,7 @@ public class DB extends DataConstants{
                 String email = (String)personJSON.get(USER_EMAIL);
                 String role = (String)personJSON.get(USER_ROLE);
                 String password = (String)personJSON.get(USER_PASSWORD);
-                users.add(new User(id,firstName, lastName, email, password));
+                users.add(new User(id,firstName, lastName, email, password, role));
             }
 
             return users;
@@ -36,7 +36,11 @@ public class DB extends DataConstants{
     public static void main(String[] args) {
         ArrayList<User> users = DB.getUsers();
         for(int i = 0; i<users.size();i++) {
-            System.out.println(users.get(i).getFirstName());
+            System.out.println(users.get(i).getFirstName()+
+            " "+users.get(i).getLastName()+
+            " "+users.get(i).getEmail()+
+            " "+users.get(i).getRole()+
+            " "+users.get(i).getPassword());
         }
     }
 }

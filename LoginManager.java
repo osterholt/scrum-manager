@@ -18,6 +18,7 @@ public class LoginManager {
 
     private LoginManager() {
         //TODO: init
+        userList = DataWriter.getUsers();
     }
 
     public static boolean checkEmail(String email) {
@@ -36,5 +37,11 @@ public class LoginManager {
         }
         Test.print("No User Found.");
         return null;
+    }
+    public ArrayList<User> getUsers() {
+        return userList;
+    }
+    public boolean saveUsers() {
+        return DataWriter.saveUsers();
     }
 }

@@ -1,0 +1,38 @@
+[
+    {
+        "firstName": "Josh",
+        "lastName": "Dietrich",
+        "password": "password1",
+        "companies": [
+            "ea539c01-9838-4064-8c41-2f71e0d96033",
+            "d4648604-594e-4533-9fba-e8a69ffdb1a8"
+        ],
+        "role" : "developer",
+        "id": "77c2f165-96ee-4857-963a-88498c4da422",
+        "email": "jdd@email.com"
+    },
+    {
+        "firstName": "Sherry",
+        "lastName": "begay",
+        "password": "password2",
+        "companies": [
+            "ea539c01-9838-4064-8c41-2f71e0d96033",
+            "d4648604-594e-4533-9fba-e8a69ffdb1a8"
+        ],
+        "role" : "developer",
+        "id": "9b8e21b1-bb02-46ad-a9db-fb13ab8a4c22",
+        "email": "shb@email.com"
+    },
+    {
+        "firstName": "evie",
+        "lastName": "ellis",
+        "password": "password3",
+        "companies": [
+            "ea539c01-9838-4064-8c41-2f71e0d96033",
+            "d4648604-594e-4533-9fba-e8a69ffdb1a8"
+        ],
+        "role" : "developer",
+        "id": "13ac43d8-7abe-4a2b-a67b-962499045908",
+        "email": "ee@email.com"
+    }
+]
