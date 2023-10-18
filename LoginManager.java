@@ -26,8 +26,9 @@ public class LoginManager {
     public static boolean checkPassword(String password) {
         return true;
     }
-    public boolean addUser(User newUser) {
-        return true;
+    public boolean addUser(String firstName, String lastName, String email, String password) {
+        User user = new User(firstName, lastName, email, password);
+        return userList.add(user);
     }
     public static User getUser(UUID id) {
         for(User user : userList) {
@@ -35,6 +36,13 @@ public class LoginManager {
                 return user;
         }
         Test.print("No User Found.");
+        return null;
+    }
+    public static User getUser(String email, String password) {
+        for(User user : userList) {
+            if(user.getEmail().equals(email) && user.isPassword(password))
+                return user;
+        }
         return null;
     }
 }
