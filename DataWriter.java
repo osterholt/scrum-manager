@@ -28,6 +28,24 @@ public class DataWriter extends DataConstants{
             return false;
         }
     }
+
+    public static boolean saveCompanies() {
+        CompanyManager companies = CompanyManager.getInstance();
+        ArrayList<Company> companyList = companies.getCompanies();
+        JSONArray jsonUsers = new JSONArray();
+        for(int i=0; i< companyList.size(); i++) {
+            jsonUsers.add(getUserJSON(companyList.get(i)));
+        }
+        try (FileWriter file = new FileWriter(COMPANY_FILE_NAME)) {
+            file.write(jsonUsers.toJSONString());
+            file.flush();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public static JSONObject getUserJSON(User user) {
         JSONObject userDetails = new JSONObject();
         userDetails.put(USER_ID, user.getId().toString());

@@ -10,9 +10,11 @@ public class History {
     private ArrayList<Update> entries;
 
     private History(){
-
+        entries = new ArrayList<Update>();
     }
-    public History getInstance(){
+    public static History getInstance(){
+        if(history == null)
+            history = new History();
         return history;
     }
     public ArrayList<Update> getHistory(){
@@ -22,7 +24,7 @@ public class History {
         return null;
     }
     public boolean updateHistory(Update change){
-    return false;
+        return false;
     }
     public Update removeChange(int id){
         return null;
