@@ -86,9 +86,9 @@ public class DataWriter extends DataConstants{
         taskDetails.put(TASK_NAME, task.getName());
         taskDetails.put(TASK_DESCRIPTION, task.getDescription());
         taskDetails.put(TASK_DATE, task.getDate());
-       // taskDetails.put(TASK_AUTHOR_ID, task.getAuthor().getId().toString());
-       // taskDetails.put(TASK_ASSIGNEE_ID, task.getAssignee().getId().toString());
-       // taskDetails.put(TASK_CATEGORY, task.getCategory().toString());
+       taskDetails.put(TASK_AUTHOR_ID, task.getAuthor().getId().toString());
+       taskDetails.put(TASK_ASSIGNEE_ID, task.getAssignee().getId().toString());
+       taskDetails.put(TASK_CATEGORY, task.getCategory().toString());
         taskDetails.put(TASK_RESOLVED, task.isResolved());
         taskDetails.put(TASK_PRIORITY, task.getPriority());
         taskDetails.put(TASK_TIME_REQUIRED, task.getTimeRequired());

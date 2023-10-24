@@ -4,8 +4,11 @@
         "time-required": 0.0,
         "name": null,
         "description": null,
+        "authorid": "9d15ec9d-a661-4609-8df4-ddf5f4f662e3",
+        "category": "FRONTEND",
         "priority": 0,
-        "taskid": "84740be4-c0af-46e4-8a39-18bce73457d5",
+        "assigneeid": "a29c7ede-4acb-41e2-8fed-81c71e45ae83",
+        "taskid": "cd739cc5-c1aa-4d5d-bc8f-a8867e70cca6",
         "resolved": false
     },
     {
@@ -13,8 +16,11 @@
         "time-required": 0.0,
         "name": null,
         "description": null,
+        "authorid": "9d15ec9d-a661-4609-8df4-ddf5f4f662e3",
+        "category": "FRONTEND",
         "priority": 0,
-        "taskid": "93d622cb-0f1a-48b0-b964-72cf5bf82bbc",
+        "assigneeid": "a29c7ede-4acb-41e2-8fed-81c71e45ae83",
+        "taskid": "47bfbeaa-17d0-4cf6-b953-dfbe27f16f07",
         "resolved": false
     },
     {
@@ -22,8 +28,11 @@
         "time-required": 0.0,
         "name": null,
         "description": null,
+        "authorid": "9d15ec9d-a661-4609-8df4-ddf5f4f662e3",
+        "category": "FRONTEND",
         "priority": 0,
-        "taskid": "6c81f3e7-e121-420d-9255-d74257863ede",
+        "assigneeid": "a29c7ede-4acb-41e2-8fed-81c71e45ae83",
+        "taskid": "e4235a4c-2af1-4bf0-84bd-dcd45d474fd2",
         "resolved": false
     }
 ]

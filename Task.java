@@ -39,12 +39,25 @@ public class Task {
 
     private void init(UUID id, String name, String description, String date, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
         setUUID(id);
+        setAssignee(assignee);
+        setAuthor(author);
+        setCategory(category);
+        
     }
     private boolean setUUID(UUID id) {
         if(id == null)
             id = UUID.randomUUID();
         this.id = id;
         return true;
+    }
+    private void setAssignee(User assignee) {
+        this.assignee = assignee;
+    }
+    private void setAuthor(User author) {
+        this.author = author;
+    }
+    private void setCategory(Category category) {
+        this.category = category;
     }
     
 
