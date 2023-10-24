@@ -21,7 +21,7 @@ public class Task {
     private int priority;
     private float timeRequired;
     private ArrayList<Comment> comments;
-    private History history;
+    private ArrayList<History> history;
 
     public Task(String name, User author) {
         //added sb
@@ -114,7 +114,7 @@ public class Task {
         return comments;
     }
 
-    public History getHistory() {
+    public ArrayList<History> getHistory() {
         return history;
     }
 
