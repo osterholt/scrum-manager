@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.UUID;
 /**
  * @author Gavin Hewitt
  * @version "v1.0"
@@ -51,4 +52,28 @@ public class CompanyManager {
     }
     return null;
   } 
+
+  public static Company getCompany(UUID id) {
+    for(Company company : companies) {
+      if(id.equals(company.getID()))
+        return company;
+    }
+    return null;
+  }
+
+  public static Company getCompany(String name) {
+    for(Company company : companies) {
+      if(name.equals(company.getName()))
+        return company;
+    }
+    return null;
+  }
+
+	public ArrayList<Company> getCompanies() {
+		return companies;
+	}
+
+  public static boolean saveCompanies() {
+    return DataWriter.saveCompanies();
+  }
 }

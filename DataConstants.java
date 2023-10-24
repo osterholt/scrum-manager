@@ -9,6 +9,11 @@ public abstract class DataConstants {
     protected static final String USER_LAST_NAME = "lastName";
     protected static final String USER_ROLE = "role";
     protected static final String USER_COMPANIES = "companies";
+    protected static final String COMPANY_NAME = "name";
+    protected static final String COMPANY_ID = "id";
+    protected static final String COMPANY_BOARDS = "boards";
+    protected static final String COMPANY_USERS = "users";
+    protected static final String COMPANY_ADMINS = "admins";
 
     protected static final String TASK_ID = "taskid";
     protected static final String TASK_NAME = "name";
