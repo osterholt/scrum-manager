@@ -25,14 +25,17 @@ public class Update {
       public String getChangeLog() {
           return changelog;
       }
-      public void setTimeStamp(Date timeStamp) {
-      this.timestamp = timeStamp;
+      public void setTimeStamp(Date timestamp) {
+        this.timestamp = timestamp;
       }
       public void setUser(User user) {
-          
+          this.user = user;
       }
-      public String setChangeLog(String changelog) {
-          return changelog;
+      public void setChangeLog(String changelog) {
+        if(changelog == null) {
+            System.out.println("Invalid log. change Failed.");
+        }
+        this.changelog = changelog;
       }
     
 }

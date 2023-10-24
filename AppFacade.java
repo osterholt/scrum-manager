@@ -12,7 +12,8 @@ public class AppFacade {
     private static AppFacade appFacade;
 
     private AppFacade() {
-        // TODO: init
+        activeUser = null;
+        activeBoard = null;
     }
 
     public static AppFacade getInstance() {
@@ -37,8 +38,8 @@ public class AppFacade {
         return activeBoard;
     }
 
-    public static boolean login(String username, String password) { //TODO: Determine parameters
-        activeUser = LoginManager.getInstance().getUser(username, password);
+    public static boolean login(String username, String password) {
+        activeUser = LoginManager.getUser(username, password);
         if(activeUser == null){
             return false;
         }
@@ -49,9 +50,10 @@ public class AppFacade {
         return activeUser;
     }
 
-    public static boolean signUp(String firstName, String lastName, String email, String password) {
-        LoginManager.getInstance().addUser(firstName, lastName, email, password);
-        return true;
+    public static UUID signUp(String firstName, String lastName, String email, String password) {
+        User user = new User(firstName, lastName, email, password);
+        LoginManager.getInstance().addUser(user);
+        return user.getId();
     }
 
     public static User getUser(UUID id) {

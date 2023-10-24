@@ -15,10 +15,24 @@ public class User {
     private ArrayList<Company> companies;
     private String role;
 
+    /**
+     * Initalises new user. USE AppFacade.SignUp to make new user.
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param password
+     */
     public User(String firstName, String lastName, String email, String password) {  
         UUID tempid = UUID.randomUUID();
         init(tempid, firstName, lastName, email, password, role);
     }
+    /**
+     * Initalises new user. USE AppFacade.SignUp to make new user.
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param password
+     */
     public User(UUID id, String firstName, String lastName, String email, String password, String role) {
         init(id, firstName, lastName, email, password, role);
     }
@@ -101,5 +115,8 @@ public class User {
         }
         this.password = password;
         return true; 
+    }
+    public String toString() {
+        return this.getFirstName() + " " + this.getLastName();
     }
 }

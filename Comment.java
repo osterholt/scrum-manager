@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.Date;
+//java.util.List;
 /**
  * @author Cam Osterholt
  * @version v1.0
  * Date: 10/10/2023
  */
-
+//sb - line 13 use List<comment> as the type for the comment list. this will make it more flexible with implementation w. changing interface
 public class Comment {
     private String comment;
     private User author;
@@ -19,7 +20,7 @@ public class Comment {
     }
 
     public void reply(User author, String comment) { 
-        if(comment == null)
+        if(comment == null || comment.isEmpty())
             return;
         comments.add(new Comment(author, comment));
     }
@@ -34,7 +35,7 @@ public class Comment {
     }
 
     public void editComment(String comment) {
-        if(comment == null)
+        if(comment == null || comment.isEmpty())
             return;
         this.comment = comment;
     }

@@ -49,7 +49,7 @@ public class Board {
     public boolean completeTask(UUID id) {
         Task task = getTask(id);
         if(task != null) {
-            this.leaderboard.updateScore(AppFacade.getActiveUser());
+            this.leaderboard.incrementScore(AppFacade.getActiveUser());
             return task.resolve();
         }
         return false;
