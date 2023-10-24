@@ -30,6 +30,11 @@ public class Column {
         return false;
     }
     public boolean taskReorder(int index, Task task){
+        //sb
+        if(index >= 0 && index < tasks.size()) {
+            tasks.add(index, task);
+            return true;
+        }
         return false;
     }
 

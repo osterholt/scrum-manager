@@ -23,7 +23,13 @@ public class Task {
     private ArrayList<Comment> comments;
     private History history;
 
-    public Task(String aName) {
+    public Task(String name, User author) {
+        //added sb
+        //genrate a unique ID for task
+        this.id = UUID.randomUUID(); 
+        this.name = name;
+        this.author = author;
+        this.comments = new ArrayList<>();
 
     }
 
