@@ -61,6 +61,14 @@ public class CompanyManager {
     return null;
   }
 
+  public static Company getCompany(String name) {
+    for(Company company : companies) {
+      if(name.equals(company.getName()))
+        return company;
+    }
+    return null;
+  }
+
 	public ArrayList<Company> getCompanies() {
 		return companies;
 	}

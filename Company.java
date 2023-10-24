@@ -130,6 +130,14 @@ public class Company {
             && this.id.equals(company.getUUID());
     }
 
+    public String toString() {
+        return "Company Name: " + name + 
+        "\tID: " + id +
+        "\nUsers: " + users + 
+        "\nAdmins: " + admins +
+        "\nBoards: " + boards;
+    }
+
     /**
      * Checks that all data members are properly initialized
      * @return boolean
