@@ -1,6 +1,7 @@
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -92,6 +93,15 @@ public class DataWriter extends DataConstants{
         taskDetails.put(TASK_RESOLVED, task.isResolved());
         taskDetails.put(TASK_PRIORITY, task.getPriority());
         taskDetails.put(TASK_TIME_REQUIRED, task.getTimeRequired());
+        JSONArray historyArray = new JSONArray();
+        for(History history : task.getHistory()) {
+            JSONObject historyObject = new JSONObject();
+            historyObject.put(HISTORY_AUTHOR_ID, history.getUser().getId().toString());
+            historyObject.put(HISTORY_CHANGE, history.getChange());
+            historyObject.put(HISTORY_DATE,history.getDate().toString());
+            historyArray.add(historyObject);
+        }
+        taskDetails.put(TASK_HISTORY, historyArray);
 
         return taskDetails;
     }
@@ -104,16 +114,15 @@ public class DataWriter extends DataConstants{
        ArrayList<Task> taskList = new ArrayList<>();
        User user1 = new User("Josh", "Dietrich", "jdd@email.com", "password1");
         User user2 = new User("Sherry", "begay", "shb@email.com", "password2");
-        User user3 = new User("evie", "ellis", "ee@email.com", "password3");
         Category cat =Category.FRONTEND;
        Task t1 = new Task(UUID.randomUUID(), "taskname", "taskdescription", user1, user2, cat, false, 1, 1);
-        Task t2 = new Task(UUID.randomUUID(), "taskname", "taskdescription", user1, user2, cat, false, 1, 1);
-       Task t3 = new Task(UUID.randomUUID(), "taskname", "taskdescription", user1, user2, cat, false, 1, 1);
-
+       Date currentDate = new Date();
+       History h1 = new History(currentDate, user2, "change");
+       ArrayList<History> histarray= new ArrayList<>();
+       histarray.add(h1);
+       t1.setHistory(histarray);
        JSONArray jsonTasks = new JSONArray();
         taskList.add(t1);
-        taskList.add(t2);
-        taskList.add(t3);
         for(int i=0; i< taskList.size(); i++) {
 			jsonTasks.add(getTaskJSON(taskList.get(i)));
 		}

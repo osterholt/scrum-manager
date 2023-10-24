@@ -131,6 +131,10 @@ public class Task {
         return history;
     }
 
+    public void setHistory(ArrayList<History> history) {
+        this.history = history;
+    }
+
     public String getDate() {
         return date;
     }
