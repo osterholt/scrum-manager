@@ -32,12 +32,28 @@ public class DataWriter extends DataConstants{
     public static boolean saveCompanies() {
         CompanyManager companies = CompanyManager.getInstance();
         ArrayList<Company> companyList = companies.getCompanies();
-        JSONArray jsonUsers = new JSONArray();
+        JSONArray jsonCompanies = new JSONArray();
         for(int i=0; i< companyList.size(); i++) {
-            jsonUsers.add(getUserJSON(companyList.get(i)));
+            jsonCompanies.add(getCompanyJSON(companyList.get(i)));
         }
         try (FileWriter file = new FileWriter(COMPANY_FILE_NAME)) {
-            file.write(jsonUsers.toJSONString());
+            file.write(jsonCompanies.toJSONString());
+            file.flush();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean saveCompanies(User user) {
+        ArrayList<Company> companies = user.getCompanies();
+        JSONArray jsonCompanies = new JSONArray();
+        for(int i=0; i< companies.size(); i++){
+            jsonCompanies.add(getCompanyJSON(companies.get(i)));
+        }
+        try (FileWriter file = new FileWriter(COMPANY_FILE_NAME)) {
+            file.write(jsonCompanies.toJSONString());
             file.flush();
             return true;
         } catch (IOException e) {
@@ -62,6 +78,32 @@ public class DataWriter extends DataConstants{
         userDetails.put(USER_COMPANIES, companyList);
 
         return userDetails;
+    }
+
+    public static JSONObject getCompanyJSON(Company company) {
+        JSONObject companyDetails = new JSONObject();
+        companyDetails.put(COMPANY_ID, company.getID().toString());
+        companyDetails.put(COMPANY_NAME, company.getName());
+        
+        JSONArray adminList = new JSONArray();
+        for (User admin : company.getAdmins()) {
+            adminList.add(admin.getId().toString());
+        }
+        companyDetails.put(COMPANY_ADMINS, adminList);
+        
+        JSONArray userList = new JSONArray();
+        for (User user : company.getUsers()) {
+            userList.add(user.getId().toString());
+        }
+        companyDetails.put(COMPANY_USERS, userList);
+
+        JSONArray boardList = new JSONArray();
+        for (Board board : company.getBoards()) {
+            boardList.add(board.getTitle());
+        }
+        companyDetails.put(COMPANY_BOARDS, boardList);
+
+        return companyDetails;
     }
     
     public static ArrayList<User> getUsers() {
