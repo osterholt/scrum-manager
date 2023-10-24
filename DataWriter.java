@@ -10,6 +10,7 @@ import org.json.simple.parser.JSONParser;
 
 public class DataWriter extends DataConstants{
 
+    //write users json
     public static boolean saveUsers() {
         LoginManager users = LoginManager.getInstance();
         ArrayList<User> userList = users.getUsers();
@@ -28,6 +29,8 @@ public class DataWriter extends DataConstants{
             return false;
         }
     }
+
+    //get useres json object to write it to the json file
     public static JSONObject getUserJSON(User user) {
         JSONObject userDetails = new JSONObject();
         userDetails.put(USER_ID, user.getId().toString());
@@ -46,6 +49,7 @@ public class DataWriter extends DataConstants{
         return userDetails;
     }
     
+    //data reader for users
     public static ArrayList<User> getUsers() {
         ArrayList<User> users = new ArrayList<User>();
 
@@ -72,41 +76,55 @@ public class DataWriter extends DataConstants{
         return null;
     }
 
-    // public void testUsers() {
-    //     ArrayList<User> users = new ArrayList<User>();
-    //     User user1 = new User("Josh", "Dietrich", "jdd@email.com", "password1");
-    //     User user2 = new User("Sherry", "begay", "shb@email.com", "password2");
-    //     User user3 = new User("evie", "ellis", "ee@email.com", "password3");
-    //     Company company1 = new Company("USC Ltd", user3, null, null);
-    //     Company company2 = new Company("Company 2", user3, null, null);
+    public static boolean saveTasks() {
+        return true;
+    }
 
-    //     user1.addCompany(company1);
-    //     user2.addCompany(company1);
-    //     user3.addCompany(company1);
-    //     user1.addCompany(company2);
-    //     user2.addCompany(company2);
-    //     user3.addCompany(company2);
-    //     users.add(user1);
-    //     users.add(user2);
-    //     users.add(user3);
-    //     JSONArray jsonUsers = new JSONArray();
-    //     for(int i=0; i< users.size(); i++) {
-	// 		jsonUsers.add(getUserJSON(users.get(i)));
-	// 	}
-    //     try (FileWriter file = new FileWriter(USER_FILE_NAME)) {
+    public static JSONObject getTaskJSON(Task task) {
+        JSONObject taskDetails = new JSONObject();
+        taskDetails.put(TASK_ID, task.getID().toString());
+        taskDetails.put(TASK_NAME, task.getName());
+        taskDetails.put(TASK_DESCRIPTION, task.getDescription());
+        taskDetails.put(TASK_DATE, task.getDate());
+       // taskDetails.put(TASK_AUTHOR_ID, task.getAuthor().getId().toString());
+       // taskDetails.put(TASK_ASSIGNEE_ID, task.getAssignee().getId().toString());
+       // taskDetails.put(TASK_CATEGORY, task.getCategory().toString());
+        taskDetails.put(TASK_RESOLVED, task.isResolved());
+        taskDetails.put(TASK_PRIORITY, task.getPriority());
+        taskDetails.put(TASK_TIME_REQUIRED, task.getTimeRequired());
+
+        return taskDetails;
+    }
+    public static ArrayList<Task> getTasks() {
+        ArrayList<Task> ret = new ArrayList<>();
+        return ret;
+    }
+    public static void main(String[] args) {
+       // ArrayList<User> userList = users.getUsers();
+       ArrayList<Task> taskList = new ArrayList<>();
+       User user1 = new User("Josh", "Dietrich", "jdd@email.com", "password1");
+        User user2 = new User("Sherry", "begay", "shb@email.com", "password2");
+        User user3 = new User("evie", "ellis", "ee@email.com", "password3");
+        Category cat =Category.FRONTEND;
+       Task t1 = new Task(UUID.randomUUID(), "taskname", "taskdescription", user1, user2, cat, false, 1, 1);
+        Task t2 = new Task(UUID.randomUUID(), "taskname", "taskdescription", user1, user2, cat, false, 1, 1);
+       Task t3 = new Task(UUID.randomUUID(), "taskname", "taskdescription", user1, user2, cat, false, 1, 1);
+
+       JSONArray jsonTasks = new JSONArray();
+        taskList.add(t1);
+        taskList.add(t2);
+        taskList.add(t3);
+        for(int i=0; i< taskList.size(); i++) {
+			jsonTasks.add(getTaskJSON(taskList.get(i)));
+		}
+        try (FileWriter file = new FileWriter(TASK_FILE_NAME)) {
  
-    //         file.write(jsonUsers.toJSONString());
-    //         file.flush();
+            file.write(jsonTasks.toJSONString());
+            file.flush();
  
-    //     } catch (IOException e) {
-    //         e.printStackTrace();
-    //     }
-    // }
-
-    
-
-
-    // public static void main(String[] args) {
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     //     DataWriter test = new DataWriter();
     //     test.testUsers();
         
@@ -127,5 +145,5 @@ public class DataWriter extends DataConstants{
     //     // } catch (IOException e) {
     //     //     e.printStackTrace();
     //     // }
-    // }
+    }
 }

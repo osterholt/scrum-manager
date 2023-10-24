@@ -1,20 +1,29 @@
 [
     {
-        "time-required": 3.0,
-        "name": "TaskName",
-        "description": "Description lalalal",
-        "authorid": "User@3764951d",
-        "assigneeid": "User@4b1210ee",
-        "taskid": "16a4ebf7-889b-4e02-a5a9-5a1cdc2a6cf7",
+        "date": null,
+        "time-required": 0.0,
+        "name": null,
+        "description": null,
+        "priority": 0,
+        "taskid": "84740be4-c0af-46e4-8a39-18bce73457d5",
         "resolved": false
     },
     {
-        "time-required": 3.0,
-        "name": "TaskName",
-        "description": "Description lalalal",
-        "authorid": "User@3764951d",
-        "assigneeid": "User@4b1210ee",
-        "taskid": "1b80f1a1-4f27-4777-a6d7-3ebac64f2e7b",
+        "date": null,
+        "time-required": 0.0,
+        "name": null,
+        "description": null,
+        "priority": 0,
+        "taskid": "93d622cb-0f1a-48b0-b964-72cf5bf82bbc",
+        "resolved": false
+    },
+    {
+        "date": null,
+        "time-required": 0.0,
+        "name": null,
+        "description": null,
+        "priority": 0,
+        "taskid": "6c81f3e7-e121-420d-9255-d74257863ede",
         "resolved": false
     }
 ]
