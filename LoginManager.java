@@ -23,7 +23,7 @@ public class LoginManager {
         userList = DataWriter.getUsers();
     }
 
-    private static boolean checkEmail(String email) {
+    public static boolean checkEmail(String email) {
         // check if email is already in user list
         for (User user : userList) {
             if(user.getEmail().equals(email)){
@@ -42,7 +42,7 @@ public class LoginManager {
      * @param password String to check
      * @return boolean if correct size
      */
-    private static boolean checkPassword(String password) {
+    public static boolean checkPassword(String password) {
         return password.length() > 7;
     }
 

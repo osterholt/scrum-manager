@@ -98,7 +98,7 @@ public class User {
         return true;
     }
     private boolean setEmail(String email) {
-        if(email == null) {
+        if(!LoginManager.checkEmail(email)) {
             System.out.println("Invalid Email. Login Failed.");
             return false;
         }
@@ -109,7 +109,7 @@ public class User {
         return password;
     }
     private boolean setPassword(String password) {
-       if(password == null) {
+        if(!LoginManager.checkPassword(password)) {
             System.out.println("Invalid Password. Login Failed.");
             return false;
         }
