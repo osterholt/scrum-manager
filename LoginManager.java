@@ -48,15 +48,13 @@ public class LoginManager {
 
     /**
      * Adds a user to the master list.
-     * @param firstName User's First Name
-     * @param lastName User's Last Name
-     * @param email User's Email
-     * @param password User's Validated Password.
+     * @param user user to add
      * @return boolean if user was added.
      */
-    public boolean addUser(String firstName, String lastName, String email, String password) {
-        User user = new User(firstName, lastName, email, password);
-        return userList.add(user);
+    public boolean addUser(User user) {
+        if(user != null)
+            return userList.add(user);
+        return false;
     }
 
     public static User getUser(UUID id) {

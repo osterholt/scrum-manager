@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.UUID;
+
 /**
  * Test class for ScrumManager
  * @version v1.0
@@ -32,15 +35,36 @@ public class Test {
     }
 
     public static void testLeaderboard() {
-        Leaderboard lb = new Leaderboard();
+        Test.print("-----Testing Leaderboard-----\n");
+        ArrayList<User> userList = new ArrayList<>();
         for(String[] userStr : TEST_USERS) {
-            lb.updateScore(new User(userStr[0], userStr[1], userStr[2], userStr[3]), Integer.parseInt(userStr[4]));
+            UUID id = AppFacade.signUp(userStr[0], userStr[1], userStr[2], userStr[3]);
+            userList.add(LoginManager.getUser(id));
+        }
+        Leaderboard lb = new Leaderboard();
+        for(int i = 0; i < userList.size(); i++) {
+            lb.updateScore(userList.get(i), Integer.parseInt(TEST_USERS[i][4]));
         }
         lb.print();
-        //TODO: In progress by Cam
+        
+        Test.print("-----Updating User 2-----\n");
+        lb.updateScore(userList.get(1), 4);
+        lb.print();
+        
+        Test.print("-----Incrementing User 2-----\n");
+        lb.incrementScore(userList.get(1));
+        lb.print();
+
+        Test.print("-----Printing top 3-----\n");
+        String[][] arr = lb.getTopRank(3);
+        for(String[] val : arr) 
+            Test.print(LoginManager.getUser(UUID.fromString(val[0])).toString() + "\tScore: " + val[1]);
+
+        Test.print("-----Ending Leaderboard Testing-----\n");
+    }
     public static void printUsers() {
         LoginManager logManager = LoginManager.getInstance();
-        print(logManager);
+        Test.print(logManager.toString());
     }
     public static void printCompanies() {
         CompanyManager compManager = CompanyManager.getInstance();

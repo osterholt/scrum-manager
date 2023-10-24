@@ -50,9 +50,10 @@ public class AppFacade {
         return activeUser;
     }
 
-    public static boolean signUp(String firstName, String lastName, String email, String password) {
-        LoginManager.getInstance().addUser(firstName, lastName, email, password);
-        return true;
+    public static UUID signUp(String firstName, String lastName, String email, String password) {
+        User user = new User(firstName, lastName, email, password);
+        LoginManager.getInstance().addUser(user);
+        return user.getId();
     }
 
     public static User getUser(UUID id) {
