@@ -9,7 +9,7 @@ public class UI {
         UI ui  = new UI();
         ui.run();
     }
-    public static void run() {
+    public void run() {
         if(AppFacade.login("plante@gmail.com", "password4")) {
             System.out.println("Successfully logged in");
             System.out.println(AppFacade.getCurrentUser().getFirstName());
