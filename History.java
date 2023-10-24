@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+import java.sql.Date;
+import java.time.LocalDate;
 /**
  * @author Evelyn Ellis
  * @version v1.0
@@ -6,27 +7,42 @@ import java.util.ArrayList;
  */
 public class History {
 
-    private static History history;
-    private ArrayList<Update> entries;
+    private Date date;
+    private User user;
+    private String change;
+    /* 
+     * 
+     * date, user, change --> task has ARRAY LIST OF INSTANCES
+     */
 
-    private History(){
+    public History(Date date, User user, String change){
+        this.date = date;
+        this.user = user;
+        this.change = change;
 
     }
-    public History getInstance(){
-        return history;
+    public Date getDate(){
+        return date;
     }
-    public ArrayList<Update> getHistory(){
-        return entries;
+    public User getUser(){
+        return user;
     }
-    public Update getHistory(int id){
-        return null;
+    public String getChange(){
+        return change;
     }
-    public boolean updateHistory(Update change){
-    return false;
+
+    public String toString(){
+        return date.toString() + " " + user.getFirstName() + " " + user.getLastName() + " " + change;
     }
-    public Update removeChange(int id){
-        return null;
-    }
+
+    // test
+  /*   public static void main(String[] args) {
+        User myUser = new User("Evie", "Ellis", "evie.ellis11@gmail.com", "B3llyR@$h");
+        Date myDate = new Date(1000000000);
+        History myHistory = new History(myDate, myUser, "popped and pushed their shit");
+        System.out.println(myHistory.toString());
     
-    
+    }
+    */
 }
+
