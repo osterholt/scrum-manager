@@ -1,44 +1,87 @@
 import java.util.ArrayList;
 import java.util.Date;
-//java.util.List;
+import java.util.UUID;
+
 /**
  * @author Cam Osterholt
  * @version v1.0
  * Date: 10/10/2023
  */
-//sb - line 13 use List<comment> as the type for the comment list. this will make it more flexible with implementation w. changing interface
 public class Comment {
+    private UUID id;
     private String comment;
     private User author;
     private Date date;
-    private ArrayList<Comment> comments;
+    //to be flexible with board and task classes
+    private Object object;
+    //private ArrayList<Comment> comments;
 
+    public Comment(String comment, User author, Object object) {
+        this.id = UUID.randomUUID();
+        this.comment = comment;
+        this.author = author;
+        this.object = object;
+        this.date = new Date();
+        /*
+        CAM-
+        init();
+        setAuthor(author);
+        editComment(author, comment);
+        */
+    }
+    /*
+    CAM-
     public Comment(User author, String comment) {
         init();
         setAuthor(author);
-        editComment(comment);
+        editComment(author, comment);
     }
-
+    */
+    //sb flexible . instance of to either associate  with baord or task
+    //addComment is not added to Board class. add or no? 
     public void reply(User author, String comment) { 
-        if(comment == null || comment.isEmpty())
-            return;
-        comments.add(new Comment(author, comment));
+        if(comment != null && !comment.isEmpty()) {
+            if(object instanceof Board) {
+              Board board = (Board) object;
+              board.addComment(new Comment(comment, author, board));
+            } else if (object instanceof Task) {
+                Task task = (Task) object;
+                task.addComment(new Comment(comment, author, task));
+            } else {
+                Test.print("unknown");
+            }
+        }
     }
-
+    /*
+    CAM-
     private void init() {
         date = new Date();
         comments = new ArrayList<Comment>();
     }
-
+    */
+    public Object getObject() {
+        return object;
+    }
+    public UUID getId() {
+        return id;
+    }
+    public void setObject(Object object) {
+        this.object= object;
+    }
     public String getComment() {
         return comment;
     }
-
-    public void editComment(String comment) {
-        if(comment == null || comment.isEmpty())
-            return;
-        this.comment = comment;
+    public void editComment(User author, String comment) {
+        if(comment == null)
+          this.comment = comment;
     }
+    /*CAM-
+     * public void editComment(String comment) {
+     * if(comment == null)
+     *   return;
+     * this.comment = comment;
+     * }
+     */
 
     public User getAuthor() {
         return author;
@@ -58,8 +101,9 @@ public class Comment {
     public Date getDate() {
         return date;
     }
-
+    /*
     public ArrayList<Comment> getComments() {
-        return comments;
+        return comment;
     }
+    */
 }
