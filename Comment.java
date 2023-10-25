@@ -1,9 +1,9 @@
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
+import java.time.LocalDateTime;
 
 /**
- * @author Cam Osterholt
+ * @author Cam Osterholt & SB
  * @version v1.0
  * Date: 10/10/2023
  */
@@ -11,7 +11,7 @@ public class Comment {
     private UUID id;
     private String comment;
     private User author;
-    private Date date;
+    private LocalDateTime time;
     //to be flexible with board and task classes
     private Object object;
     //private ArrayList<Comment> comments;
@@ -21,7 +21,7 @@ public class Comment {
         this.comment = comment;
         this.author = author;
         this.object = object;
-        this.date = new Date();
+        this.time = LocalDateTime.now();
         /*
         CAM-
         init();
@@ -65,6 +65,12 @@ public class Comment {
     public UUID getId() {
         return id;
     }
+    public LocalDateTime getTime() {
+        return time;
+    }
+    public void setTime(LocalDateTime time) {
+        this.time = time;
+    }
     public void setObject(Object object) {
         this.object= object;
     }
@@ -97,10 +103,11 @@ public class Comment {
             return false;
         }
     }
-
+    /*
     public Date getDate() {
         return date;
     }
+    */
     /*
     public ArrayList<Comment> getComments() {
         return comment;
