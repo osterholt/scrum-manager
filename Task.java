@@ -24,7 +24,6 @@ public class Task {
     private ArrayList<History> history;
 
     public Task(String name, User author) {
-        //added sb
         //genrate a unique ID for task
         this.id = UUID.randomUUID(); 
         this.name = name;

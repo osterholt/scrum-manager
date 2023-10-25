@@ -12,55 +12,33 @@ public class Comment {
     private String comment;
     private User author;
     private LocalDateTime time;
-    //to be flexible with board and task classes
-    private Object object;
-    //private ArrayList<Comment> comments;
+    private ArrayList<Comment> comments;
 
-    public Comment(String comment, User author, Object object) {
+    public Comment(String comment, User author) {
         this.id = UUID.randomUUID();
-        this.comment = comment;
-        this.author = author;
-        this.object = object;
-        this.time = LocalDateTime.now();
-        /*
-        CAM-
         init();
         setAuthor(author);
         editComment(author, comment);
-        */
+        this.time = LocalDateTime.now();
     }
-    /*
-    CAM-
+    
     public Comment(User author, String comment) {
         init();
         setAuthor(author);
         editComment(author, comment);
     }
-    */
-    //sb flexible . instance of to either associate  with baord or task
-    //addComment is not added to Board class. add or no? 
+     
     public void reply(User author, String comment) { 
         if(comment != null && !comment.isEmpty()) {
-            if(object instanceof Board) {
-              Board board = (Board) object;
-              board.addComment(new Comment(comment, author, board));
-            } else if (object instanceof Task) {
-                Task task = (Task) object;
-                task.addComment(new Comment(comment, author, task));
+            Comment newComment = new Comment(comment, author);
+            comments.add(newComment);
             } else {
                 Test.print("unknown");
             }
         }
-    }
-    /*
-    CAM-
     private void init() {
-        date = new Date();
+        //time = new Date();
         comments = new ArrayList<Comment>();
-    }
-    */
-    public Object getObject() {
-        return object;
     }
     public UUID getId() {
         return id;
@@ -71,23 +49,19 @@ public class Comment {
     public void setTime(LocalDateTime time) {
         this.time = time;
     }
-    public void setObject(Object object) {
-        this.object= object;
-    }
     public String getComment() {
         return comment;
     }
     public void editComment(User author, String comment) {
-        if(comment == null)
+        if(comment != null)
           this.comment = comment;
     }
-    /*CAM-
-     * public void editComment(String comment) {
-     * if(comment == null)
-     *   return;
-     * this.comment = comment;
-     * }
-     */
+    
+    public void editComment(String comment) {
+     if(comment != null)
+       this.comment = comment;
+     }
+     
 
     public User getAuthor() {
         return author;
@@ -108,9 +82,7 @@ public class Comment {
         return date;
     }
     */
-    /*
     public ArrayList<Comment> getComments() {
-        return comment;
+        return comments;
     }
-    */
 }
