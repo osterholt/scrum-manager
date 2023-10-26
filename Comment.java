@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.UUID;
+//import java.util.UUID;
 import java.time.LocalDateTime;
 
 /**
@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
  * Date: 10/10/2023
  */
 public class Comment {
-    //private UUID id;
     private String comment;
     private User author;
     private LocalDateTime time;
