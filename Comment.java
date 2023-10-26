@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 /**
  * @author Cam Osterholt
  * @version v1.0
@@ -7,15 +8,14 @@ import java.util.Date;
  */
 
 public class Comment {
+    private UUID id;
     private String comment;
     private User author;
     private Date date;
     private ArrayList<Comment> comments;
 
     public Comment(User author, String comment) {
-        init();
-        setAuthor(author);
-        editComment(comment);
+        init(author, comment);
     }
 
     public void reply(User author, String comment) { 
@@ -24,9 +24,22 @@ public class Comment {
         comments.add(new Comment(author, comment));
     }
 
-    private void init() {
+    private void init(User author, String comment) {
         date = new Date();
         comments = new ArrayList<Comment>();
+        setAuthor(author);
+        editComment(comment);
+    }
+
+    public UUID getID() {
+        return this.id;
+    }
+    
+    private boolean setID(UUID id) {
+        if(id == null)
+            return false;
+        this.id = id;
+        return true;
     }
 
     public String getComment() {
@@ -60,5 +73,17 @@ public class Comment {
 
     public ArrayList<Comment> getComments() {
         return comments;
+    }
+
+    public boolean deleteComment(UUID id) {
+        for(Comment comment : this.comments) {
+            if(comment.getID().equals(id)) {
+                comments.remove(comment);
+                return true;
+            }
+            if(comment.deleteComment(id)) 
+                return true;
+        }
+        return false;
     }
 }

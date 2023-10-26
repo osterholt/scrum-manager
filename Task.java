@@ -6,14 +6,13 @@
 
 import java.util.ArrayList;
 import java.util.UUID;
+import java.time.LocalDateTime;
 
 public class Task {
     private UUID id;
-    private UUID authorid;
-    private UUID assigneeid;
     private String name;
     private String description;
-    private String date;
+    private LocalDateTime time;
     private User author;
     private User assignee;
     private Category category;
@@ -21,18 +20,44 @@ public class Task {
     private int priority;
     private float timeRequired;
     private ArrayList<Comment> comments;
-    private History history;
+    private ArrayList<History> history;
+
+    private final int DEF_PRIORITY = 3;
 
     public Task(String aName) {
-
+        init(null, aName, null, null, null, null, null, false, DEF_PRIORITY, 0);
     }
 
-    public Task(UUID id, String name, String description, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
-        init(id, name, description, date, author, assignee, category, resolved, priority, timeRequired);
+    /**
+     * Creates Task from JSON's parameters
+     * @param id
+     * @param name
+     * @param description
+     * @param date
+     * @param author
+     * @param assignee
+     * @param category
+     * @param resolved
+     * @param priority
+     * @param timeRequired
+     */
+    public Task(UUID id, String name, String description, String time, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
+        init(id, name, description, time, author, assignee, category, resolved, priority, timeRequired);
     }
 
-    private void init(UUID id, String name, String description, String date, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
+    private void init(UUID id, String name, String description, String time, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
         setUUID(id);
+        setName(name);
+        setDescription(description);
+        setTime(time);
+        setAuthor(author);
+        setAssignee(assignee);
+        setCategory(category);
+        setResolve(resolved);
+        setPriority(priority);
+        setTimeRequired(timeRequired);
+        this.comments = new ArrayList<>();
+        this.history = new ArrayList<>();
     }
     private boolean setUUID(UUID id) {
         if(id == null)
@@ -42,32 +67,48 @@ public class Task {
     }
     
 
-    public boolean changeCategory() {
-        return false;
+    public boolean changeCategory(Category category) {
+        if(category == null)
+            return false;
+        this.category = category;
+        return true;
     }
 
     public boolean resolve() {
+        this.resolved = true;
+        return this.resolved;
+    }
+    private boolean setResolve(boolean resolved) {
+        this.resolved = resolved;
+        return true;
+    }
+
+    public int getPriority() {
+        return this.priority;
+    }
+
+    public boolean setPriority(int priority) {
+        if(priority > 0 && priority < 4)
+            this.priority = priority;
+        else
+            this.priority = DEF_PRIORITY;
+        return true;
+    }
+
+    public boolean addComment(String description) {
+        return this.comments.add(new Comment(AppFacade.getActiveUser(), description));
+    }
+
+    public boolean deleteComment(UUID id) {
+        for(Comment comment : comments) {
+            if(comment.getID().equals(id)) {
+                comments.remove(comment);
+                return true;
+            }
+            if(comment.deleteComment(id))
+                return true;
+        }
         return false;
-    }
-
-    public boolean changePriority(int priority) {
-        return false;
-    }
-
-    public boolean addComment(Comment comment) {
-        return false;
-    }
-
-    public boolean deleteComment(Comment comment) {
-        return false;
-    }
-
-    public UUID getAuthorID() {
-        return this.authorid;
-    }
-
-    public UUID getAssignedID() {
-        return this.assigneeid;
     }
 
     public UUID getID() {
@@ -77,42 +118,85 @@ public class Task {
         return this.name;
     }
     public String getDescription() {
-        return description;
+        return this.description;
+    }
+    public boolean setDescription(String description) {
+        if(description == null)
+            return false;
+        this.description = description;
+        return true;
     }
 
     public User getAuthor() {
         return author;
     }
+    private boolean setAuthor(User author) {
+        if(author == null)
+            author = AppFacade.getActiveUser();
+        this.author = author;
+        return true;
+    }
 
     public User getAssignee() {
         return assignee;
     }
+    public boolean setAssignee(User assignee) {
+        // Allow null to have no assignee.
+        this.assignee = assignee;
+        return true;
+    }
 
     public Category getCategory() {
         return category;
+    }
+    public boolean setCategory(Category category) {
+        if(category == null)
+            return false;
+        this.category = category;
+        return true;
     }
 
     public boolean isResolved() {
         return resolved;
     }
 
-    public int getPriority() {
-        return priority;
-    }
-
     public float getTimeRequired() {
         return timeRequired;
+    }
+
+    public boolean setTimeRequired(float timeRequired) {
+        if(timeRequired % 0.5 != 0)
+            return false;    
+        this.timeRequired = timeRequired;
+        return true;
     }
 
     public ArrayList<Comment> getComments() {
         return comments;
     }
 
-    public History getHistory() {
+    public ArrayList<History> getHistory() {
         return history;
     }
 
-    public String getDate() {
-        return date;
+    public String timeDate() {
+        return this.time.toString();
+    }
+    
+    private boolean setTime(String dateStr) {
+        if(dateStr == null)
+            this.time = LocalDateTime.now();
+        else    
+            this.time = LocalDateTime.parse(dateStr);
+        return true;
+    }
+
+    // ------------
+
+    private boolean setName(String name) { 
+        if(name == null)
+            return false;    
+        this.name = name;
+        return true;
     }
 }
