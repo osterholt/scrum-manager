@@ -25,10 +25,12 @@ public class LoginManager {
 
     public static boolean checkEmail(String email) {
         // check if email is already in user list
+        if(userList!=null){
         for (User user : userList) {
             if(user.getEmail().equals(email)){
                 return false;
             }    
+        }
         }
         // check if email is valid
         String emailRegex = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
@@ -69,7 +71,7 @@ public class LoginManager {
         return userList;
     }
 
-    /**
+    /*
      * Has DataWriter save the users to json.
      */
     public static boolean saveUsers() {
