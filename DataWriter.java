@@ -193,6 +193,32 @@ public class DataWriter extends DataConstants{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+        ArrayList<User> users = new ArrayList<User>();
+        users.add(user1); users.add(user2);
+        User admin1 = new User("admin", "person", "admin@email.com", "coolpassword");
+        Company company1 = new Company("first", admin1, users, UUID.randomUUID());
+        ArrayList<User> users2 = new ArrayList<User>();
+        User bbgorl = new User("baby", "girl", "bbg@gmail.com", "waaaaawoooooo");
+        users2.add(bbgorl);
+        User admin2 = new User("mama", "joe", "mimimoomoo@aol.com", "weewoobooboo");
+        Company company2 = new Company("second", admin2, users2, UUID.randomUUID());
+        ArrayList<Company> companies = new ArrayList<Company>();
+        companies.add(company1); companies.add(company2);
+        JSONArray jsonCompany = new JSONArray();
+        for (Company company : companies) {
+            jsonCompany.add(getCompanyJSON(company));
+        }
+        try (FileWriter file = new FileWriter(COMPANY_FILE_NAME)) {
+ 
+            file.write(jsonCompany.toJSONString());
+            file.flush();
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+
     //     DataWriter test = new DataWriter();
     //     test.testUsers();
         
