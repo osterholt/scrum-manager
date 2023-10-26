@@ -23,16 +23,9 @@ public class History {
     }
     public Date getDate(){
         return date;
-
-    private History(){
-        entries = new ArrayList<Update>();
     }
-    public static History getInstance(){
-        if(history == null)
-            history = new History();
-        return history;
 
-    }
+    
     public User getUser(){
         return user;
     }
@@ -42,12 +35,6 @@ public class History {
     
     public String toString(){
         return date.toString() + " " + user.getFirstName() + " " + user.getLastName() + " " + change;
-
-    public boolean updateHistory(Update change){
-        return false;
-    }
-    public Update removeChange(int id){
-        return null;
     }
 
     // test

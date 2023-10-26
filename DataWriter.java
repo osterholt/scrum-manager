@@ -31,9 +31,7 @@ public class DataWriter extends DataConstants{
         }
     }
 
-<<<<<<< HEAD
     //get useres json object to write it to the json file
-=======
     public static boolean saveCompanies() {
         CompanyManager companies = CompanyManager.getInstance();
         ArrayList<Company> companyList = companies.getCompanies();
@@ -67,7 +65,6 @@ public class DataWriter extends DataConstants{
         }
     }
 
->>>>>>> 915270953f7902d097e6b9a575e2a4638d21059d
     public static JSONObject getUserJSON(User user) {
         JSONObject userDetails = new JSONObject();
         userDetails.put(USER_ID, user.getId().toString());
@@ -149,9 +146,9 @@ public class DataWriter extends DataConstants{
         taskDetails.put(TASK_NAME, task.getName());
         taskDetails.put(TASK_DESCRIPTION, task.getDescription());
         taskDetails.put(TASK_DATE, task.getDate());
-       taskDetails.put(TASK_AUTHOR_ID, task.getAuthor().getId().toString());
-       taskDetails.put(TASK_ASSIGNEE_ID, task.getAssignee().getId().toString());
-       taskDetails.put(TASK_CATEGORY, task.getCategory().toString());
+        taskDetails.put(TASK_AUTHOR_ID, task.getAuthor().getId().toString());
+        taskDetails.put(TASK_ASSIGNEE_ID, task.getAssignee().getId().toString());
+        taskDetails.put(TASK_CATEGORY, task.getCategory().toString());
         taskDetails.put(TASK_RESOLVED, task.isResolved());
         taskDetails.put(TASK_PRIORITY, task.getPriority());
         taskDetails.put(TASK_TIME_REQUIRED, task.getTimeRequired());
