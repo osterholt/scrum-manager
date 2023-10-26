@@ -161,8 +161,26 @@ public class DataWriter extends DataConstants{
             historyArray.add(historyObject);
         }
         taskDetails.put(TASK_HISTORY, historyArray);
-
+        JSONArray commentArray = new JSONArray();
+        for (Comment comment : task.getComments()) {
+            commentArray.add(getCommentObject(comment));
+        }
+        taskDetails.put("comments", commentArray);
+        
         return taskDetails;
+    }
+
+    private static JSONObject getCommentObject(Comment comment){
+        JSONObject commentDetails = new JSONObject();
+        commentDetails.put("id", comment.getId());
+        commentDetails.put("text", comment.getComment());
+        JSONArray replies = new JSONArray();
+        for(Comment reply : comment.getComments()) {
+            replies.add(getCommentObject(reply));
+
+        }
+        commentDetails.put("comments", replies);
+        return commentDetails;
     }
     public static ArrayList<Task> getTasks() {
         ArrayList<Task> ret = new ArrayList<>();
