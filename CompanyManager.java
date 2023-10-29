@@ -28,7 +28,7 @@ public class CompanyManager {
    */
   public boolean addCompany(Company company) {
     for(Company currCompany : companies) {
-      if(currCompany.equals(company) || !company.isValid())
+      if(currCompany.equals(company))
         return false;
     }
     companies.add(company);
@@ -42,8 +42,6 @@ public class CompanyManager {
    * @return Company removed
    */
   public Company removeCompany(Company company) {
-    if(!company.isValid())
-      return null;
     for(Company currCompany : companies) {
       if(currCompany.equals(company)) {
         companies.remove(currCompany);

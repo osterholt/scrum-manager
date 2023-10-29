@@ -2,53 +2,21 @@
     {
         "date": null,
         "time-required": 0.0,
-        "comments": [
-            {
-                "comments": [],
-                "comment": "test comment",
-                "authorid": "d1f5e859-b75a-415c-aebe-963d9966795a"
-            }
-        ],
+        "comments": [],
         "name": null,
         "description": null,
         "history": [
             {
-                "date": "Thu Oct 26 09:34:01 EDT 2023",
+                "date": "Sun Oct 29 15:54:18 EDT 2023",
                 "change": "change",
-                "authorid": "d1f5e859-b75a-415c-aebe-963d9966795a"
+                "authorid": "269dbaee-1183-432c-8202-914788b6566d"
             }
         ],
-        "authorid": "ba622fba-5038-4c8b-8af0-23cb21ec1393",
+        "authorid": "44c450fb-62d3-4ed9-9c02-738e97077d9d",
         "category": "FRONTEND",
         "priority": 0,
-        "assigneeid": "d1f5e859-b75a-415c-aebe-963d9966795a",
-        "taskid": "c0555344-e45c-4698-b070-681495b6ffb6",
-        "resolved": false
-    },
-    {
-        "date": null,
-        "time-required": 0.0,
-        "comments": [
-            {
-                "comments": [],
-                "comment": "test comment",
-                "authorid": "d1f5e859-b75a-415c-aebe-963d9966795a"
-            }
-        ],
-        "name": null,
-        "description": null,
-        "history": [
-            {
-                "date": "Thu Oct 26 09:34:01 EDT 2023",
-                "change": "change",
-                "authorid": "d1f5e859-b75a-415c-aebe-963d9966795a"
-            }
-        ],
-        "authorid": "ba622fba-5038-4c8b-8af0-23cb21ec1393",
-        "category": "FRONTEND",
-        "priority": 0,
-        "assigneeid": "d1f5e859-b75a-415c-aebe-963d9966795a",
-        "taskid": "1f865cfd-3a5b-4748-84c6-1fbf37c5d2ff",
+        "assigneeid": "269dbaee-1183-432c-8202-914788b6566d",
+        "taskid": "3042e5e6-5151-40a1-ad81-fc06245fa274",
         "resolved": false
     }
 ]

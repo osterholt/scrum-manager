@@ -119,7 +119,4 @@ public class User {
     public String toString() {
         return this.getFirstName() + " " + this.getLastName();
     }
-    public boolean saveCompanies() {
-        return DataWriter.saveCompanies(this);
-    }
 }

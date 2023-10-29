@@ -11,15 +11,18 @@ public class UI {
         ui.run();
     }
     public void run() {
-        if(AppFacade.login("plante@gmail.com", "password4")) {
+        
+
+        // AppFacade.signUp("Portia", "Plante", "plante@gmail.com", "passwordpaswwrod");
+        // AppFacade.logOut();
+        AppFacade.signUp("joshua", "dietrich", "jdd10@gmail.com", "123456789");
+        AppFacade.logOut();
+        if(AppFacade.login("plante@gmail.com", "passwordpaswwrod")) {
             System.out.println("Successfully logged in");
             System.out.println(AppFacade.getCurrentUser().getFirstName());
         } else {
             System.out.println("Not able to login");
         }
-
-        // AppFacade.signUp("Portia", "Plante", "plante@gmail.com", "password4");
-        // AppFacade.logOut();
       
         //TODO:
         //ADD USER with data above

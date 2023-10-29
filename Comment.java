@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.UUID;
+//import java.util.UUID;
 import java.time.LocalDateTime;
 
 /**
@@ -8,40 +8,25 @@ import java.time.LocalDateTime;
  * Date: 10/10/2023
  */
 public class Comment {
-    private UUID id;
     private String comment;
     private User author;
     private LocalDateTime time;
     private ArrayList<Comment> comments;
-
-    public Comment(String comment, User author) {
-        this.id = UUID.randomUUID();
-        init();
+    private AppFacade appFacade;
+    
+    public Comment(User author, String comment, AppFacade appFacade) {
         setAuthor(author);
         editComment(author, comment);
         this.time = LocalDateTime.now();
+        this.comments = new ArrayList<Comment>();
+        this.appFacade = appFacade;
     }
     
-    public Comment(User author, String comment) {
-        init();
-        setAuthor(author);
-        editComment(author, comment);
-    }
-     
     public void reply(User author, String comment) { 
-        if(comment != null && !comment.isEmpty()) {
-            Comment newComment = new Comment(comment, author);
-            comments.add(newComment);
-            } else {
-                Test.print("unknown");
-            }
+        if(comment != null) {
+            Comment reply = new Comment(author, comment, this.appFacade);
+            comments.add(reply);
         }
-    private void init() {
-        //time = new Date();
-        comments = new ArrayList<Comment>();
-    }
-    public UUID getId() {
-        return id;
     }
     public LocalDateTime getTime() {
         return time;
@@ -55,13 +40,8 @@ public class Comment {
     public void editComment(User author, String comment) {
         if(comment != null)
           this.comment = comment;
+          this.time = LocalDateTime.now();
     }
-    
-    public void editComment(String comment) {
-     if(comment != null)
-       this.comment = comment;
-     }
-     
 
     public User getAuthor() {
         return author;
@@ -77,11 +57,7 @@ public class Comment {
             return false;
         }
     }
-    /*
-    public Date getDate() {
-        return date;
-    }
-    */
+    
     public ArrayList<Comment> getComments() {
         return comments;
     }
