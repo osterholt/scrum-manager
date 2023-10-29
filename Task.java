@@ -41,6 +41,7 @@ public class Task {
         setAssignee(assignee);
         setAuthor(author);
         setCategory(category);
+        this.comments = new ArrayList<>();
         
     }
     private boolean setUUID(UUID id) {
@@ -73,6 +74,7 @@ public class Task {
     }
 
     public boolean addComment(Comment comment) {
+        comments.add(comment);
         return false;
     }
 

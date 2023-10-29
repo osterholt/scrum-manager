@@ -30,6 +30,24 @@ public class DataWriter extends DataConstants{
             return false;
         }
     }
+    public static boolean saveTasks() {
+        LoginManager users = LoginManager.getInstance();
+        ArrayList<User> userList = users.getUsers();
+        JSONArray jsonTasks = new JSONArray();
+        for(int i=0; i< userList.size(); i++) {
+			jsonTasks.add(getUserJSON(userList.get(i)));
+		}
+        try (FileWriter file = new FileWriter(TASK_FILE_NAME)) {
+ 
+            file.write(jsonTasks.toJSONString());
+            file.flush();
+            return true;
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     //get useres json object to write it to the json file
     public static boolean saveCompanies() {
@@ -135,9 +153,9 @@ public class DataWriter extends DataConstants{
 		}
         return null;
     }
-
-    public static boolean saveTasks() {
-        return true;
+    public static ArrayList<Task> getTasks() {
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        return null;
     }
 
     public static JSONObject getTaskJSON(Task task) {
@@ -165,26 +183,21 @@ public class DataWriter extends DataConstants{
         for (Comment comment : task.getComments()) {
             commentArray.add(getCommentObject(comment));
         }
-        taskDetails.put("comments", commentArray);
+        taskDetails.put(COMMENT_COMMENTS, commentArray);
         
         return taskDetails;
     }
 
     private static JSONObject getCommentObject(Comment comment){
         JSONObject commentDetails = new JSONObject();
-        commentDetails.put("id", comment.getId());
-        commentDetails.put("text", comment.getComment());
+        commentDetails.put(COMMENTS_ID, comment.getAuthor().getId().toString());
+        commentDetails.put(COMMENT, comment.getComment());
         JSONArray replies = new JSONArray();
         for(Comment reply : comment.getComments()) {
             replies.add(getCommentObject(reply));
-
         }
-        commentDetails.put("comments", replies);
+        commentDetails.put(COMMENT_COMMENTS, replies);
         return commentDetails;
-    }
-    public static ArrayList<Task> getTasks() {
-        ArrayList<Task> ret = new ArrayList<>();
-        return ret;
     }
     public static void main(String[] args) {
        // ArrayList<User> userList = users.getUsers();
@@ -192,12 +205,14 @@ public class DataWriter extends DataConstants{
        User user1 = new User("Josh", "Dietrich", "jdd@email.com", "password1");
         User user2 = new User("Sherry", "begay", "shb@email.com", "password2");
         Category cat =Category.FRONTEND;
-       Task t1 = new Task(UUID.randomUUID(), "taskname", "taskdescription", user1, user2, cat, false, 1, 1);
-       Date currentDate = new Date();
+        Task t1 = new Task(UUID.randomUUID(), "taskname", "taskdescription", user1, user2, cat, false, 1, 1);
+        Date currentDate = new Date();
        History h1 = new History(currentDate, user2, "change");
        ArrayList<History> histarray= new ArrayList<>();
        histarray.add(h1);
        t1.setHistory(histarray);
+       Comment c1 = new Comment(user2, "test comment");
+       t1.addComment(c1);
        JSONArray jsonTasks = new JSONArray();
         taskList.add(t1);
         for(int i=0; i< taskList.size(); i++) {
