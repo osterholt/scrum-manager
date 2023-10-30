@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-//import java.util.UUID;
+import java.util.UUID;
 import java.time.LocalDateTime;
 
 /**
@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
  * Date: 10/10/2023
  */
 public class Comment {
+    private UUID id;
     private String comment;
     private User author;
     private LocalDateTime time;
@@ -33,12 +34,32 @@ public class Comment {
             comments.add(reply);
         }
     }
+
+
+    private void init(User author, String comment) {
+        date = new Date();
+        comments = new ArrayList<Comment>();
+        setAuthor(author);
+        editComment(comment);
+    }
+
+    public UUID getID() {
+        return this.id;
+    }
+    
+    private boolean setID(UUID id) {
+        if(id == null)
+            return false;
+        this.id = id;
+        return true;
+
     /**
      * Get the time/date when comment was created
      * @return show the time/date of the comment
      */
     public LocalDateTime getTime() {
         return time;
+
     }
     /**
      * Set the time/date for the comment
@@ -94,4 +115,18 @@ public class Comment {
     public ArrayList<Comment> getComments() {
         return comments;
     }
+
+
+    public boolean deleteComment(UUID id) {
+        for(Comment comment : this.comments) {
+            if(comment.getID().equals(id)) {
+                comments.remove(comment);
+                return true;
+            }
+            if(comment.deleteComment(id)) 
+                return true;
+        }
+        return false;
+    }
 }
+
