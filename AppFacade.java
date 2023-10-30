@@ -38,8 +38,8 @@ public class AppFacade {
         return activeBoard;
     }
 
-    public static boolean login(String username, String password) {
-        activeUser = LoginManager.getUser(username, password);
+    public static boolean login(String email, String password) {
+        activeUser = LoginManager.getUser(email, password);
         if(activeUser == null){
             return false;
         }
