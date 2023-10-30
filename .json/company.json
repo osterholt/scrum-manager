@@ -1,33 +1,14 @@
 [
     {
-        "name": "USC Ltd",
-        "id": "a113e416-a6d4-4673-b12b-a3e41c11c506",
-        "boards": [{
-            "title": "Project Board",
-            "description": "board for the project",
-            "comments" : [{
-                "authorId" : "5b234d00-f114-4b39-9919-ccd1eb8ae9a5",
-                "comment" : "Attempted fix but didn't have time to finish",
-                "date":"10/12/2023"
-            }],
-            "columns": [{
-                "title" : "Maintenance tasks",
-                "description" : "Tasks to help maintain functionality of the program",
-                "tasks": ["13651c17-f3a0-4462-8052-a2f0b86603fd", "09050e6f-6668-46a3-9a0c-9aa5834c1f25"]
-                    } , {
-                "title" : "Future tasks",
-                "description" : "Tasks to be done in the next sprint, look out for these",
-                "tasks": ["13651c17-f3a0-4462-8052-a2f0b86603fd", "09050e6f-6668-46a3-9a0c-9aa5834c1f25"]
-                }
-            ],
-                "private": false,
-                "scrumMaster": "cd6afc55-0fac-490c-9e21-26101ae0a656",
-                "productOwner":"5b234d00-f114-4b39-9919-ccd1eb8ae9a5",
-                "developers": []
-            }
+        "name": "hiiii",
+        "boards": [],
+        "id": "7caf61fe-b492-4e19-8363-cf6a82927b2e",
+        "admins": [
+            "403acb2d-e4de-4596-be6b-947240265b6d"
         ],
-        "users": ["5b234d00-f114-4b39-9919-ccd1eb8ae9a5", "cd6afc55-0fac-490c-9e21-26101ae0a656"],
-        "admins": ["5b234d00-f114-4b39-9919-ccd1eb8ae9a5", "cd6afc55-0fac-490c-9e21-26101ae0a656"]
-
+        "users": [
+            "78abdd23-ce09-4a43-8eed-68144d19554b",
+            "bd0fabdd-1f84-4e56-ad9c-d822e3b13833"
+        ]
     }
 ]

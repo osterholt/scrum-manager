@@ -1,6 +1,7 @@
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -10,6 +11,7 @@ import org.json.simple.parser.JSONParser;
 
 public class DataWriter extends DataConstants{
 
+    //write users json
     public static boolean saveUsers() {
         LoginManager users = LoginManager.getInstance();
         ArrayList<User> userList = users.getUsers();
@@ -28,6 +30,67 @@ public class DataWriter extends DataConstants{
             return false;
         }
     }
+    public static boolean saveTasks() {
+        CompanyManager companyManager = CompanyManager.getInstance();
+        JSONArray jsonTasks = new JSONArray();
+        for(Company company : companyManager.getCompanies()) {
+
+            for(Board board : company.getBoards()) {
+
+                for(Column column : board.getColumns()) {
+
+                    for(Task task : column.getTasks()) {
+                        jsonTasks.add(getTaskJSON(task));
+                    }
+                }
+            }
+        }
+        try (FileWriter file = new FileWriter(TASK_FILE_NAME)) {
+ 
+            file.write(jsonTasks.toJSONString());
+            file.flush();
+            return true;
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    //get useres json object to write it to the json file
+    public static boolean saveCompanies() {
+        CompanyManager companies = CompanyManager.getInstance();
+        ArrayList<Company> companyList = companies.getCompanies();
+        JSONArray jsonCompanies = new JSONArray();
+        for(int i=0; i< companyList.size(); i++) {
+            jsonCompanies.add(getCompanyJSON(companyList.get(i)));
+        }
+        try (FileWriter file = new FileWriter(COMPANY_FILE_NAME)) {
+            file.write(jsonCompanies.toJSONString());
+            file.flush();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean saveCompanies(User user) {
+        ArrayList<Company> companies = user.getCompanies();
+        JSONArray jsonCompanies = new JSONArray();
+        for(int i=0; i< companies.size(); i++){
+            jsonCompanies.add(getCompanyJSON(companies.get(i)));
+        }
+        try (FileWriter file = new FileWriter(COMPANY_FILE_NAME)) {
+            file.write(jsonCompanies.toJSONString());
+            file.flush();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public static JSONObject getUserJSON(User user) {
         JSONObject userDetails = new JSONObject();
         userDetails.put(USER_ID, user.getId().toString());
@@ -45,7 +108,34 @@ public class DataWriter extends DataConstants{
 
         return userDetails;
     }
+
+    public static JSONObject getCompanyJSON(Company company) {
+        JSONObject companyDetails = new JSONObject();
+        companyDetails.put(COMPANY_ID, company.getID().toString());
+        companyDetails.put(COMPANY_NAME, company.getName());
+        
+        JSONArray adminList = new JSONArray();
+        for (User admin : company.getAdmins()) {
+            adminList.add(admin.getId().toString());
+        }
+        companyDetails.put(COMPANY_ADMINS, adminList);
+        
+        JSONArray userList = new JSONArray();
+        for (User user : company.getUsers()) {
+            userList.add(user.getId().toString());
+        }
+        companyDetails.put(COMPANY_USERS, userList);
+
+        JSONArray boardList = new JSONArray();
+        for (Board board : company.getBoards()) {
+            boardList.add(board.getTitle());
+        }
+        companyDetails.put(COMPANY_BOARDS, boardList);
+
+        return companyDetails;
+    }
     
+    //data reader for users
     public static ArrayList<User> getUsers() {
         ArrayList<User> users = new ArrayList<User>();
 
@@ -71,42 +161,128 @@ public class DataWriter extends DataConstants{
 		}
         return null;
     }
+    public static ArrayList<Task> getTasks() {
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        return null;
+    }
 
-    // public void testUsers() {
-    //     ArrayList<User> users = new ArrayList<User>();
-    //     User user1 = new User("Josh", "Dietrich", "jdd@email.com", "password1");
-    //     User user2 = new User("Sherry", "begay", "shb@email.com", "password2");
-    //     User user3 = new User("evie", "ellis", "ee@email.com", "password3");
-    //     Company company1 = new Company("USC Ltd", user3, null, null);
-    //     Company company2 = new Company("Company 2", user3, null, null);
+    public static JSONObject getTaskJSON(Task task) {
+        JSONObject taskDetails = new JSONObject();
+        taskDetails.put(TASK_ID, task.getID().toString());
+        taskDetails.put(TASK_NAME, task.getName());
+        taskDetails.put(TASK_DESCRIPTION, task.getDescription());
+        taskDetails.put(TASK_DATE, task.getDate());
+        taskDetails.put(TASK_AUTHOR_ID, task.getAuthor().getId().toString());
+        taskDetails.put(TASK_ASSIGNEE_ID, task.getAssignee().getId().toString());
+        taskDetails.put(TASK_CATEGORY, task.getCategory().toString());
+        taskDetails.put(TASK_RESOLVED, task.isResolved());
+        taskDetails.put(TASK_PRIORITY, task.getPriority());
+        taskDetails.put(TASK_TIME_REQUIRED, task.getTimeRequired());
+        JSONArray historyArray = new JSONArray();
+        for(History history : task.getHistory()) {
+            JSONObject historyObject = new JSONObject();
+            historyObject.put(HISTORY_AUTHOR_ID, history.getUser().getId().toString());
+            historyObject.put(HISTORY_CHANGE, history.getChange());
+            historyObject.put(HISTORY_DATE,history.getDate().toString());
+            historyArray.add(historyObject);
+        }
+        taskDetails.put(TASK_HISTORY, historyArray);
+        JSONArray commentArray = new JSONArray();
+        for (Comment comment : task.getComments()) {
+            commentArray.add(getCommentObject(comment));
+        }
+        taskDetails.put(COMMENT_COMMENTS, commentArray);
+        
+        return taskDetails;
+    }
 
-    //     user1.addCompany(company1);
-    //     user2.addCompany(company1);
-    //     user3.addCompany(company1);
-    //     user1.addCompany(company2);
-    //     user2.addCompany(company2);
-    //     user3.addCompany(company2);
-    //     users.add(user1);
-    //     users.add(user2);
-    //     users.add(user3);
-    //     JSONArray jsonUsers = new JSONArray();
-    //     for(int i=0; i< users.size(); i++) {
-	// 		jsonUsers.add(getUserJSON(users.get(i)));
-	// 	}
-    //     try (FileWriter file = new FileWriter(USER_FILE_NAME)) {
+    private static JSONObject getCommentObject(Comment comment){
+        JSONObject commentDetails = new JSONObject();
+        commentDetails.put(COMMENTS_ID, comment.getAuthor().getId().toString());
+        commentDetails.put(COMMENT, comment.getComment());
+        JSONArray replies = new JSONArray();
+        for(Comment reply : comment.getComments()) {
+            replies.add(getCommentObject(reply));
+        }
+        commentDetails.put(COMMENT_COMMENTS, replies);
+        return commentDetails;
+    }
+    public static void main(String[] args) {
+        AppFacade.signUp("joshua", "dietrich", "jdd10@gmail.com", "123456789");
+        AppFacade.logOut();
+        if(AppFacade.login("plante@gmail.com", "passwordpaswwrod")) {
+            System.out.println("Successfully logged in");
+            System.out.println(AppFacade.getCurrentUser().getFirstName());
+        } else {
+            System.out.println("Not able to login");
+        }
+       ArrayList<Task> taskList = new ArrayList<>();
+       User user1 = new User("Josh", "Dietrich", "jdd@email.com", "password1");
+        User user2 = new User("Sherry", "begay", "shb@email.com", "password2");
+        Category cat =Category.FRONTEND;
+        Task t1 = new Task(UUID.randomUUID(), "taskname", "taskdescription", user1, user2, cat, false, 1, 1);
+        Column column = new Column("Todo", "Tasks that need to be done");
+        column.addTask(t1);
+        Board board = new Board("Test Board", false);
+        ArrayList<User> users = new ArrayList<User>();
+        users.add(user1); users.add(user2);
+
+        board.addColumn(column);
+
+        Company company = new Company("Test Company", user1, users, UUID.randomUUID());
+        
+        company.addBoard(board);
+        CompanyManager companyManager = CompanyManager.getInstance();
+        companyManager.addCompany(company);
+
+        Date currentDate = new Date();
+       History h1 = new History(currentDate, user2, "change");
+       ArrayList<History> histarray= new ArrayList<>();
+       histarray.add(h1);
+       t1.setHistory(histarray);
+       //Comment c1 = new Comment(user2, "test comment");
+       //t1.addComment(c1);
+       JSONArray jsonTasks = new JSONArray();
+        taskList.add(t1);
+        DataWriter.saveTasks();
+        
+     
+        User admin1 = new User("admin", "person", "admin@email.com", "coolpassword");
+        Company company1 = new Company("first", admin1, users, UUID.randomUUID());
+        ArrayList<User> users2 = new ArrayList<User>();
+        User bbgorl = new User("baby", "girl", "bbg@gmail.com", "waaaaawoooooo");
+        users2.add(bbgorl);
+        User admin2 = new User("mama", "joe", "mimimoomoo@aol.com", "weewoobooboo");
+        Company company2 = new Company("second", admin2, users2, UUID.randomUUID());
+        ArrayList<Company> companies = new ArrayList<Company>();
+        companies.add(company1); companies.add(company2);
+        JSONArray jsonCompany = new JSONArray();
+
+        //attempt 2
+        // for(int i=0; i< taskList.size(); i++) {
+		// 	jsonTasks.add(getTaskJSON(taskList.get(i)));
+		// }
+        // try (FileWriter file = new FileWriter(TASK_FILE_NAME)) {
  
-    //         file.write(jsonUsers.toJSONString());
-    //         file.flush();
+        //     file.write(jsonTasks.toJSONString());
+        //     file.flush();
  
-    //     } catch (IOException e) {
-    //         e.printStackTrace();
-    //     }
-    // }
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
+        // for (Company company : companies) {
+        //     jsonCompany.add(getCompanyJSON(company));
+        // }
+        // try (FileWriter file = new FileWriter(COMPANY_FILE_NAME)) {
+ 
+        //     file.write(jsonCompany.toJSONString());
+        //     file.flush();
+ 
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
+        
 
-    
-
-
-    // public static void main(String[] args) {
     //     DataWriter test = new DataWriter();
     //     test.testUsers();
         
@@ -127,5 +303,5 @@ public class DataWriter extends DataConstants{
     //     // } catch (IOException e) {
     //     //     e.printStackTrace();
     //     // }
-    // }
+    }
 }

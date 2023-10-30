@@ -23,13 +23,21 @@ public class Column {
     public boolean addDescription(String description){
         return false;
     }
-    public boolean addTask(UUID id, String name, String description, User author, User assignee, Category category, boolean resolved, float timeRequired){
-        return true;
+    // public boolean addTask(UUID id, String name, String description, User author, User assignee, Category category, boolean resolved, float timeRequired){
+    //     return true;
+    // }
+    public void addTask(Task task) {
+        tasks.add(task);
     }
     public boolean editTitle(String title){
         return false;
     }
     public boolean taskReorder(int index, Task task){
+        //sb
+        if(index >= 0 && index < tasks.size()) {
+            tasks.add(index, task);
+            return true;
+        }
         return false;
     }
 
@@ -46,6 +54,10 @@ public class Column {
                 return task;
         }
         return null;
+    }
+
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 
     /**

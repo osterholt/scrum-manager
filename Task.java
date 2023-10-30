@@ -23,6 +23,19 @@ public class Task {
     private ArrayList<History> history;
 
     private final int DEF_PRIORITY = 3;
+  
+    public Task(String name, User author) {
+        //genrate a unique ID for task
+        this.id = UUID.randomUUID(); 
+        this.name = name;
+        this.author = author;
+        this.comments = new ArrayList<>();
+
+    }
+
+    public Task(UUID id, String name, String description, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
+        init(id, name, description, date, author, assignee, category, resolved, priority, timeRequired);
+    }
 
     public Task(String aName) {
         init(null, aName, null, null, null, null, null, false, DEF_PRIORITY, 0);
@@ -58,12 +71,22 @@ public class Task {
         setTimeRequired(timeRequired);
         this.comments = new ArrayList<>();
         this.history = new ArrayList<>();
+
     }
     private boolean setUUID(UUID id) {
         if(id == null)
             id = UUID.randomUUID();
         this.id = id;
         return true;
+    }
+    private void setAssignee(User assignee) {
+        this.assignee = assignee;
+    }
+    private void setAuthor(User author) {
+        this.author = author;
+    }
+    private void setCategory(Category category) {
+        this.category = category;
     }
     
 
@@ -85,6 +108,10 @@ public class Task {
 
     public int getPriority() {
         return this.priority;
+    }
+    public boolean addComment(Comment comment) {
+        comments.add(comment);
+        return false;
     }
 
     public boolean setPriority(int priority) {
@@ -198,5 +225,12 @@ public class Task {
             return false;    
         this.name = name;
         return true;
+    }
+    public void setHistory(ArrayList<History> history) {
+        this.history = history;
+    }
+
+    public String getDate() {
+        return date;
     }
 }

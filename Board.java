@@ -85,6 +85,13 @@ public class Board {
             return temp.addTask(id, name, description, author, assignee, category, resolved, timeRequired);
         return false; //TODO: fix
     }
+    public boolean addColumn(Column column) {
+        if(column != null && !columns.contains(column)) {
+            columns.add(column);
+            return true;
+        }
+        return false;
+    }
 
     public boolean createColumn(String title) {
         return createColumn(title, null);
@@ -122,6 +129,10 @@ public class Board {
         }
         Test.print("Column Not Found.");
         return null;
+    }
+
+    public ArrayList<Column> getColumns() {
+        return columns;
     }
 
     /**

@@ -17,7 +17,8 @@ public class Test {
 
     public static void main(String[] args) {
         
-        testLeaderboard();
+        //testLeaderboard();
+        testCompanyManager();
     }
 
     public static void print(String str) {
@@ -66,9 +67,23 @@ public class Test {
         LoginManager logManager = LoginManager.getInstance();
         Test.print(logManager.toString());
     }
-    public static void printCompanies() {
+    public static void printCompanies(CompanyManager compManager) {
+        for(Company c : compManager.getCompanies()) {
+            System.out.println(c);
+        }
+    }
+    public static void testCompanyManager() {
         CompanyManager compManager = CompanyManager.getInstance();
-        
-
+        User wowAdmin = new User("wow", "admin", "wowie@hotmail.com", "zooweeemama");
+        User boeJiden = new User("boe", "jiden", "mepres@usarules.gov", "iheartkamala");
+        User missHarris = new User("kamala", "harris", "kama@usarules.gov", "ilaughatnothing");
+        ArrayList<User> users = new ArrayList<User>();
+        users.add(boeJiden); users.add(missHarris);
+        Company hello = new Company("hiiii", wowAdmin, users, UUID.randomUUID());
+        compManager.addCompany(hello);
+        printCompanies(compManager);
+        CompanyManager.saveCompanies();
+        System.out.println(CompanyManager.getCompany("hiiii"));
+        System.out.println(CompanyManager.getCompany(hello.getID()));
     }
 }

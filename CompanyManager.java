@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.UUID;
 /**
  * @author Gavin Hewitt
  * @version "v1.0"
@@ -27,7 +28,7 @@ public class CompanyManager {
    */
   public boolean addCompany(Company company) {
     for(Company currCompany : companies) {
-      if(currCompany.equals(company) || !company.isValid())
+      if(currCompany.equals(company))
         return false;
     }
     companies.add(company);
@@ -41,8 +42,6 @@ public class CompanyManager {
    * @return Company removed
    */
   public Company removeCompany(Company company) {
-    if(!company.isValid())
-      return null;
     for(Company currCompany : companies) {
       if(currCompany.equals(company)) {
         companies.remove(currCompany);
@@ -51,4 +50,28 @@ public class CompanyManager {
     }
     return null;
   } 
+
+  public static Company getCompany(UUID id) {
+    for(Company company : companies) {
+      if(id.equals(company.getID()))
+        return company;
+    }
+    return null;
+  }
+
+  public static Company getCompany(String name) {
+    for(Company company : companies) {
+      if(name.equals(company.getName()))
+        return company;
+    }
+    return null;
+  }
+
+	public ArrayList<Company> getCompanies() {
+		return companies;
+	}
+
+  public static boolean saveCompanies() {
+    return DataWriter.saveCompanies();
+  }
 }

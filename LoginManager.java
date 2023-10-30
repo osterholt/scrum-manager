@@ -23,12 +23,14 @@ public class LoginManager {
         userList = DataWriter.getUsers();
     }
 
-    private static boolean checkEmail(String email) {
+    public static boolean checkEmail(String email) {
         // check if email is already in user list
+        if(userList!=null){
         for (User user : userList) {
             if(user.getEmail().equals(email)){
                 return false;
             }    
+        }
         }
         // check if email is valid
         String emailRegex = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
@@ -42,7 +44,7 @@ public class LoginManager {
      * @param password String to check
      * @return boolean if correct size
      */
-    private static boolean checkPassword(String password) {
+    public static boolean checkPassword(String password) {
         return password.length() > 7;
     }
 
@@ -69,7 +71,7 @@ public class LoginManager {
         return userList;
     }
 
-    /**
+    /*
      * Has DataWriter save the users to json.
      */
     public static boolean saveUsers() {
