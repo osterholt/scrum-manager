@@ -63,6 +63,11 @@ public class AppFacade {
     public void logOut() {
         LoginManager.getInstance().saveUsers();
     }
+    public static void save() {
+        LoginManager.getInstance().saveUsers();
+        LoginManager.getInstance().saveTasks();
+        LoginManager.getInstance().saveCompanies();
+    }
 
     public Company getActiveCompany() {
         return activeCompany;

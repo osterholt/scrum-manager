@@ -80,6 +80,12 @@ public class LoginManager {
     public boolean saveUsers() {
         return DataWriter.saveUsers();
     }
+    public boolean saveTasks() {
+        return DataWriter.saveTasks();
+    }
+    public boolean saveCompanies() {
+        return DataWriter.saveCompanies();
+    }
     public User getUser(String email, String password) {
         for(User user : userList) {
             if(user.getEmail().equals(email) && user.isPassword(password))
