@@ -174,10 +174,11 @@ public class DataWriter extends DataConstants{
                 User author = LoginManager.getInstance().getUser(authorid);
                 String name = (String)taskJSON.get(TASK_NAME);
                 String description = (String)taskJSON.get(TASK_DESCRIPTION);
-                int priority = (int)taskJSON.get(TASK_RESOLVED);
-                float timeRequired = (float)taskJSON.get(TASK_TIME_REQUIRED);
+                int priority = ((Long)taskJSON.get(TASK_PRIORITY)).intValue();
+                float timeRequired = ((Double) taskJSON.get(TASK_TIME_REQUIRED)).floatValue();
                 Category category = Category.valueOf((String)taskJSON.get(TASK_CATEGORY));
-                tasks.add(new Task(id, name, description, author, assignee, category, false, priority, timeRequired));
+                boolean resolved = (boolean)taskJSON.get(TASK_RESOLVED);
+                tasks.add(new Task(id, name, description, author, assignee, category, resolved, priority, timeRequired));
             }
             return tasks;
         } catch (Exception e) {
@@ -235,6 +236,7 @@ public class DataWriter extends DataConstants{
         } else {
             System.out.println("Not able to login");
         }
+        System.out.println(DataWriter.getTasks());
     //    ArrayList<Task> taskList = new ArrayList<>();
     //    User user1 = new User("Josh", "Dietrich", "jdd@email.com", "password1");
     //     User user2 = new User("Sherry", "begay", "shb@email.com", "password2");
