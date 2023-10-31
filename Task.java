@@ -194,7 +194,7 @@ public class Task {
         return history;
     }
 
-    public String timeDate() {
+    public String dateToString() {
         return this.time.toString();
     }
     

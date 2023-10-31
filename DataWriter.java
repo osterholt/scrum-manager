@@ -1,6 +1,7 @@
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -171,7 +172,7 @@ public class DataWriter extends DataConstants{
         taskDetails.put(TASK_ID, task.getID().toString());
         taskDetails.put(TASK_NAME, task.getName());
         taskDetails.put(TASK_DESCRIPTION, task.getDescription());
-        taskDetails.put(TASK_DATE, task.getDate());
+        taskDetails.put(TASK_DATE, task.dateToString());
         taskDetails.put(TASK_AUTHOR_ID, task.getAuthor().getId().toString());
         taskDetails.put(TASK_ASSIGNEE_ID, task.getAssignee().getId().toString());
         taskDetails.put(TASK_CATEGORY, task.getCategory().toString());
@@ -220,7 +221,7 @@ public class DataWriter extends DataConstants{
        User user1 = new User("Josh", "Dietrich", "jdd@email.com", "password1");
         User user2 = new User("Sherry", "begay", "shb@email.com", "password2");
         Category cat =Category.FRONTEND;
-        Task t1 = new Task(UUID.randomUUID(), "taskname", "taskdescription", user1, user2, cat, false, 1, 1);
+        Task t1 = new Task(UUID.randomUUID(), "taskname", "taskdescription", LocalDateTime.now(), user1, user2, cat, false, 1, 1);
         Column column = new Column("Todo", "Tasks that need to be done");
         column.addTask(t1);
         Board board = new Board("Test Board", false);
