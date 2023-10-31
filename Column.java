@@ -95,10 +95,6 @@ public class Column {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String toString(){
         String toReturn = "\n Title: " +title;
         toReturn += "\n  Description: " + description;
