@@ -24,7 +24,9 @@ public class User {
      */
     public User(String firstName, String lastName, String email, String password) {  
         UUID tempid = UUID.randomUUID();
-        init(tempid, firstName, lastName, email, password, role);
+        init(tempid, firstName, lastName, role);
+        setEmail(email);
+        setPassword(password);
     }
     /**
      * Initalises new user. USE AppFacade.SignUp to make new user.
@@ -34,15 +36,17 @@ public class User {
      * @param password
      */
     public User(UUID id, String firstName, String lastName, String email, String password, String role) {
-        init(id, firstName, lastName, email, password, role);
+        init(id, firstName, lastName, role);
+        this.email=email;
+        this.password=password;
     }
-    private void init(UUID id, String firstName, String lastName, String email, String password, String role) {
+    private void init(UUID id, String firstName, String lastName, String role) {
         this.companies = new ArrayList<Company>();
         setUUID(id);
         setFirstName(firstName);
         setLastName(lastName);
-        setEmail(email);
-        setPassword(password);
+        
+        
         setRole(role);
     }
     
@@ -98,7 +102,7 @@ public class User {
         return true;
     }
     private boolean setEmail(String email) {
-        if(!LoginManager.checkEmail(email)) {
+        if(!LoginManager.getInstance().checkEmail(email)) {
             System.out.println("Invalid Email. Login Failed.");
             return false;
         }
@@ -109,7 +113,7 @@ public class User {
         return password;
     }
     private boolean setPassword(String password) {
-        if(!LoginManager.checkPassword(password)) {
+        if(!LoginManager.getInstance().checkPassword(password)) {
             System.out.println("Invalid Password. Login Failed.");
             return false;
         }

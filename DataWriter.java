@@ -159,7 +159,7 @@ public class DataWriter extends DataConstants{
         } catch (Exception e) {
 			e.printStackTrace();
 		}
-        return null;
+        return users;
     }
     public static ArrayList<Task> getTasks() {
         ArrayList<Task> tasks = new ArrayList<Task>();
@@ -208,55 +208,54 @@ public class DataWriter extends DataConstants{
         return commentDetails;
     }
     public static void main(String[] args) {
-        AppFacade.signUp("joshua", "dietrich", "jdd10@gmail.com", "123456789");
-        AppFacade.logOut();
-        if(AppFacade.login("plante@gmail.com", "passwordpaswwrod")) {
+        // AppFacade.signUp("sherry", "begay", "sherry@gmail.com", "12345678910");
+        // AppFacade.logOut();
+        if(AppFacade.login("sherry@gmail.com", "12345678910")) {
             System.out.println("Successfully logged in");
-            System.out.println(AppFacade.getCurrentUser().getFirstName());
         } else {
             System.out.println("Not able to login");
         }
-       ArrayList<Task> taskList = new ArrayList<>();
-       User user1 = new User("Josh", "Dietrich", "jdd@email.com", "password1");
-        User user2 = new User("Sherry", "begay", "shb@email.com", "password2");
-        Category cat =Category.FRONTEND;
-        Task t1 = new Task(UUID.randomUUID(), "taskname", "taskdescription", user1, user2, cat, false, 1, 1);
-        Column column = new Column("Todo", "Tasks that need to be done");
-        column.addTask(t1);
-        Board board = new Board("Test Board", false);
-        ArrayList<User> users = new ArrayList<User>();
-        users.add(user1); users.add(user2);
+    //    ArrayList<Task> taskList = new ArrayList<>();
+    //    User user1 = new User("Josh", "Dietrich", "jdd@email.com", "password1");
+    //     User user2 = new User("Sherry", "begay", "shb@email.com", "password2");
+    //     Category cat =Category.FRONTEND;
+    //     Task t1 = new Task(UUID.randomUUID(), "taskname", "taskdescription", user1, user2, cat, false, 1, 1);
+    //     Column column = new Column("Todo", "Tasks that need to be done");
+    //     column.addTask(t1);
+    //     Board board = new Board("Test Board", false);
+    //     ArrayList<User> users = new ArrayList<User>();
+    //     users.add(user1); users.add(user2);
 
-        board.addColumn(column);
+    //     board.addColumn(column);
 
-        Company company = new Company("Test Company", user1, users, UUID.randomUUID());
+    //     Company company = new Company("Test Company", user1, users, UUID.randomUUID());
         
-        company.addBoard(board);
-        CompanyManager companyManager = CompanyManager.getInstance();
-        companyManager.addCompany(company);
+    //     company.addBoard(board);
+    //     CompanyManager companyManager = CompanyManager.getInstance();
+    //     companyManager.addCompany(company);
 
-        Date currentDate = new Date();
-       History h1 = new History(currentDate, user2, "change");
-       ArrayList<History> histarray= new ArrayList<>();
-       histarray.add(h1);
-       t1.setHistory(histarray);
-       //Comment c1 = new Comment(user2, "test comment");
-       //t1.addComment(c1);
-       JSONArray jsonTasks = new JSONArray();
-        taskList.add(t1);
-        DataWriter.saveTasks();
+    //     Date currentDate = new Date();
+    //    History h1 = new History(currentDate, user2, "change");
+    //    ArrayList<History> histarray= new ArrayList<>();
+    //    histarray.add(h1);
+    //    t1.setHistory(histarray);
+    //    //Comment c1 = new Comment(user2, "test comment");
+    //    //t1.addComment(c1);
+    //    JSONArray jsonTasks = new JSONArray();
+    //     taskList.add(t1);
+    //     DataWriter.saveTasks();
         
      
-        User admin1 = new User("admin", "person", "admin@email.com", "coolpassword");
-        Company company1 = new Company("first", admin1, users, UUID.randomUUID());
-        ArrayList<User> users2 = new ArrayList<User>();
-        User bbgorl = new User("baby", "girl", "bbg@gmail.com", "waaaaawoooooo");
-        users2.add(bbgorl);
-        User admin2 = new User("mama", "joe", "mimimoomoo@aol.com", "weewoobooboo");
-        Company company2 = new Company("second", admin2, users2, UUID.randomUUID());
-        ArrayList<Company> companies = new ArrayList<Company>();
-        companies.add(company1); companies.add(company2);
-        JSONArray jsonCompany = new JSONArray();
+    //     User admin1 = new User("admin", "person", "admin@email.com", "coolpassword");
+    //     Company company1 = new Company("first", admin1, users, UUID.randomUUID());
+    //     ArrayList<User> users2 = new ArrayList<User>();
+    //     User bbgorl = new User("baby", "girl", "bbg@gmail.com", "waaaaawoooooo");
+    //     users2.add(bbgorl);
+    //     User admin2 = new User("mama", "joe", "mimimoomoo@aol.com", "weewoobooboo");
+    //     Company company2 = new Company("second", admin2, users2, UUID.randomUUID());
+    //     ArrayList<Company> companies = new ArrayList<Company>();
+    //     companies.add(company1); companies.add(company2);
+    //     JSONArray jsonCompany = new JSONArray();
 
         //attempt 2
         // for(int i=0; i< taskList.size(); i++) {

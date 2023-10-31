@@ -40,7 +40,7 @@ public class AppFacade {
     }
 
     public static boolean login(String username, String password) {
-        activeUser = LoginManager.getUser(username, password);
+        activeUser = LoginManager.getInstance().getUser(username, password);
         if(activeUser == null){
             return false;
         }
@@ -58,11 +58,11 @@ public class AppFacade {
     }
 
     public static User getUser(UUID id) {
-        return LoginManager.getUser(id);
+        return LoginManager.getInstance().getUser(id);
     }
 
     public static void logOut() {
-        LoginManager.saveUsers();
+        LoginManager.getInstance().saveUsers();
     }
 
 }
