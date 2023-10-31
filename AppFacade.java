@@ -70,9 +70,6 @@ public class AppFacade {
 
     public static void logOut() {
         LoginManager.getInstance().saveUsers();
-    }
-    public static void save() {
-        LoginManager.getInstance().saveUsers();
         LoginManager.getInstance().saveTasks();
         LoginManager.getInstance().saveCompanies();
     }
