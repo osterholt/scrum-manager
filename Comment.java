@@ -19,7 +19,7 @@ public class Comment {
      */
     public Comment(User author, String comment) {
         setAuthor(author);
-        editComment(author, comment);
+        editComment(comment);
         this.time = LocalDateTime.now();
         this.comments = new ArrayList<Comment>();
     }
@@ -37,7 +37,7 @@ public class Comment {
 
 
     private void init(User author, String comment) {
-        date = new Date();
+        time = LocalDateTime.now();
         comments = new ArrayList<Comment>();
         setAuthor(author);
         editComment(comment);
@@ -52,14 +52,13 @@ public class Comment {
             return false;
         this.id = id;
         return true;
-
+    }
     /**
      * Get the time/date when comment was created
      * @return show the time/date of the comment
      */
     public LocalDateTime getTime() {
         return time;
-
     }
     /**
      * Set the time/date for the comment
@@ -80,10 +79,11 @@ public class Comment {
      * @param author author making the edit
      * @param comment update comment content
      */
-    public void editComment(User author, String comment) {
-        if(comment != null)
-          this.comment = comment;
-          this.time = LocalDateTime.now();
+    public void editComment(String comment) {
+        if(comment != null) {
+            this.comment = comment;
+            this.time = LocalDateTime.now();
+        }
     }
     /**
      * Get the author comment

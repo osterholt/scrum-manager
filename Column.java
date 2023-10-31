@@ -23,9 +23,9 @@ public class Column {
     public boolean addDescription(String description){
         return false;
     }
-    // public boolean addTask(UUID id, String name, String description, User author, User assignee, Category category, boolean resolved, float timeRequired){
-    //     return true;
-    // }
+    public boolean addTask(UUID id, String name, String description, User author, User assignee, Category category, boolean resolved, float timeRequired){
+        return true;
+    }
     public void addTask(Task task) {
         tasks.add(task);
     }
