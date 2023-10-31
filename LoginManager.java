@@ -9,7 +9,7 @@ import java.util.regex.Matcher;
  */
 
 public class LoginManager {
-    private static ArrayList<User> userList;
+    private ArrayList<User> userList;
     private static LoginManager loginManager;
 
     public static LoginManager getInstance() {
@@ -25,7 +25,7 @@ public class LoginManager {
             userList = new ArrayList<User>();
     }
 
-    public static boolean checkEmail(String email) {
+    public boolean checkEmail(String email) {
         // check if email is already in user list
         if(userList!=null){
         for (User user : userList) {
@@ -46,7 +46,7 @@ public class LoginManager {
      * @param password String to check
      * @return boolean if correct size
      */
-    public static boolean checkPassword(String password) {
+    public boolean checkPassword(String password) {
         return password.length() > 7;
     }
 
@@ -61,7 +61,7 @@ public class LoginManager {
         return false;
     }
 
-    public static User getUser(UUID id) {
+    public User getUser(UUID id) {
         for(User user : userList) {
             if(id.equals(user.getId()))
                 return user;
@@ -69,6 +69,7 @@ public class LoginManager {
         Test.print("No User Found.");
         return null;
     }
+    
     public ArrayList<User> getUsers() {
         return userList;
     }
@@ -76,10 +77,10 @@ public class LoginManager {
     /*
      * Has DataWriter save the users to json.
      */
-    public static boolean saveUsers() {
+    public boolean saveUsers() {
         return DataWriter.saveUsers();
     }
-    public static User getUser(String email, String password) {
+    public User getUser(String email, String password) {
         for(User user : userList) {
             if(user.getEmail().equals(email) && user.isPassword(password))
                 return user;

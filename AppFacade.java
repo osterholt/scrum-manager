@@ -33,6 +33,10 @@ public class AppFacade {
         return activeUser;
     }
 
+    public static void setActiveUser(User active){
+        activeUser = active;
+    }
+
     public static Board getActiveBoard() {
         if(activeBoard == null) {
             System.out.println("No Board Selected.");
@@ -41,8 +45,8 @@ public class AppFacade {
         return activeBoard;
     }
 
-    public static boolean login(String email, String password) {
-        activeUser = LoginManager.getUser(email, password);
+    public static boolean login(String username, String password) {
+        activeUser = LoginManager.getInstance().getUser(username, password);
         if(activeUser == null){
             return false;
         }
@@ -56,15 +60,16 @@ public class AppFacade {
     public static UUID signUp(String firstName, String lastName, String email, String password) {
         User user = new User(firstName, lastName, email, password);
         LoginManager.getInstance().addUser(user);
+        setActiveUser(user);
         return user.getId();
     }
 
     public static User getUser(UUID id) {
-        return LoginManager.getUser(id);
+        return LoginManager.getInstance().getUser(id);
     }
 
     public static void logOut() {
-        LoginManager.saveUsers();
+        LoginManager.getInstance().saveUsers();
     }
 
     public static Company getActiveCompany() {

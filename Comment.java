@@ -17,11 +17,9 @@ public class Comment {
      * @param author The author of the comment
      * @param comment The content of the comments
      */
-    public Comment(User author, String comment) {
-        setAuthor(author);
+    public Comment(String comment) {
         editComment(comment);
-        this.time = LocalDateTime.now();
-        this.comments = new ArrayList<Comment>();
+        init();
     }
     /**
      * Add reply to comment with an Author in mind and reply text.
@@ -30,17 +28,16 @@ public class Comment {
      */
     public void reply(User author, String comment) { 
         if(comment != null) {
-            Comment reply = new Comment(author, comment);
+            Comment reply = new Comment(comment);
             comments.add(reply);
         }
     }
 
 
-    private void init(User author, String comment) {
+    private void init() {
         time = LocalDateTime.now();
         comments = new ArrayList<Comment>();
-        setAuthor(author);
-        editComment(comment);
+        setAuthor(AppFacade.getActiveUser());
     }
 
     public UUID getID() {

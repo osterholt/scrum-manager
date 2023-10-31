@@ -38,7 +38,6 @@ public class ScenarioDriver {
                             + "Z. Quit\n"
                             + "Enter selection: ");
             choice = scnr.nextLine().charAt(0);
-            
             switch(choice) {
                 case 'A':
                     login();
