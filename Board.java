@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.UUID;
+import java.time.LocalDateTime;
 /**
  * @author Cam Osterholt
  * @version v1.0
@@ -65,10 +66,10 @@ public class Board {
         return null;
     }
 
-    public boolean createTask(String column, UUID id, String name, String description, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
+    public boolean createTask(String column, UUID id, String name, String description, LocalDateTime time, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
         Column temp = getColumn(column);
         if(temp != null) 
-            return temp.addTask(id, name, description, author, assignee, category, resolved, priority, timeRequired);
+            return temp.addTask(id, name, description, time, author, assignee, category, resolved, priority, timeRequired);
         return false;
     }
     public boolean addColumn(Column column) {
