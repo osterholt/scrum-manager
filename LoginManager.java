@@ -21,7 +21,8 @@ public class LoginManager {
     private LoginManager() {
         //TODO: init
         userList = DataWriter.getUsers();
-       // userList = new ArrayList<User>();
+        if(userList == null)
+            userList = new ArrayList<User>();
     }
 
     public boolean checkEmail(String email) {
@@ -68,6 +69,7 @@ public class LoginManager {
         Test.print("No User Found.");
         return null;
     }
+    
     public ArrayList<User> getUsers() {
         return userList;
     }
