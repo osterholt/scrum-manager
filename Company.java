@@ -13,6 +13,11 @@ public class Company {
     private ArrayList<User> users;
     private ArrayList<User> admins;
 
+    public Company(String name) {
+        init();
+        setName(name);
+    }
+
     public Company(String aName, User self, ArrayList<User> users, UUID id){
         init();
         setUUID(id);
