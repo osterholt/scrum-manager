@@ -31,6 +31,10 @@ public class AppFacade {
         return activeUser;
     }
 
+    public static void setActiveUser(User active){
+        activeUser = active;
+    }
+
     public static Board getActiveBoard() {
         if(activeBoard == null) {
             System.out.println("No Board Selected.");
@@ -54,6 +58,7 @@ public class AppFacade {
     public static UUID signUp(String firstName, String lastName, String email, String password) {
         User user = new User(firstName, lastName, email, password);
         LoginManager.getInstance().addUser(user);
+        setActiveUser(user);
         return user.getId();
     }
 

@@ -33,15 +33,7 @@ public class Task {
 
     }
 
-    public Task(UUID id, String name, String description, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
-        init(id, name, description, time, author, assignee, category, resolved, priority, timeRequired);
-    }
-
-    public Task(String aName) {
-        init(null, aName, null, null, null, null, null, false, DEF_PRIORITY, 0);
-    }
-
-    /**
+        /**
      * Creates Task from JSON's parameters
      * @param id
      * @param name
@@ -54,11 +46,17 @@ public class Task {
      * @param priority
      * @param timeRequired
      */
-    public Task(UUID id, String name, String description, String time, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
+
+    public Task(UUID id, String name, String description, LocalDateTime time, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
         init(id, name, description, time, author, assignee, category, resolved, priority, timeRequired);
     }
 
-    private void init(UUID id, String name, String description, String time, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
+    public Task(String aName) {
+        init(null, aName, null, null, null, null, null, false, DEF_PRIORITY, 0);
+    }
+
+
+    private void init(UUID id, String name, String description, LocalDateTime time, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
         setUUID(id);
         setName(name);
         setDescription(description);
@@ -113,7 +111,7 @@ public class Task {
     }
 
     public boolean addComment(String description) {
-        return this.comments.add(new Comment(AppFacade.getActiveUser(), description));
+        return this.comments.add(new Comment(description));
     }
 
     public boolean deleteComment(UUID id) {
@@ -196,15 +194,15 @@ public class Task {
         return history;
     }
 
-    public String timeDate() {
+    public String dateToString() {
         return this.time.toString();
     }
     
-    private boolean setTime(String dateStr) {
+    private boolean setTime(LocalDateTime dateStr) {
         if(dateStr == null)
             this.time = LocalDateTime.now();
         else    
-            this.time = LocalDateTime.parse(dateStr);
+            this.time = dateStr;
         return true;
     }
 
@@ -220,7 +218,4 @@ public class Task {
         this.history = history;
     }
 
-    public String getDate() {
-        return date;
-    }
 }
