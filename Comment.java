@@ -19,6 +19,7 @@ public class Comment {
      */
     public Comment(String comment) {
         editComment(comment);
+        setID(UUID.randomUUID());
         init();
     }
     /**
