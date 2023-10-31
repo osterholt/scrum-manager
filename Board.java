@@ -55,20 +55,6 @@ public class Board {
         return false;
     }
 
-    //FIXME: Do We want this? Doesnt seem to make sense with columns anymore
-    
-    // public ArrayList<Task> getTasks() {
-    //     if(this.open || canEdit()) 
-    //         return this.task
-    //     return null; //TODO: fix
-    // }
-
-    // FIXME: Do we want this method? What would it be used for?
-    public ArrayList<Task> getBacklog() {
-
-        return null; //TODO: fix
-    }
-
     public boolean deleteTask(UUID id, String name) {
         return getTask(id, name) != null;
     }
@@ -79,11 +65,11 @@ public class Board {
         return null;
     }
 
-    public boolean createTask(String column, UUID id, String name, String description, User author, User assignee, Category category, boolean resolved, float timeRequired) {
+    public boolean createTask(String column, UUID id, String name, String description, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
         Column temp = getColumn(column);
         if(temp != null) 
-            return temp.addTask(id, name, description, author, assignee, category, resolved, timeRequired);
-        return false; //TODO: fix
+            return temp.addTask(id, name, description, author, assignee, category, resolved, priority, timeRequired);
+        return false;
     }
     public boolean addColumn(Column column) {
         if(column != null && !columns.contains(column)) {
@@ -106,10 +92,9 @@ public class Board {
             return false;
     }
 
-    //FIXME: Do we want to take User or just implement from active user?
-    private boolean isDev(User user) {
+    private boolean isDev() {
         for(User dev : this.developers) {
-            if(user.equals(dev))
+            if(AppFacade.getActiveUser().equals(dev))
                 return true;
         }
         return false;
@@ -117,7 +102,7 @@ public class Board {
     private boolean canEdit() {
         if(this.open)
             return true;
-        if(isDev(AppFacade.getActiveUser()))
+        if(isDev())
             return true;
         return false;
     }
@@ -236,5 +221,8 @@ public class Board {
             this.productOwner = productOwner;
         else
             Test.print("Invalid Input.");
+    }
+    public ArrayList<User> getDevelopers() {
+        return developers;
     }
 }
