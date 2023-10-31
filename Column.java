@@ -97,10 +97,13 @@ public class Column {
 
     public String toString(){
         String toReturn = "\n Title: " +title;
-        toReturn += "\n  Description: " + description;
-        toReturn += "\n  Tasks: ";
-        for(int i = 0; i < tasks.size(); i++){
-            toReturn += tasks.get(i).toString();
+        if(description!=null)
+            toReturn += "\n  Description: " + description;
+        if(tasks!=null){
+            toReturn += "\n  Tasks: ";
+            for(int i = 0; i < tasks.size(); i++){
+                toReturn += tasks.get(i).toString();
+        }
         }
         return toReturn;
     }

@@ -27,8 +27,11 @@ public class AppFacade {
         return activeUser;
     }
 
-    public void setActiveUser(User active){
+    public boolean setActiveUser(User active){
+        if(active == null)
+            return false;
         activeUser = active;
+        return true;
     }
 
     public Board getActiveBoard() {
@@ -74,6 +77,7 @@ public class AppFacade {
             return false;
         return null != (activeCompany = CompanyManager.getCompany(name));
     }
+    
     public boolean setActiveCompany(Company company) {
         if(company == null)
             return false;
