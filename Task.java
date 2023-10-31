@@ -79,16 +79,6 @@ public class Task {
         this.id = id;
         return true;
     }
-    private void setAssignee(User assignee) {
-        this.assignee = assignee;
-    }
-    private void setAuthor(User author) {
-        this.author = author;
-    }
-    private void setCategory(Category category) {
-        this.category = category;
-    }
-    
 
     public boolean changeCategory(Category category) {
         if(category == null)
