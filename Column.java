@@ -33,12 +33,7 @@ public class Column {
     }
     public boolean addTask(UUID id, String name, String description, LocalDateTime time, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired){
         Task newTask = new Task(id, name, description, time, author, assignee, category, resolved, priority, timeRequired);
-        for(Task task : tasks) {
-            if(task.equals(newTask))
-                return false;
-        }
-        tasks.add(newTask);
-        return true;
+        return addTask(newTask);
     }
     public boolean addTask(Task task) {
         for(Task currTask : tasks) {
