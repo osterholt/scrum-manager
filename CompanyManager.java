@@ -32,6 +32,7 @@ public class CompanyManager {
         return false;
     }
     companies.add(company);
+    AppFacade.getInstance().setActiveCompany(company);
     return true;
   }
 
@@ -61,7 +62,7 @@ public class CompanyManager {
 
   public static Company getCompany(String name) {
     for(Company company : companies) {
-      if(name.equals(company.getName()))
+      if(name.toLowerCase().equals(company.getName().toLowerCase()))
         return company;
     }
     return null;

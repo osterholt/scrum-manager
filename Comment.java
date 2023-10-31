@@ -37,7 +37,7 @@ public class Comment {
     private void init() {
         time = LocalDateTime.now();
         comments = new ArrayList<Comment>();
-        setAuthor(AppFacade.getActiveUser());
+        setAuthor(AppFacade.getInstance().getActiveUser());
     }
 
     public UUID getID() {

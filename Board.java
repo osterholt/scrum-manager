@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.UUID;
+import java.time.LocalDateTime;
 /**
  * @author Cam Osterholt
  * @version v1.0
@@ -28,7 +29,7 @@ public class Board {
     private void init(String title, String description, boolean open) {
         setDefaultColumns();
         this.developers = new ArrayList<User>();
-        this.developers.add(AppFacade.getActiveUser());
+        this.developers.add(AppFacade.getInstance().getActiveUser());
         leaderboard = new Leaderboard();
         
         setTitle(title);
@@ -49,7 +50,7 @@ public class Board {
     public boolean completeTask(UUID id) {
         Task task = getTask(id);
         if(task != null) {
-            this.leaderboard.incrementScore(AppFacade.getActiveUser());
+            this.leaderboard.incrementScore(AppFacade.getInstance().getActiveUser());
             return task.resolve();
         }
         return false;
@@ -65,10 +66,10 @@ public class Board {
         return null;
     }
 
-    public boolean createTask(String column, UUID id, String name, String description, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
+    public boolean createTask(String column, UUID id, String name, String description, LocalDateTime time, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
         Column temp = getColumn(column);
         if(temp != null) 
-            return temp.addTask(id, name, description, author, assignee, category, resolved, priority, timeRequired);
+            return temp.addTask(id, name, description, time, author, assignee, category, resolved, priority, timeRequired);
         return false;
     }
     public boolean addColumn(Column column) {
@@ -94,7 +95,7 @@ public class Board {
 
     private boolean isDev() {
         for(User dev : this.developers) {
-            if(AppFacade.getActiveUser().equals(dev))
+            if(AppFacade.getInstance().getActiveUser().equals(dev))
                 return true;
         }
         return false;

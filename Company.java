@@ -15,6 +15,7 @@ public class Company {
 
     public Company(String name) {
         init();
+        setUUID(null);
         setName(name);
     }
 
@@ -34,7 +35,7 @@ public class Company {
         this.boards = new ArrayList<Board>();
         this.users = new ArrayList<User>();
         this.admins = new ArrayList<User>();
-        name = "No Name";
+        users.add(AppFacade.getInstance().getActiveUser());
     }
 
     public String getName() {
@@ -43,6 +44,15 @@ public class Company {
     public ArrayList<Board> getBoards(){
         return boards;
     }
+
+    public Board getBoard(String title) {
+        for(Board board : boards) {
+            if(board.getTitle().toLowerCase().equals(title.toLowerCase())) 
+                return board;
+        }
+        return null;
+    }
+
     public ArrayList<User> getUsers(){
         return users;
     }

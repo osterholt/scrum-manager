@@ -21,7 +21,8 @@ public class LoginManager {
     private LoginManager() {
         //TODO: init
         userList = DataWriter.getUsers();
-       // userList = new ArrayList<User>();
+        if(userList == null)
+            userList = new ArrayList<User>();
     }
 
     public boolean checkEmail(String email) {
@@ -79,12 +80,25 @@ public class LoginManager {
     public boolean saveUsers() {
         return DataWriter.saveUsers();
     }
+    public boolean saveTasks() {
+        return DataWriter.saveTasks();
+    }
+    public boolean saveCompanies() {
+        return DataWriter.saveCompanies();
+    }
     public User getUser(String email, String password) {
         for(User user : userList) {
             if(user.getEmail().equals(email) && user.isPassword(password))
                 return user;
         }
         return null;
+    }
+
+    public void printUsers() {
+        System.out.println("");
+        for(User user : userList) 
+            System.out.println(user);
+        System.out.println("");
     }
 }
 

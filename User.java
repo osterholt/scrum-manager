@@ -121,6 +121,10 @@ public class User {
         return true; 
     }
     public String toString() {
+        return getEmail();
+    }
+    
+    public String info() {
         String hiddenPassword = password.substring(0,1);
         for(int i = 1; i < password.length(); i++){
             hiddenPassword += '*';

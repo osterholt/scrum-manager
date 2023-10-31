@@ -147,7 +147,7 @@ public class Task {
     }
     private boolean setAuthor(User author) {
         if(author == null)
-            author = AppFacade.getActiveUser();
+            author = AppFacade.getInstance().getActiveUser();
         this.author = author;
         return true;
     }
