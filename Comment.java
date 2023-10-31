@@ -125,5 +125,11 @@ public class Comment {
         }
         return false;
     }
+
+    public String toString(){
+        String toReturn = "\n Comment: " + comment;
+        toReturn += "\n Sub-Comments: " + comments.toString();
+        return toReturn;
+    }
 }
 
