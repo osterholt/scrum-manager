@@ -9,11 +9,13 @@ import java.util.UUID;
 
 public class AppFacade {
     private static User activeUser;
+    private static Company activeCompany;
     private static Board activeBoard;
     private static AppFacade appFacade;
 
     private AppFacade() {
         activeUser = null;
+        activeCompany = null;
         activeBoard = null;
     }
 
@@ -63,6 +65,18 @@ public class AppFacade {
 
     public static void logOut() {
         LoginManager.saveUsers();
+    }
+
+    public static Company getActiveCompany() {
+        return activeCompany;
+    }
+
+    public static boolean setActiveCompany(String name) {
+        return null != (activeCompany = CompanyManager.getCompany(name));
+    }
+
+    public static boolean setActiveBoard(String name) {
+        return null != (activeCompany.getBoard(name));
     }
 
 }

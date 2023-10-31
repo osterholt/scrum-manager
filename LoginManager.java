@@ -21,6 +21,8 @@ public class LoginManager {
     private LoginManager() {
         //TODO: init
         userList = DataWriter.getUsers();
+        if(userList == null)
+            userList = new ArrayList<User>();
     }
 
     public static boolean checkEmail(String email) {
