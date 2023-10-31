@@ -225,4 +225,16 @@ public class Board {
     public ArrayList<User> getDevelopers() {
         return developers;
     }
+    public String toString(){
+
+        String toReturn = "\nTitle: " +title;
+        toReturn += "\n  Description: " + description;
+        toReturn += "\n  Scrum Master: " + scrumMaster.getFirstName() + " " + scrumMaster.getLastName();
+        toReturn += "\n  Product Master: " + productOwner.getFirstName() + " " + productOwner.getLastName();
+        toReturn += "\n  Columns: ";
+        for(int i = 0; i < columns.size(); i++){
+            toReturn += columns.get(i).toString();
+        }
+        return toReturn;
+    }
 }

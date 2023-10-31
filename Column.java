@@ -90,5 +90,15 @@ public class Column {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String toString(){
+        String toReturn = "\n Title: " +title;
+        toReturn += "\n  Description: " + description;
+        toReturn += "\n  Tasks: ";
+        for(int i = 0; i < tasks.size(); i++){
+            toReturn += tasks.get(i).toString();
+        }
+        return toReturn;
+    }
     
 }
