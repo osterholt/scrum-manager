@@ -48,7 +48,9 @@ public class ScenarioDriver {
                     AppFacade.login(info.get("Email"), info.get("Password"));
                     break;
                 case 3:
-                    
+                    System.out.print("Enter company name: ");
+                    String name = scnr.nextLine();
+                    CompanyManager.getInstance().addCompany(new Company(name));
                     break;
                 case 9:
                     return;

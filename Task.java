@@ -34,7 +34,7 @@ public class Task {
     }
 
     public Task(UUID id, String name, String description, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
-        init(id, name, description, date, author, assignee, category, resolved, priority, timeRequired);
+        init(id, name, description, time, author, assignee, category, resolved, priority, timeRequired);
     }
 
     public Task(String aName) {
