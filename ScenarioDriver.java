@@ -31,11 +31,11 @@ public class ScenarioDriver {
         int choice = 0;
         while(choice != 9) {
             scnr = new Scanner(System.in);
-            System.out.print("Enter selection:" 
-                             + "1. Create New User"
-                             + "2. Login"
-                             + "3. Create New Company"
-                             + "9. Quit");
+            System.out.print("Enter selection:\n" 
+                             + "1. Create New User\n"
+                             + "2. Login\n"
+                             + "3. Create New Company\n"
+                             + "9. Quit\n");
             choice = Integer.parseInt(scnr.nextLine());
             HashMap<String, String> info = null;
             switch(choice) {
