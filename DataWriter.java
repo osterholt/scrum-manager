@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.UUID;
+import java.time.format.DateTimeFormatter;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -179,7 +180,10 @@ public class DataWriter extends DataConstants{
                 float timeRequired = ((Double) taskJSON.get(TASK_TIME_REQUIRED)).floatValue();
                 Category category = Category.valueOf((String)taskJSON.get(TASK_CATEGORY));
                 boolean resolved = (boolean)taskJSON.get(TASK_RESOLVED);
-                tasks.add(new Task(id, name, description, author, assignee, category, resolved, priority, timeRequired));
+                String dateString = (String) taskJSON.get(TASK_DATE);
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy");
+                LocalDateTime date = LocalDateTime.parse(dateString, dateFormatter);
+                tasks.add(new Task(id, name, description, date, author, assignee, category, resolved, priority, timeRequired));
             }
             return tasks;
         } catch (Exception e) {
@@ -232,22 +236,23 @@ public class DataWriter extends DataConstants{
     public static void main(String[] args) {
         // AppFacade.signUp("sherry", "begay", "sherry@gmail.com", "12345678910");
         // AppFacade.logOut();
-        if(AppFacade.login("sherry@gmail.com", "12345678910")) {
-            System.out.println("Successfully logged in");
-        } else {
-            System.out.println("Not able to login");
-        }
+        // if(AppFacade.login("sherry@gmail.com", "12345678910")) {
+        //     System.out.println("Successfully logged in");
+        // } else {
+        //     System.out.println("Not able to login");
+        // }
+        System.out.println(DataWriter.getTasks().get(0).getName());
 
-       ArrayList<Task> taskList = new ArrayList<>();
-       User user1 = new User("Josh", "Dietrich", "jdd@email.com", "password1");
-        User user2 = new User("Sherry", "begay", "shb@email.com", "password2");
-        Category cat =Category.FRONTEND;
-        Task t1 = new Task(UUID.randomUUID(), "taskname", "taskdescription", LocalDateTime.now(), user1, user2, cat, false, 1, 1);
-        Column column = new Column("Todo", "Tasks that need to be done");
-        column.addTask(t1);
-        Board board = new Board("Test Board", false);
-        ArrayList<User> users = new ArrayList<User>();
-        users.add(user1); users.add(user2);
+    //    ArrayList<Task> taskList = new ArrayList<>();
+    //    User user1 = new User("Josh", "Dietrich", "jdd@email.com", "password1");
+    //     User user2 = new User("Sherry", "begay", "shb@email.com", "password2");
+    //     Category cat =Category.FRONTEND;
+    //     Task t1 = new Task(UUID.randomUUID(), "taskname", "taskdescription", LocalDateTime.now(), user1, user2, cat, false, 1, 1);
+    //     Column column = new Column("Todo", "Tasks that need to be done");
+    //     column.addTask(t1);
+    //     Board board = new Board("Test Board", false);
+    //     ArrayList<User> users = new ArrayList<User>();
+    //     users.add(user1); users.add(user2);
 
     //     board.addColumn(column);
 
