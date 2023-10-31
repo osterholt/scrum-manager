@@ -8,9 +8,9 @@ import java.util.UUID;
  */
 
 public class AppFacade {
-    private static User activeUser;
-    private static Company activeCompany;
-    private static Board activeBoard;
+    private User activeUser;
+    private Company activeCompany;
+    private Board activeBoard;
     private static AppFacade appFacade;
 
     private AppFacade() {
@@ -25,27 +25,19 @@ public class AppFacade {
         return appFacade;
     }
 
-    public static User getActiveUser() {
-        if(activeUser == null) {
-            System.out.println("No User Logged In.");
-            return null;
-        }
+    public User getActiveUser() {
         return activeUser;
     }
 
-    public static void setActiveUser(User active){
+    public void setActiveUser(User active){
         activeUser = active;
     }
 
-    public static Board getActiveBoard() {
-        if(activeBoard == null) {
-            System.out.println("No Board Selected.");
-            return null;
-        }
+    public Board getActiveBoard() {
         return activeBoard;
     }
 
-    public static boolean login(String username, String password) {
+    public boolean login(String username, String password) {
         activeUser = LoginManager.getInstance().getUser(username, password);
         if(activeUser == null){
             return false;
@@ -53,35 +45,40 @@ public class AppFacade {
         return true;
     }
 
-    public static User getCurrentUser(){
+    public User getCurrentUser(){
         return activeUser;
     }
 
-    public static UUID signUp(String firstName, String lastName, String email, String password) {
+    public UUID signUp(String firstName, String lastName, String email, String password) {
         User user = new User(firstName, lastName, email, password);
         LoginManager.getInstance().addUser(user);
         setActiveUser(user);
         return user.getId();
     }
 
-    public static User getUser(UUID id) {
+    public User getUser(UUID id) {
         return LoginManager.getInstance().getUser(id);
     }
 
-    public static void logOut() {
+    public void logOut() {
         LoginManager.getInstance().saveUsers();
     }
 
-    public static Company getActiveCompany() {
+    public Company getActiveCompany() {
         return activeCompany;
     }
 
-    public static boolean setActiveCompany(String name) {
+    public boolean setActiveCompany(String name) {
         return null != (activeCompany = CompanyManager.getCompany(name));
     }
+    public boolean setActiveCompany(Company company) {
+        return null != (activeCompany = company);
+    }
 
-    public static boolean setActiveBoard(String name) {
-        return null != (activeCompany.getBoard(name));
+    public boolean setActiveBoard(String name) {
+        if(name == null)
+            return false;
+        return null != (activeBoard = AppFacade.getInstance().getActiveCompany().getBoard(name));
     }
 
 }

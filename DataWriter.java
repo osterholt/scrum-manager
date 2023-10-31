@@ -231,7 +231,7 @@ public class DataWriter extends DataConstants{
     public static void main(String[] args) {
         // AppFacade.signUp("sherry", "begay", "sherry@gmail.com", "12345678910");
         // AppFacade.logOut();
-        if(AppFacade.login("sherry@gmail.com", "12345678910")) {
+        if(AppFacade.getInstance().login("sherry@gmail.com", "12345678910")) {
             System.out.println("Successfully logged in");
         } else {
             System.out.println("Not able to login");

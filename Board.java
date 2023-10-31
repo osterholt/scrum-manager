@@ -28,7 +28,7 @@ public class Board {
     private void init(String title, String description, boolean open) {
         setDefaultColumns();
         this.developers = new ArrayList<User>();
-        this.developers.add(AppFacade.getActiveUser());
+        this.developers.add(AppFacade.getInstance().getActiveUser());
         leaderboard = new Leaderboard();
         
         setTitle(title);
@@ -49,7 +49,7 @@ public class Board {
     public boolean completeTask(UUID id) {
         Task task = getTask(id);
         if(task != null) {
-            this.leaderboard.incrementScore(AppFacade.getActiveUser());
+            this.leaderboard.incrementScore(AppFacade.getInstance().getActiveUser());
             return task.resolve();
         }
         return false;
@@ -94,7 +94,7 @@ public class Board {
 
     private boolean isDev() {
         for(User dev : this.developers) {
-            if(AppFacade.getActiveUser().equals(dev))
+            if(AppFacade.getInstance().getActiveUser().equals(dev))
                 return true;
         }
         return false;
@@ -224,5 +224,10 @@ public class Board {
     }
     public ArrayList<User> getDevelopers() {
         return developers;
+    }
+
+    public String toString() {
+        //TODO: Complete
+        return null;
     }
 }

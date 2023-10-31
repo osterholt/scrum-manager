@@ -73,7 +73,7 @@ public class Leaderboard {
           return getIndex(user.getId()) + 1;
      }
      public int getRank() {
-          return getIndex(AppFacade.getActiveUser().getId()) + 1;
+          return getIndex(AppFacade.getInstance().getActiveUser().getId()) + 1;
      }
 
      /**
