@@ -43,8 +43,8 @@ public class AppFacade {
         return activeBoard;
     }
 
-    public static boolean login(String email, String password) {
-        activeUser = LoginManager.getUser(email, password);
+    public static boolean login(String username, String password) {
+        activeUser = LoginManager.getInstance().getUser(username, password);
         if(activeUser == null){
             return false;
         }
@@ -63,11 +63,11 @@ public class AppFacade {
     }
 
     public static User getUser(UUID id) {
-        return LoginManager.getUser(id);
+        return LoginManager.getInstance().getUser(id);
     }
 
     public static void logOut() {
-        LoginManager.saveUsers();
+        LoginManager.getInstance().saveUsers();
     }
 
 }

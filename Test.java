@@ -40,7 +40,7 @@ public class Test {
         ArrayList<User> userList = new ArrayList<>();
         for(String[] userStr : TEST_USERS) {
             UUID id = AppFacade.signUp(userStr[0], userStr[1], userStr[2], userStr[3]);
-            userList.add(LoginManager.getUser(id));
+            userList.add(LoginManager.getInstance().getUser(id));
         }
         Leaderboard lb = new Leaderboard();
         for(int i = 0; i < userList.size(); i++) {
@@ -59,7 +59,7 @@ public class Test {
         Test.print("-----Printing top 3-----\n");
         String[][] arr = lb.getTopRank(3);
         for(String[] val : arr) 
-            Test.print(LoginManager.getUser(UUID.fromString(val[0])).toString() + "\tScore: " + val[1]);
+            Test.print(LoginManager.getInstance().getUser(UUID.fromString(val[0])).toString() + "\tScore: " + val[1]);
 
         Test.print("-----Ending Leaderboard Testing-----\n");
     }

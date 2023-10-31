@@ -23,11 +23,22 @@ public class Column {
     public boolean addDescription(String description){
         return false;
     }
-    public boolean addTask(UUID id, String name, String description, User author, User assignee, Category category, boolean resolved, float timeRequired){
+    public boolean addTask(UUID id, String name, String description, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired){
+        Task newTask = new Task(id, name, description, author, assignee, category, resolved, priority, timeRequired);
+        for(Task task : tasks) {
+            if(task.equals(newTask))
+                return false;
+        }
+        tasks.add(newTask);
         return true;
     }
-    public void addTask(Task task) {
+    public boolean addTask(Task task) {
+        for(Task currTask : tasks) {
+            if(currTask.equals(task))
+                return false;
+        }
         tasks.add(task);
+        return true;
     }
     public boolean editTitle(String title){
         return false;
