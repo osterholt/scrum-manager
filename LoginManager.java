@@ -93,5 +93,12 @@ public class LoginManager {
         }
         return null;
     }
+
+    public void printUsers() {
+        System.out.println("");
+        for(User user : userList) 
+            System.out.println(user);
+        System.out.println("");
+    }
 }
 
