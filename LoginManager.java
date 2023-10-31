@@ -67,6 +67,7 @@ public class LoginManager {
         Test.print("No User Found.");
         return null;
     }
+    
     public ArrayList<User> getUsers() {
         return userList;
     }
