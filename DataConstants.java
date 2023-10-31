@@ -14,7 +14,6 @@ public abstract class DataConstants {
     protected static final String COMPANY_BOARDS = "boards";
     protected static final String COMPANY_USERS = "users";
     protected static final String COMPANY_ADMINS = "admins";
-
     protected static final String TASK_ID = "taskid";
     protected static final String TASK_NAME = "name";
     protected static final String TASK_DESCRIPTION = "description";
@@ -34,5 +33,4 @@ public abstract class DataConstants {
     protected static final String COMMENT = "comment";
     protected static final String COMMENT_DATE = "date";
     protected static final String COMMENT_COMMENTS = "comments";
-
 }

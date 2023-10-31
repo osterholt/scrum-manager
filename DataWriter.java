@@ -34,11 +34,8 @@ public class DataWriter extends DataConstants{
         CompanyManager companyManager = CompanyManager.getInstance();
         JSONArray jsonTasks = new JSONArray();
         for(Company company : companyManager.getCompanies()) {
-
             for(Board board : company.getBoards()) {
-
                 for(Column column : board.getColumns()) {
-
                     for(Task task : column.getTasks()) {
                         jsonTasks.add(getTaskJSON(task));
                     }
@@ -163,7 +160,30 @@ public class DataWriter extends DataConstants{
     }
     public static ArrayList<Task> getTasks() {
         ArrayList<Task> tasks = new ArrayList<Task>();
-        return null;
+        try {
+            FileReader reader = new FileReader(TASK_FILE_NAME);
+            JSONParser parser = new JSONParser();
+            JSONArray tasksJSON = (JSONArray)new JSONParser().parse(reader);
+
+            for (int i = 0; i < tasksJSON.size(); i++) {
+                JSONObject taskJSON = (JSONObject)tasksJSON.get(i);
+                UUID id = UUID.fromString((String)taskJSON.get(TASK_ID));
+                UUID assigneeid = UUID.fromString((String)taskJSON.get(TASK_ASSIGNEE_ID));
+                User assignee = LoginManager.getInstance().getUser(assigneeid);
+                UUID authorid = UUID.fromString((String)taskJSON.get(TASK_AUTHOR_ID));
+                User author = LoginManager.getInstance().getUser(authorid);
+                String name = (String)taskJSON.get(TASK_NAME);
+                String description = (String)taskJSON.get(TASK_DESCRIPTION);
+                int priority = (int)taskJSON.get(TASK_RESOLVED);
+                float timeRequired = (float)taskJSON.get(TASK_TIME_REQUIRED);
+                Category category = Category.valueOf((String)taskJSON.get(TASK_CATEGORY));
+                tasks.add(new Task(id, name, description, author, assignee, category, false, priority, timeRequired));
+            }
+            return tasks;
+        } catch (Exception e) {
+			e.printStackTrace();
+		}
+        return tasks;
     }
 
     public static JSONObject getTaskJSON(Task task) {

@@ -37,8 +37,8 @@ public class User {
      */
     public User(UUID id, String firstName, String lastName, String email, String password, String role) {
         init(id, firstName, lastName, role);
-        this.email=email;
-        this.password=password;
+        this.email = email;
+        this.password = password;
     }
     private void init(UUID id, String firstName, String lastName, String role) {
         this.companies = new ArrayList<Company>();
