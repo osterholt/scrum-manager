@@ -48,8 +48,11 @@ public class Column {
         tasks.add(task);
         return true;
     }
-    public boolean editTitle(String title){
-        return false;
+    public boolean setTitle(String title){
+        if(title == null)
+            return false;
+        this.title = title;
+        return true;
     }
     public boolean taskReorder(int index, Task task){
         //sb
@@ -86,9 +89,6 @@ public class Column {
      */
     public String getTitle() {
         return title;
-    }
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getDescription() {
