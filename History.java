@@ -25,7 +25,6 @@ public class History {
         return date;
     }
 
-    
     public User getUser(){
         return user;
     }
@@ -38,13 +37,13 @@ public class History {
     }
 
     // test
-  /*   public static void main(String[] args) {
+    /*public static void main(String[] args) {
         User myUser = new User("Evie", "Ellis", "evie.ellis11@gmail.com", "B3llyR@$h");
         Date myDate = new Date(1000000000);
         History myHistory = new History(myDate, myUser, "popped and pushed their shit");
         System.out.println(myHistory.toString());
     
-    }
-    */
+    }*/
+    
 }
 
