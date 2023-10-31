@@ -39,7 +39,7 @@ public class Test {
         Test.print("-----Testing Leaderboard-----\n");
         ArrayList<User> userList = new ArrayList<>();
         for(String[] userStr : TEST_USERS) {
-            UUID id = AppFacade.signUp(userStr[0], userStr[1], userStr[2], userStr[3]);
+            UUID id = AppFacade.getInstance().signUp(userStr[0], userStr[1], userStr[2], userStr[3]);
             userList.add(LoginManager.getInstance().getUser(id));
         }
         Leaderboard lb = new Leaderboard();

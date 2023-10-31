@@ -11,6 +11,7 @@ public class ScenarioDriver {
     //User Info: {Atticus, Madden, amadden@email.sc.edu, password}
    
     public static void main(String[] args) {
+        clearTerminal();
         run();
     }
 
@@ -31,10 +32,12 @@ public class ScenarioDriver {
         char choice = ' ';
         while(choice != 'Z') {
             scnr = new Scanner(System.in);
-            System.out.print("\nA. Enter User\n"
-                            + "B. Enter Company\n"
-                            + "C. Enter Board\n"
-                            + "D. Enter Task\n"
+            printActive();
+            System.out.print("A. User\n"
+                            + "B. Company\n"
+                            + "C. Board\n"
+                            + "D. Column\n"
+                            + "E. Task\n"
                             + "Z. Quit\n"
                             + "Enter selection: ");
             choice = scnr.nextLine().charAt(0);
@@ -46,50 +49,68 @@ public class ScenarioDriver {
                     company();
                     break;
                 case 'C':
+                    board();
                     break;
-                case 'E':
-                    
+                case 'D':
+                    column();
+                    break;                    
                 case 9:
+                    AppFacade.getInstance().logOut();
                     return;
+                default:
+                    clearTerminal();
+                    break;
             }
-
+            // System.out.println("------------------------------------\n");
         }
 
 
     }
 
     private static void login() {
-        System.out.print("\nA. Login\n"
+        clearTerminal();
+        System.out.print("A. Login\n"
                              + "B. Create New User\n"
                              + "C. View User\n"
+                             + "D. View all Users (DEBUG)\n"
                              + "Z. Exit to Menu\n"
                              + "Enter selection: ");
         char choice = scnr.nextLine().charAt(0);
         HashMap<String, String> info = null;
         switch(choice) {
             case 'A':
+                clearTerminal();
                 info = getExistingData();
-                AppFacade.login(info.get("Email"), info.get("Password"));
+                AppFacade.getInstance().login(info.get("Email"), info.get("Password"));
                 break;
             case 'B':
+                clearTerminal();
                 info = getNewUserData();
-                AppFacade.signUp(info.get("First Name"), info.get("Last Name"), info.get("Email"), info.get("Password"));
+                AppFacade.getInstance().signUp(info.get("First Name"), info.get("Last Name"), info.get("Email"), info.get("Password"));
+                AppFacade.getInstance().login(info.get("Email"), info.get("Password"));
                 break;
             case 'C':
+                clearTerminal();
                 try{
-                    System.out.println("Active User: " + AppFacade.getActiveUser().toString());
+                    System.out.println("Active User: \n" + AppFacade.getInstance().getActiveUser().info());
                 }
                 catch (Exception e){
                     System.out.println("No User Logged in.");
                 }
                 break;
+            case 'D':
+                clearTerminal();
+                LoginManager.getInstance().printUsers();
+                break;
             case 'Z':
+                clearTerminal();
                 return;
         }
     }
 
     private static void company() {
-        System.out.print("\nA. Set Active Company\n"
+        clearTerminal();
+        System.out.print("A. Set Active Company\n"
                        + "B. Create New Company\n"
                        + "C. View Active Company\n"
                        + "Z. Exit to Menu\n"
@@ -97,26 +118,142 @@ public class ScenarioDriver {
         char choice = scnr.nextLine().charAt(0);
         String name = null;
         switch(choice) {
+            // Set Active Company
             case 'A':
+                clearTerminal();
                 System.out.print("Enter company name: ");
                 name = scnr.nextLine();
-                if(!AppFacade.setActiveCompany(name)) 
+                if(!AppFacade.getInstance().setActiveCompany(name)) 
                     System.out.println("Company not found.");
                 break;
+            // New Company
             case 'B':
+                clearTerminal();
                 System.out.print("Enter company name: ");
                 name = scnr.nextLine();
                 CompanyManager.getInstance().addCompany(new Company(name));
                 break;
             case 'C':
+                clearTerminal();
                 try{
-                    System.out.println("Active Company: " + AppFacade.getActiveCompany().toString());
+                    System.out.println("Active Company: " + AppFacade.getInstance().getActiveCompany().toString());
                 }
                 catch (Exception e){
                     System.out.println("No Active Company.");
                 }
                 break;
             case 'Z':
+                clearTerminal();
+                return;
+        }
+    }
+
+    private static void board() {
+        clearTerminal();
+        System.out.print("A. Open Board\n"
+                             + "B. Create New Board\n"
+                             + "C. View Active Board\n"
+                             + "Z. Exit to Menu\n"
+                             + "Enter selection: ");
+        char choice = scnr.nextLine().charAt(0);
+        String name = null;
+        switch(choice) {
+            // Open Board
+            case 'A':
+                clearTerminal();
+                System.out.print("Enter board name: ");
+                name = scnr.nextLine();
+                if(!AppFacade.getInstance().setActiveBoard(name)) 
+                    System.out.println("Board not found.");
+                break;
+            // Create Board
+            case 'B':
+                clearTerminal();
+                System.out.print("Enter board name: ");
+                name = scnr.nextLine();
+
+                System.out.print("[O]pen or [P]rivate: ");
+                char openChar = scnr.nextLine().charAt(0);
+                boolean open = false;
+                if(openChar == 'O')
+                    open = true;
+
+                AppFacade.getInstance().getActiveCompany().addBoard(new Board(name, open));
+
+                AppFacade.getInstance().setActiveBoard(name);
+
+                break;
+            // Active Board
+            case 'C':
+                clearTerminal();
+                try{
+                    System.out.println("Active Board: " + AppFacade.getInstance().getActiveBoard().toString());
+                }
+                catch (Exception e){
+                    System.out.println("No Active Board.");
+                }
+                break;
+            case 'Z':
+                clearTerminal();
+                return;
+        }
+    }
+
+    private static void column() {
+        clearTerminal();
+        System.out.print("A. View Tasks\n"
+                             + "B. Create New Task\n"
+                             + "Z. Exit to Menu\n"
+                             + "Enter selection: ");
+        char choice = scnr.nextLine().charAt(0);
+        switch (choice) {
+            case 'A':
+                
+                break;
+            case 'B':
+
+                break;
+            case 'C':
+                
+                break;
+            default:
+                break;
+        }
+    }
+
+    private static void task() {
+        clearTerminal();
+        System.out.print("A. View Tasks\n"
+                             + "B. Create New Task\n"
+                             + "Z. Exit to Menu\n"
+                             + "Enter selection: ");
+        char choice = scnr.nextLine().charAt(0);
+        String name = null;
+        switch(choice) {
+            // Open Board
+            case 'A':
+                clearTerminal();
+                
+                break;
+            // Create Board
+            case 'B':
+                clearTerminal();
+                System.out.print("Enter board name: ");
+                name = scnr.nextLine();
+
+                System.out.print("[O]pen or [P]rivate: ");
+                char openChar = scnr.nextLine().charAt(0);
+                boolean open = false;
+                if(openChar == 'O')
+                    open = true;
+
+                AppFacade.getInstance().getActiveCompany().addBoard(new Board(name, open));
+                break;
+            // Active Board
+            case 'C':
+                
+            case 'Z':
+                clearTerminal();
                 return;
         }
     }
@@ -154,5 +291,30 @@ public class ScenarioDriver {
         ret.put("Email", email);
         ret.put("Password", password);
         return ret;
+    }
+
+    private static void clearTerminal() {
+        final String ANSI_CLS = "\u001b[2J";
+        final String ANSI_HOME = "\u001b[H";
+        System.out.print(ANSI_CLS + ANSI_HOME);
+        System.out.flush();
+    }
+    private static void printActive() {
+        try{
+            System.out.println("Active User: " + AppFacade.getInstance().getActiveUser().getEmail());
+        } catch (Exception e) {
+            System.out.println("Active User: NONE");
+        }
+        try{
+            System.out.println("Active Company: " + AppFacade.getInstance().getActiveCompany().getName());
+        } catch (Exception e) {
+            System.out.println("Active Company: NONE");
+        }
+        try{
+            System.out.println("Active Board: " + AppFacade.getInstance().getActiveBoard().getTitle());
+        } catch (Exception e) {
+            System.out.println("Active Board: NONE");
+        }
+        
     }
 }
