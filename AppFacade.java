@@ -75,7 +75,7 @@ public class AppFacade {
     public boolean setActiveCompany(String name) {
         if(name == null)
             return false;
-        return null != (activeCompany = CompanyManager.getCompany(name));
+        return null != (activeCompany = CompanyManager.getInstance().getCompany(name));
     }
     
     public boolean setActiveCompany(Company company) {

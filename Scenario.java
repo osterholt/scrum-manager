@@ -21,13 +21,16 @@ public class Scenario {
     login();
     addBoards();
     jeff();
-    createExistingInfo();
     // prompts for input in ui to make it look funcitonal
     System.out.print("\nWhich project would you like to select?\n1. Electric Missiles\t2. Soap Free Washers\t3. Air Computers");
-    scan.nextLine();
+    int projectInt = Integer.parseInt(scan.nextLine());
     boolean cont = true;
-    System.out.println("Electric Missiles Selected.");
-    selectBoard();
+    if(projectInt == 1) {
+      System.out.println("Electric Missiles Selected.");
+      selectBoard("Electric Missiles");
+      createExistingInfo(); // CSO: THis appears to initalise electric missles. Moved from line 24 to 30.
+    }
+    else System.exit(1);
     while(cont) {
       System.out.print("\nWould you like to do?\t1. Add Task\t2. Move Task\t3. Reassign Task\n4. Create New Column\t5. Reply to a comment\t6. Write to file\t7. Exit");
       int input = scan.nextInt();
@@ -110,8 +113,8 @@ public class Scenario {
     AppFacade.getInstance().signUp("Jeff", "Goldblum", "mynamejeff@aol.com", "ohbrotherthisguystinks");
     AppFacade.getInstance().getActiveCompany().addUser(LoginManager.getInstance().getUser("mynamejeff@aol.com", "ohbrotherthisguystinks"));
   }
-  private static void selectBoard() {
-    AppFacade.getInstance().setActiveBoard("Electric Missiles");  
+  private static void selectBoard(String name) {
+    AppFacade.getInstance().setActiveBoard(name);  
   }
   private static void addTask() {
     AppFacade.getInstance().getActiveBoard().createTask("Todo", UUID.randomUUID(), "Super Algorithm", "Initialize super algorithm to detonate at warp speed", LocalDateTime.now(), 
