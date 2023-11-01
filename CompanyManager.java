@@ -60,7 +60,7 @@ public class CompanyManager {
      * @param id The UUID of the Company to be retrieved
      * @return The company with the specified ID, or null if not found
      */
-  public static Company getCompany(UUID id) {
+  public Company getCompany(UUID id) {
     for(Company company : companies) {
       if(id.equals(company.getID()))
         return company;
@@ -72,7 +72,7 @@ public class CompanyManager {
      * @param name name of the company to be retrieved
      * @return company with the specified name, or null if not found
      */
-  public static Company getCompany(String name) {
+  public Company getCompany(String name) {
     for(Company company : companies) {
       if(name.toLowerCase().equals(company.getName().toLowerCase()))
         return company;
@@ -91,7 +91,7 @@ public class CompanyManager {
    * saves the list of companies to persistent storage.
    * @return true if the companies are successfully saved, false otherwise
    */
-  public static boolean saveCompanies() {
+  public boolean saveCompanies() {
     return DataWriter.saveCompanies();
   }
 }
