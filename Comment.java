@@ -27,7 +27,7 @@ public class Comment {
      * @param author of the reply
      * @param comment: the author text content
      */
-    public void reply(User author, String comment) { 
+    public void reply(String comment) { 
         if(comment != null) {
             Comment reply = new Comment(comment);
             comments.add(reply);
