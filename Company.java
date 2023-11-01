@@ -19,6 +19,12 @@ public class Company {
         setName(name);
     }
 
+    public Company(String name, UUID id) {
+        init();
+        setUUID(id);
+        setName(name);
+    }
+
     public Company(String aName, User self, ArrayList<User> users, UUID id){
         init();
         setUUID(id);

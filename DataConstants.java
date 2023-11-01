@@ -33,4 +33,15 @@ public abstract class DataConstants {
     protected static final String COMMENT = "comment";
     protected static final String COMMENT_DATE = "date";
     protected static final String COMMENT_COMMENTS = "comments";
+    protected static final String BOARD_TITLE = "title";
+    protected static final String BOARD_DESCRIPTION = "description";
+    protected static final String BOARD_COMMENTS = "comments";
+    protected static final String BOARD_COLUMNS = "columns";
+    protected static final String BOARD_PRIVATE = "private";
+    protected static final String BOARD_SCRUM_MASTER = "scrumMaster";
+    protected static final String BOARD_PRODUCT_OWNER = "productOwner";
+    protected static final String BOARD_DEVELOPERS = "developers";
+    protected static final String COLUMN_TITLE = "title";
+    protected static final String COLUMN_DESCRIPTION = "description";
+    protected static final String COLUMN_TASKS = "tasks";
 }
