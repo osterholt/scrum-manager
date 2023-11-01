@@ -206,6 +206,14 @@ public class Task {
         return true;
     }
 
+    public Comment getComment(String description) {
+        for(Comment comment : comments) {
+            if(comment.getComment().equals(description))
+                return comment;
+        }
+        return null;
+    }
+
     // ------------
 
     private boolean setName(String name) { 

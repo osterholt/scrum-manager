@@ -83,6 +83,16 @@ public class Column {
         return null;
     }
 
+    public boolean removeTask(String name) {
+        for(Task task : tasks) {
+            if(task.getName().equals(name)) {
+                tasks.remove(task);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public ArrayList<Task> getTasks() {
         return tasks;
     }

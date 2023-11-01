@@ -126,9 +126,9 @@ public class DataWriter extends DataConstants{
         companyDetails.put(COMPANY_USERS, userList);
 
         JSONArray boardList = new JSONArray();
-        for (Board board : company.getBoards()) {
-            boardList.add(board.getTitle());
-        }
+        /*for (Board board : company.getBoards()) {
+            
+        }*/
         companyDetails.put(COMPANY_BOARDS, boardList);
 
         return companyDetails;
@@ -137,28 +137,63 @@ public class DataWriter extends DataConstants{
     //data reader for users
     public static ArrayList<User> getUsers() {
         ArrayList<User> users = new ArrayList<User>();
-
+      
         try {
             FileReader reader = new FileReader(USER_FILE_NAME);
             JSONParser parser = new JSONParser();
             JSONArray userJSON = (JSONArray)new JSONParser().parse(reader);
-
+      
             for(int i=0; i < userJSON.size(); i++) {
-			    JSONObject personJSON = (JSONObject)userJSON.get(i);
+                JSONObject personJSON = (JSONObject)userJSON.get(i);
                 UUID id = UUID.fromString((String)personJSON.get(USER_ID));
                 String firstName = (String)personJSON.get(USER_FIRST_NAME);
                 String lastName = (String)personJSON.get(USER_LAST_NAME);
                 String email = (String)personJSON.get(USER_EMAIL);
                 String role = (String)personJSON.get(USER_ROLE);
                 String password = (String)personJSON.get(USER_PASSWORD);
-                users.add(new User(id,firstName, lastName, email, password, role));
+                JSONArray companyIDs = (JSONArray)personJSON.get(USER_COMPANIES);
+                User newUser = new User(id, firstName, lastName, email, password, role);
+                for (Object companyID : companyIDs) {
+                    newUser.addCompany(CompanyManager.getInstance().getCompany(UUID.fromString((String)companyID)));
+                }
+                users.add(newUser);
             }
-
             return users;
         } catch (Exception e) {
-			e.printStackTrace();
-		}
+            e.printStackTrace();
+        }
         return users;
+      }
+
+    public static ArrayList<Company> getCompanies() {
+        ArrayList<Company> companies = new ArrayList<Company>();
+
+        try {
+            FileReader reader = new FileReader(COMPANY_FILE_NAME);
+            JSONParser parser = new JSONParser();
+            JSONArray companyJSON = (JSONArray)new JSONParser().parse(reader);
+
+            for(int i=0; i < companyJSON.size(); i++) {
+                JSONObject company_JSON = (JSONObject)companyJSON.get(i);
+                UUID id = UUID.fromString((String)company_JSON.get(COMPANY_ID));
+                String companyName = (String)company_JSON.get(COMPANY_NAME);
+                Company newCompany = new Company(companyName, id);
+                JSONArray userIDs = (JSONArray)company_JSON.get(COMPANY_USERS);
+                JSONArray boardIDs = (JSONArray)company_JSON.get(COMPANY_BOARDS);
+                JSONArray adminIDs = (JSONArray)company_JSON.get(COMPANY_ADMINS);
+                for (Object userID : userIDs) {
+                    newCompany.addUser(LoginManager.getInstance().getUser(UUID.fromString((String)userID)));
+                }
+                /*for (Object boardID : boardIDs) {
+                    for(Company company : CompanyManager.getInstance().getCompanies()) {
+                        newCompany.add //TODO: addBoard
+                    }
+                }*/
+                for (Object adminID : adminIDs) {
+                    newCompany.addAdmin(LoginManager.getInstance().getUser(UUID.fromString((String)adminID)));
+                }
+            }   
+        }
     }
     public static ArrayList<Task> getTasks() {
         ArrayList<Task> tasks = new ArrayList<Task>();
@@ -232,6 +267,26 @@ public class DataWriter extends DataConstants{
         }
         commentDetails.put(COMMENT_COMMENTS, replies);
         return commentDetails;
+    }
+
+    /*private static JSONObject getBoardObject(Board board) {
+        JSONObject boardDetails = new JSONObject();
+        boardDetails.put(BOARD_TITLE, board.getTitle());
+        boardDetails.put(BOARD_DESCRIPTION, board.getDescription());
+        JSONArray comments = new JSONArray();
+        
+    }*/
+
+    private static JSONObject getColumnObject(Column column) {
+        JSONObject columnDetails = new JSONObject();
+        columnDetails.put(COLUMN_TITLE, column.getTitle());
+        columnDetails.put(COLUMN_DESCRIPTION, column.getDescription());
+        JSONArray tasks = new JSONArray();
+        for(Task task : column.getTasks()) {
+            tasks.add(task.getID().toString());
+        }
+        columnDetails.put(COLUMN_TASKS, tasks);
+        return columnDetails;
     }
     public static void main(String[] args) {
         // AppFacade.signUp("sherry", "begay", "sherry@gmail.com", "12345678910");

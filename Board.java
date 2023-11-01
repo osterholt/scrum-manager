@@ -159,6 +159,17 @@ public class Board {
         return null;
     }
 
+    public boolean moveTask(String oldCol, String newCol, String taskName) {
+        if(oldCol == null || newCol == null || taskName == null || getColumn(oldCol) == null)
+            return false;
+        if(getColumn(newCol) == null)
+            createColumn(newCol);
+        Task toMove = getColumn(oldCol).getTask(taskName);
+        
+        return getColumn(oldCol).removeTask(taskName) && getColumn(newCol).addTask(toMove);
+    }
+
+
     //---Getters and Setters---
 
     public String getTitle() {
@@ -246,7 +257,7 @@ public class Board {
         }
         return toReturn;
     }
-
+    // give the path
     private void writeToTextFile(String filePath) {
         try (PrintWriter writer = new PrintWriter(filePath)) {
             writer.println(this.toString());
