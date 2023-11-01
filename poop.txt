@@ -1,0 +1,36 @@
+
+Title: Electric Missiles
+  Description: null
+  Scrum Master: null
+  Product Owner: null
+  Columns: 
+ Title: Todo
+  Tasks: 
+Task: Curve the metal to make a cylindrical shape
+  Description: null
+  Initialized On: 2023-11-01T15:19:25.151254
+  Time Required: 0.0 Hours
+  Category: null (NOT RESOLVED)
+  Author: Atticus Madden
+  Assignee: null
+  Priority: 3
+ Comments: [
+ Comment: Not cylindrical enough
+ Author: jgoldblum@email.sc.edu
+ Sub-Comments: [], 
+ Comment: What's a cylinder
+ Author: afinch@email.sc.edu
+ Sub-Comments: []]
+Task: Make impossible burger possible
+  Description: null
+  Initialized On: 2023-11-01T15:19:25.152434
+  Time Required: 0.0 Hours
+  Category: null (NOT RESOLVED)
+  Author: Atticus Madden
+  Assignee: null
+  Priority: 3
+ Comments: []
+ Title: Doing
+  Tasks: 
+ Title: Done
+  Tasks: 
