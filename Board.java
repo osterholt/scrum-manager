@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.UUID;
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
 /**
  * @author Cam Osterholt
  * @version v1.0
@@ -65,10 +67,10 @@ public class Board {
         return null;
     }
 
-    public boolean createTask(String column, UUID id, String name, String description, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
+    public boolean createTask(String column, UUID id, String name, String description, LocalDateTime time, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
         Column temp = getColumn(column);
         if(temp != null) 
-            return temp.addTask(id, name, description, author, assignee, category, resolved, priority, timeRequired);
+            return temp.addTask(id, name, description, time, author, assignee, category, resolved, priority, timeRequired);
         return false;
     }
     public boolean addColumn(Column column) {
@@ -115,6 +117,9 @@ public class Board {
         Test.print("Column Not Found.");
         return null;
     }
+    public Column getColumn(int index) {
+        return columns.get(index);
+    }
 
     public ArrayList<Column> getColumns() {
         return columns;
@@ -128,11 +133,15 @@ public class Board {
         return getColumn(title) == null;
     }
 
-    private Task getTask(UUID id) {
+    public Task getTask(UUID id) {
         return getTask(id, null);
     }
 
-    private Task getTask(UUID id, String name) {
+    public Task getTask(String name) {
+        return getTask(null, name);
+    }
+
+    public Task getTask(UUID id, String name) {
         if(id != null) {
             for(Column col : columns) {
                 Task temp = col.getTask(id);
@@ -225,9 +234,25 @@ public class Board {
     public ArrayList<User> getDevelopers() {
         return developers;
     }
+    public String toString(){
 
-    public String toString() {
-        //TODO: Complete
-        return null;
+        String toReturn = "\nTitle: " +title;
+        toReturn += "\n  Description: " + description;
+        toReturn += "\n  Scrum Master: " + scrumMaster.getFirstName() + " " + scrumMaster.getLastName();
+        toReturn += "\n  Product Master: " + productOwner.getFirstName() + " " + productOwner.getLastName();
+        toReturn += "\n  Columns: ";
+        for(int i = 0; i < columns.size(); i++){
+            toReturn += columns.get(i).toString();
+        }
+        return toReturn;
+    }
+
+    private void writeToTextFile(String filePath) {
+        try (PrintWriter writer = new PrintWriter(filePath)) {
+            writer.println(this.toString());
+            System.out.println("Content has been written to " + filePath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
