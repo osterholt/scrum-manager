@@ -59,7 +59,9 @@ public class User {
         companies.add(company); //TODO: Fix when add Company class
     }
     private boolean removeCompany(Company company) {
-        return true; //TODO: Implement
+        if(company == null)
+            return false;
+        return companies.remove(company);
     }
     public ArrayList<Company> getCompanies() {
         return this.companies; 
