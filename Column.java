@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.UUID;
+
+import javax.xml.namespace.QName;
+
 import java.time.LocalDateTime;
 /**
  * @author Evelyn Ellis
@@ -41,6 +44,15 @@ public class Column {
                 return false;
         }
         tasks.add(task);
+        return true;
+    }
+    public boolean addTask(String name){
+        for(Task currTask : tasks) {
+            if(currTask.getName().equals(name))
+                return false;
+        }
+        Task newTask = new Task(name);
+        addTask(newTask);
         return true;
     }
     public boolean setTitle(String title){
