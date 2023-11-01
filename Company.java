@@ -82,6 +82,9 @@ public class Company {
     }
     
     public boolean removeUser(User user){
+        if(user==null){
+            return false;
+        }
         for(int i = 0; i<users.size(); i++){
             if(users.get(i).equals(user)){
                 users.remove(i);

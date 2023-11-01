@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.UUID;
+
+import javax.xml.namespace.QName;
+
 import java.time.LocalDateTime;
 /**
  * @author Evelyn Ellis
@@ -33,12 +36,7 @@ public class Column {
     }
     public boolean addTask(UUID id, String name, String description, LocalDateTime time, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired){
         Task newTask = new Task(id, name, description, time, author, assignee, category, resolved, priority, timeRequired);
-        for(Task task : tasks) {
-            if(task.equals(newTask))
-                return false;
-        }
-        tasks.add(newTask);
-        return true;
+        return addTask(newTask);
     }
     public boolean addTask(Task task) {
         for(Task currTask : tasks) {
@@ -46,6 +44,15 @@ public class Column {
                 return false;
         }
         tasks.add(task);
+        return true;
+    }
+    public boolean addTask(String name){
+        for(Task currTask : tasks) {
+            if(currTask.getName().equals(name))
+                return false;
+        }
+        Task newTask = new Task(name);
+        addTask(newTask);
         return true;
     }
     public boolean setTitle(String title){
@@ -95,16 +102,15 @@ public class Column {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String toString(){
         String toReturn = "\n Title: " +title;
-        toReturn += "\n  Description: " + description;
-        toReturn += "\n  Tasks: ";
-        for(int i = 0; i < tasks.size(); i++){
-            toReturn += tasks.get(i).toString();
+        if(description!=null)
+            toReturn += "\n  Description: " + description;
+        if(tasks!=null){
+            toReturn += "\n  Tasks: ";
+            for(int i = 0; i < tasks.size(); i++){
+                toReturn += tasks.get(i).toString();
+        }
         }
         return toReturn;
     }

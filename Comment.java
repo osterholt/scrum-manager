@@ -19,6 +19,7 @@ public class Comment {
      */
     public Comment(String comment) {
         editComment(comment);
+        setID(UUID.randomUUID());
         init();
     }
     /**
@@ -128,6 +129,7 @@ public class Comment {
 
     public String toString(){
         String toReturn = "\n Comment: " + comment;
+        if(comments!=null)
         toReturn += "\n Sub-Comments: " + comments.toString();
         return toReturn;
     }

@@ -1,6 +1,4 @@
-import java.time.LocalDateTime;
 import java.util.UUID;
-
 /**
  * @author Cam Osterholt
  * @version v1.0
@@ -29,8 +27,11 @@ public class AppFacade {
         return activeUser;
     }
 
-    public void setActiveUser(User active){
+    public boolean setActiveUser(User active){
+        if(active == null)
+            return false;
         activeUser = active;
+        return true;
     }
 
     public Board getActiveBoard() {
@@ -64,6 +65,7 @@ public class AppFacade {
         LoginManager.getInstance().saveUsers();
         LoginManager.getInstance().saveTasks();
         LoginManager.getInstance().saveCompanies();
+        System.exit(0);
     }
 
     public Company getActiveCompany() {
@@ -71,9 +73,14 @@ public class AppFacade {
     }
 
     public boolean setActiveCompany(String name) {
+        if(name == null)
+            return false;
         return null != (activeCompany = CompanyManager.getCompany(name));
     }
+    
     public boolean setActiveCompany(Company company) {
+        if(company == null)
+            return false;
         return null != (activeCompany = company);
     }
 
@@ -81,6 +88,13 @@ public class AppFacade {
         if(name == null)
             return false;
         return null != (activeBoard = AppFacade.getInstance().getActiveCompany().getBoard(name));
+    }
+
+    public String toString(){
+        String toReturn = "\nActive User: "+ activeUser.getFirstName()+ " "+ activeUser.getLastName();
+        toReturn += "\nActive Company: "+ activeCompany.getName();
+        toReturn += "\nActive Board: "+ activeBoard.getTitle();
+        return toReturn;
     }
 
 }
