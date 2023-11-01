@@ -1,13 +1,15 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+
+import javax.swing.plaf.ColorUIResource;
 /**
  * @author Cam Osterholt
  * @version v1.0
  * Date: 10/30/2023
  */
 
-public class ScenarioDriverUI {
+public class ScenarioDriver {
     private static Scanner scnr;
     //User Info: {Atticus, Madden, amadden@email.sc.edu, password}
    
