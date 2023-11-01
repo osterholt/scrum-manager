@@ -3,7 +3,7 @@
         "firstName": "Portia",
         "lastName": "Plante",
         "password": "passwordpaswwrod",
-        "companies": ["c9741b1c-d19f-4766-9606-ff5ec7260115","6755bae6-f693-4d41-94c8-8ebcc3ae6af7"],
+        "companies": [],
         "id": "6755bae6-f693-4d41-94c8-8ebcc3ae6af7",
         "email": "plante@gmail.com"
     },
@@ -30,5 +30,13 @@
         "companies": [],
         "id": "80e2d92d-299a-44f4-b2aa-ffe13ab18c5d",
         "email": "cam@osterholt.com"
+    },
+    {
+        "firstName": "Atticus",
+        "lastName": "Madden",
+        "password": "password",
+        "companies": [],
+        "id": "ce68606e-24af-4ce9-964b-d630bef0ba57",
+        "email": "amadden@gmail.com"
     }
 ]
