@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 /**
@@ -6,7 +7,7 @@ import java.util.Scanner;
  * Date: 10/30/2023
  */
 
-public class ScenarioDriver {
+public class ScenarioDriverUI {
     private static Scanner scnr;
     //User Info: {Atticus, Madden, amadden@email.sc.edu, password}
    
@@ -53,8 +54,11 @@ public class ScenarioDriver {
                     break;
                 case 'D':
                     column();
-                    break;                    
-                case 9:
+                    break;   
+                case 'E':
+                    task();
+                    break;
+                case 'Z':
                     AppFacade.getInstance().logOut();
                     return;
                 default:
@@ -225,39 +229,68 @@ public class ScenarioDriver {
         clearTerminal();
         System.out.print("A. View Tasks\n"
                              + "B. Create New Task\n"
+                             + "C. Comment\n"
+                             + "D. View Comments\n"
                              + "Z. Exit to Menu\n"
                              + "Enter selection: ");
         char choice = scnr.nextLine().charAt(0);
         String name = null;
+        int index = 0;
+        String text = "";
         switch(choice) {
-            // Open Board
+            // View Tasks
             case 'A':
                 clearTerminal();
-                
+                System.out.println(AppFacade.getInstance().getActiveBoard().toString());
                 break;
-            // Create Board
+            // Create Task
             case 'B':
                 clearTerminal();
-                System.out.print("Enter board name: ");
-                name = scnr.nextLine();
+                printColumns();
+                index = 0;
+                System.out.println("Enter column choice: ");
+                index = Integer.parseInt(scnr.nextLine());
 
-                System.out.print("[O]pen or [P]rivate: ");
-                char openChar = scnr.nextLine().charAt(0);
-                boolean open = false;
-                if(openChar == 'O')
-                    open = true;
+                System.out.println("Enter Task Name: ");
+                text = scnr.nextLine();
 
-                AppFacade.getInstance().getActiveCompany().addBoard(new Board(name, open));
+                AppFacade.getInstance().getActiveBoard().getColumn(index).addTask(text);
                 break;
-            // Active Board
+            // Comment
             case 'C':
-                
+                clearTerminal();
+                printColumns();
+                index = 0;
+                System.out.print("Enter column choice: ");
+                index = Integer.parseInt(scnr.nextLine());
+                Column col = AppFacade.getInstance().getActiveBoard().getColumn(index);
+
+                System.out.print("Enter Task Name: ");
+                text = scnr.nextLine();
+                Task task = col.getTask(name);
+
+                System.out.print("Enter Comment: ");
+                text = scnr.nextLine();
+                task.addComment(text);
+                break;
+            case 'D':
+                System.out.print("Enter Task Name: ");
+                name = scnr.nextLine();
+                commentViewer(name);
+                break;
             case 'Z':
                 clearTerminal();
                 return;
         }
     }
 
+
+    private static void printColumns() {
+        ArrayList<Column> columns = AppFacade.getInstance().getActiveBoard().getColumns();
+        for(int i = 0; i < columns.size(); i++) {
+            System.out.println(i + 1 + ". " + columns.get(i).getTitle());
+        }
+    }
 
     private static HashMap<String, String> getNewUserData() {
         System.out.print("Enter first name: ");
@@ -316,5 +349,37 @@ public class ScenarioDriver {
             System.out.println("Active Board: NONE");
         }
         
+    }
+    private static void commentViewer(String taskName) {
+        Task task = AppFacade.getInstance().getActiveBoard().getTask(taskName);
+        if(task == null) {
+            System.out.println("Invalid Task Name");
+            return;
+        }
+        ArrayList<Comment> comments = task.getComments();
+        char choice = ' ';
+        int index = 0;
+        if(comments.size() == 0)
+            System.out.println("No Commments for " + task.getName());
+
+        while(choice != 'E') {
+            if(index < comments.size()) {
+                System.out.println(comments.get(index));
+                System.out.print("[N]ext, [R]eply, [E]xit to Menu: ");
+                choice = scnr.nextLine().charAt(0);
+                if(choice == 'R') {
+                    System.out.print("Enter comment: ");
+                    String com = scnr.nextLine();
+                    comments.get(0).reply(com);
+                }
+                if(choice == 'N')
+                    index++;
+                else if(choice == 'E')
+                    return;
+                clearTerminal();
+            }
+            else 
+                return;
+        }
     }
 }

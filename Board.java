@@ -117,6 +117,9 @@ public class Board {
         Test.print("Column Not Found.");
         return null;
     }
+    public Column getColumn(int index) {
+        return columns.get(index);
+    }
 
     public ArrayList<Column> getColumns() {
         return columns;
@@ -130,11 +133,15 @@ public class Board {
         return getColumn(title) == null;
     }
 
-    private Task getTask(UUID id) {
+    public Task getTask(UUID id) {
         return getTask(id, null);
     }
 
-    private Task getTask(UUID id, String name) {
+    public Task getTask(String name) {
+        return getTask(null, name);
+    }
+
+    public Task getTask(UUID id, String name) {
         if(id != null) {
             for(Column col : columns) {
                 Task temp = col.getTask(id);

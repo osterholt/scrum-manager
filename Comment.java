@@ -14,7 +14,7 @@ public class Comment {
     private LocalDateTime time;
     private ArrayList<Comment> comments;
     /**
-     * @param author The author of the comment
+     * Construct a new comment with the given content and sets the author
      * @param comment The content of the comments
      */
     public Comment(String comment) {
@@ -24,10 +24,9 @@ public class Comment {
     }
     /**
      * Add reply to comment with an Author in mind and reply text.
-     * @param author of the reply
      * @param comment: the author text content
      */
-    public void reply(User author, String comment) { 
+    public void reply(String comment) { 
         if(comment != null) {
             Comment reply = new Comment(comment);
             comments.add(reply);
@@ -40,7 +39,10 @@ public class Comment {
         comments = new ArrayList<Comment>();
         setAuthor(AppFacade.getInstance().getActiveUser());
     }
-
+    /**
+     * get unique ID of the comment
+     * @return returns unique of the comment
+     */
     public UUID getID() {
         return this.id;
     }
@@ -60,7 +62,7 @@ public class Comment {
     }
     /**
      * Set the time/date for the comment
-     * @param time time for the content of comment
+     * @param time time/date for the comment
      */
     public void setTime(LocalDateTime time) {
         this.time = time;
@@ -74,8 +76,7 @@ public class Comment {
     }
     /**
      * edit the comment and update the time/date
-     * @param author author making the edit
-     * @param comment update comment content
+     * @param comment comment The updated comment content
      */
     public void editComment(String comment) {
         if(comment != null) {
@@ -93,7 +94,7 @@ public class Comment {
     /**
      * Set Author's comment
      * @param author new auhtor's comment
-     * @return true if the author is set 
+     * @return true if the author is successful, false if the author is invalid
      */
     public boolean setAuthor(User author) {
         if(author != null) {
@@ -107,13 +108,16 @@ public class Comment {
     }
     /**
      * Get list of comments replying to this comment.
-     *
      * @return list of reply comments.
      */
     public ArrayList<Comment> getComments() {
         return comments;
     }
-
+    /**
+     * Delete a comment with the specified ID
+     * @param id The ID of the comment to be deleted
+     * @return true if a comment with the specified ID was found and deleted. 
+     */
 
     public boolean deleteComment(UUID id) {
         for(Comment comment : this.comments) {
@@ -126,7 +130,10 @@ public class Comment {
         }
         return false;
     }
-
+    /**
+     * get a string representation of the comment, including its content and sub-comments.
+     * @return A string representation of the comment
+     */
     public String toString(){
         String toReturn = "\n Comment: " + comment;
         if(comments!=null)
