@@ -241,7 +241,7 @@ public class DataWriter extends DataConstants{
         // } else {
         //     System.out.println("Not able to login");
         // }
-        System.out.println(DataWriter.getTasks().get(0).getName());
+        //System.out.println(DataWriter.getTasks().get(0).getName());
 
     //    ArrayList<Task> taskList = new ArrayList<>();
     //    User user1 = new User("Josh", "Dietrich", "jdd@email.com", "password1");

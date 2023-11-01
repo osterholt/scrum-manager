@@ -45,8 +45,6 @@ public class User {
         setUUID(id);
         setFirstName(firstName);
         setLastName(lastName);
-        
-        
         setRole(role);
     }
     

@@ -54,7 +54,7 @@ public class ScenarioDriver {
                 case 'D':
                     column();
                     break;                    
-                case 9:
+                case 'Z':
                     AppFacade.getInstance().logOut();
                     return;
                 default:
