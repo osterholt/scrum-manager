@@ -246,7 +246,7 @@ public class Board {
         }
         return toReturn;
     }
-
+    // give the path
     private void writeToTextFile(String filePath) {
         try (PrintWriter writer = new PrintWriter(filePath)) {
             writer.println(this.toString());
