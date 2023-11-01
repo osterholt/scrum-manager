@@ -52,11 +52,11 @@ public class Scenario {
           System.out.print("What task would you like to move?\t1. Impossible Burger\t2. Curve Metal\t3. Super Algorithm ");
           int taskNum = scan.nextInt();
           System.out.print("Which Column would you like to move it to? ");
-          scan.nextLine();
+          String moveColumn = scan.nextLine();
           if(taskNum == 1)
             moveBurger();
           else
-            moveMetal();
+            moveMetal(moveColumn);
           System.out.println("Task moved successfully.\n");
           break;
         case 3: 
@@ -149,9 +149,9 @@ public class Scenario {
   private static void createAbandoned() {
     AppFacade.getInstance().getActiveBoard().createColumn("Abandoned");
   }
-  private static void moveMetal() {
+  private static void moveMetal(String moveColumn) {
     //FIXME: maybe ?? portia calls it "doing", but that's the same as "in progress" that we have defined already
-    AppFacade.getInstance().getActiveBoard().moveTask("Todo", "In Progress", "Curve Metal");
+    AppFacade.getInstance().getActiveBoard().moveTask("Todo", moveColumn, "Curve Metal");
   }
   private static void moveBurger() {
     AppFacade.getInstance().getActiveBoard().moveTask("Todo", "Abandoned", "Impossible Burger");

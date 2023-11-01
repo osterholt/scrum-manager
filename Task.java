@@ -228,17 +228,37 @@ public class Task {
 
     public String toString(){
         String toReturn = "\nTask: "+ name;
-        toReturn += "\n  Description: "+ description;
+        try {
+            toReturn += "\n  Description: "+ description;
+        } catch (Exception e) {
+            toReturn += "\n  Description: null";
+        }
         toReturn += "\n  Initialized On: "+ time.toString();
-        toReturn += "\n  Time Required: " + timeRequired + " Hours";
-        toReturn += "\n  Category: "+ category.name();
+        try{
+            toReturn += "\n  Time Required: " + timeRequired + " Hours";
+        } catch (Exception e) {
+            toReturn += "\n  Time Required: null";
+        }
+        try {
+            toReturn += "\n  Category: "+ category.name();
+        } catch (Exception e) {
+            toReturn += "\n  Category: null";
+        }
         if(resolved)
         toReturn += " (RESOLVED)";
         else
         toReturn += " (NOT RESOLVED)";
         toReturn += "\n  Author: "+ author.getFirstName() + " " + author.getLastName();
-        toReturn += "\n  Assignee: " + assignee.getFirstName() + " " + assignee.getLastName();
-        toReturn += "\n  Priority: "+ priority;
+        try {
+            toReturn += "\n  Assignee: " + assignee.getFirstName() + " " + assignee.getLastName();
+        } catch (Exception e) {
+            toReturn += "\n  Assignee: null";
+        }
+        try {
+            toReturn += "\n  Priority: "+ priority;
+        } catch (Exception e) {
+            toReturn += "\n  Priority: null";
+        }
         toReturn += "\n Comments: "+ comments.toString();
         return toReturn;
     }

@@ -18,7 +18,7 @@ public class Board {
     private ArrayList<User> developers;
     private Leaderboard leaderboard;
 
-    private final String[] DEF_COLUMNS = {"Todo", "In Progress", "Done"};
+    private final String[] DEF_COLUMNS = {"Todo", "Doing", "Done"};
 
     public Board(String title, boolean open) {
         init(title, null, open);
@@ -246,16 +246,29 @@ public class Board {
         return developers;
     }
     public String toString(){
-
         String toReturn = "\nTitle: " +title;
-        toReturn += "\n  Description: " + description;
-        toReturn += "\n  Scrum Master: " + scrumMaster.getFirstName() + " " + scrumMaster.getLastName();
-        toReturn += "\n  Product Master: " + productOwner.getFirstName() + " " + productOwner.getLastName();
+        try {
+            toReturn += "\n  Description: " + description;
+        } catch (Exception e) {
+            toReturn += "\n  Description: null";
+        }
+        try {
+            toReturn += "\n  Scrum Master: " + scrumMaster.getFirstName() + " " + scrumMaster.getLastName();
+        } catch (Exception e) {
+            toReturn += "\n  Scrum Master: null";
+        }
+        try {
+            toReturn += "\n  Product Ownet: " + productOwner.getFirstName() + " " + productOwner.getLastName();
+        } catch (Exception e) {
+            toReturn += "\n  Product Owner: null";
+        }
         toReturn += "\n  Columns: ";
         for(int i = 0; i < columns.size(); i++){
             toReturn += columns.get(i).toString();
         }
         return toReturn;
+    
+        
     }
     // give the path
     private void writeToTextFile(String filePath) {
