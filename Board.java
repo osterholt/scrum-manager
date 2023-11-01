@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.UUID;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 /**
  * @author Cam Osterholt
@@ -244,5 +245,14 @@ public class Board {
             toReturn += columns.get(i).toString();
         }
         return toReturn;
+    }
+
+    private void writeToTextFile(String filePath) {
+        try (PrintWriter writer = new PrintWriter(filePath)) {
+            writer.println(this.toString());
+            System.out.println("Content has been written to " + filePath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
