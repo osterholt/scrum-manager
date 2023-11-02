@@ -271,7 +271,7 @@ public class Board {
         
     }
     // give the path
-    private void writeToTextFile(String filePath) {
+    public void writeToTextFile(String filePath) {
         try (PrintWriter writer = new PrintWriter(filePath)) {
             writer.println(this.toString());
             System.out.println("Content has been written to " + filePath);

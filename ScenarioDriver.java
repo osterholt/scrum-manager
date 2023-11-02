@@ -32,6 +32,7 @@ public class ScenarioDriver {
      */
 
     private static void run() {
+        initScenario();
         char choice = ' ';
         while(choice != 'Z') {
             scnr = new Scanner(System.in);
@@ -71,6 +72,35 @@ public class ScenarioDriver {
         }
 
 
+    }
+
+    private static void initScenario() {
+        AppFacade.getInstance().signUp("Jeff", "Goldblum", "jgoldblum@email.sc.edu", "password");
+        AppFacade.getInstance().signUp("Atticus", "Finch", "afinch@email.sc.edu", "password");
+        AppFacade.getInstance().signUp("Atticus", "Madden", "amadden@email.sc.edu", "password");
+
+        CompanyManager.getInstance().addCompany(new Company("Code Mission Possible"));
+
+        AppFacade.getInstance().getActiveCompany().addBoard(new Board("Electric Missiles", false));
+        AppFacade.getInstance().getActiveCompany().addBoard(new Board("Soap Free Washers", false));
+        AppFacade.getInstance().getActiveCompany().addBoard(new Board("Air Computers", false));
+        
+        System.out.println("Now opening last used Board: Electric Missiles");
+        AppFacade.getInstance().setActiveBoard("Electric Missiles");
+
+        Task curveMetal = new Task("Curve the metal to make a cylindrical shape");
+        AppFacade.getInstance().getActiveBoard().getColumn(0).addTask(curveMetal); // Create "Curve the metal to make the cylindrical shape"
+
+        Task impossibleBurger = new Task("Make impossible burger possible");
+        AppFacade.getInstance().getActiveBoard().getColumn(0).addTask(impossibleBurger); // Create "Curve the metal to make the cylindrical shape"
+        
+        AppFacade.getInstance().login("jgoldblum@email.sc.edu", "password");
+        curveMetal.addComment("Not cylindrical enough");
+
+        AppFacade.getInstance().login("afinch@email.sc.edu", "password");
+        curveMetal.addComment("What's a cylinder");
+
+        AppFacade.getInstance().login("amadden@email.sc.edu", "password");
     }
 
     private static void login() {
@@ -159,6 +189,8 @@ public class ScenarioDriver {
         System.out.print("A. Open Board\n"
                              + "B. Create New Board\n"
                              + "C. View Active Board\n"
+                             + "D. Create New Column\n"
+                             + "E. Export Board to File\n"
                              + "Z. Exit to Menu\n"
                              + "Enter selection: ");
         char choice = scnr.nextLine().charAt(0);
@@ -199,16 +231,29 @@ public class ScenarioDriver {
                     System.out.println("No Active Board.");
                 }
                 break;
+            case 'D':
+                clearTerminal();
+                System.out.print("Enter Column Name: ");
+                name = scnr.nextLine();
+                AppFacade.getInstance().getActiveBoard().addColumn(new Column(name));
+                break;
+            case 'E':
+                clearTerminal();
+                System.out.print("Enter File Name: ");
+                name = scnr.nextLine();
+                AppFacade.getInstance().getActiveBoard().writeToTextFile(name + ".txt");
+                break;
             case 'Z':
                 clearTerminal();
                 return;
         }
     }
 
+    //FIXME: Do we need??
     private static void column() {
         clearTerminal();
-        System.out.print("A. View Tasks\n"
-                             + "B. Create New Task\n"
+        System.out.print("A. View Column\n"
+                             + "B. Create New Column\n"
                              + "Z. Exit to Menu\n"
                              + "Enter selection: ");
         char choice = scnr.nextLine().charAt(0);
@@ -233,12 +278,15 @@ public class ScenarioDriver {
                              + "B. Create New Task\n"
                              + "C. Comment\n"
                              + "D. View Comments\n"
+                             + "E. Move Task\n"
+                             + "F. Assign Task\n"
                              + "Z. Exit to Menu\n"
                              + "Enter selection: ");
         char choice = scnr.nextLine().charAt(0);
         String name = null;
         int index = 0;
         String text = "";
+        Column col = null;
         switch(choice) {
             // View Tasks
             case 'A':
@@ -250,13 +298,13 @@ public class ScenarioDriver {
                 clearTerminal();
                 printColumns();
                 index = 0;
-                System.out.println("Enter column choice: ");
+                System.out.print("Enter column choice: ");
                 index = Integer.parseInt(scnr.nextLine());
 
-                System.out.println("Enter Task Name: ");
+                System.out.print("Enter Task Name: ");
                 text = scnr.nextLine();
 
-                AppFacade.getInstance().getActiveBoard().getColumn(index).addTask(text);
+                AppFacade.getInstance().getActiveBoard().getColumn(index - 1).addTask(text);
                 break;
             // Comment
             case 'C':
@@ -265,20 +313,51 @@ public class ScenarioDriver {
                 index = 0;
                 System.out.print("Enter column choice: ");
                 index = Integer.parseInt(scnr.nextLine());
-                Column col = AppFacade.getInstance().getActiveBoard().getColumn(index);
+                col = AppFacade.getInstance().getActiveBoard().getColumn(index - 1);
 
                 System.out.print("Enter Task Name: ");
                 text = scnr.nextLine();
-                Task task = col.getTask(name);
+                Task task = col.getTask(text);
 
                 System.out.print("Enter Comment: ");
                 text = scnr.nextLine();
                 task.addComment(text);
                 break;
             case 'D':
+                clearTerminal();
                 System.out.print("Enter Task Name: ");
                 name = scnr.nextLine();
                 commentViewer(name);
+                break;
+            case 'E':
+                clearTerminal();
+                Board ab = AppFacade.getInstance().getActiveBoard();
+                printColumns();
+                index = 0;
+                System.out.print("Enter original column: ");
+                index = Integer.parseInt(scnr.nextLine());
+
+                System.out.print("Enter Task Name: ");
+                name = scnr.nextLine();
+
+                System.out.print("Enter new column choice: ");
+                int index2 = Integer.parseInt(scnr.nextLine());
+                ab.moveTask(ab.getColumn(index - 1).getTitle(), ab.getColumn(index2 - 1).getTitle(), name);
+
+                System.out.println("Task is now in column: " + index2);
+
+                break;
+            case 'F':
+                clearTerminal();
+                System.out.print("Enter Task Name: ");
+                name = scnr.nextLine();
+                task = AppFacade.getInstance().getActiveBoard().getTask(name);
+
+                System.out.print("Enter Assignee's Email: ");
+                name = scnr.nextLine();
+
+                task.setAssignee(LoginManager.getInstance().getUser(name, "password"));
+
                 break;
             case 'Z':
                 clearTerminal();
