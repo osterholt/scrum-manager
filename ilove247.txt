@@ -1,0 +1,53 @@
+
+Title: Electric Missiles
+  Description: null
+  Scrum Master: null
+  Product Owner: null
+  Columns: 
+ Title: Todo
+  Tasks: 
+ Title: Doing
+  Tasks: 
+Task: Initialize super algorithm to detonate at warp speed
+  Description: null
+  Initialized On: 2023-11-01T15:30:30.703296
+  Time Required: 0.0 Hours
+  Category: null (NOT RESOLVED)
+  Author: Atticus Madden
+  Assignee: Jeff Goldblum
+  Priority: 3
+ Comments: [
+ Comment: Avoid civilians Jeff!
+ Author: amadden@email.sc.edu
+ Sub-Comments: []]
+Task: Curve the metal to make a cylindrical shape
+  Description: null
+  Initialized On: 2023-11-01T15:29:29.018246
+  Time Required: 0.0 Hours
+  Category: null (NOT RESOLVED)
+  Author: Atticus Madden
+  Assignee: Jeff Goldblum
+  Priority: 3
+ Comments: [
+ Comment: Not cylindrical enough
+ Author: jgoldblum@email.sc.edu
+ Sub-Comments: [
+ Comment: How about you do it Jeff
+ Author: amadden@email.sc.edu
+ Sub-Comments: []], 
+ Comment: What's a cylinder
+ Author: afinch@email.sc.edu
+ Sub-Comments: []]
+ Title: Done
+  Tasks: 
+ Title: Abandoned
+  Tasks: 
+Task: Make impossible burger possible
+  Description: null
+  Initialized On: 2023-11-01T15:29:29.019379
+  Time Required: 0.0 Hours
+  Category: null (NOT RESOLVED)
+  Author: Atticus Madden
+  Assignee: null
+  Priority: 3
+ Comments: []

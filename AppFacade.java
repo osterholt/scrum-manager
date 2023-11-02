@@ -85,9 +85,8 @@ public class AppFacade {
     }
 
     public boolean setActiveBoard(String name) {
-        if(name == null)
-            return false;
-        return null != (activeBoard = AppFacade.getInstance().getActiveCompany().getBoard(name));
+        activeBoard = AppFacade.getInstance().getActiveCompany().getBoard(name);
+        return true;
     }
 
     public String toString(){
