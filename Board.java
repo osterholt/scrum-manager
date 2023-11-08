@@ -32,10 +32,10 @@ public class Board {
         this.developers = new ArrayList<User>();
         this.developers.add(AppFacade.getInstance().getActiveUser());
         leaderboard = new Leaderboard();
-        
+        setPermissions(open);
         setTitle(title);
         setDescription(description);
-        setPermissions(open);
+        
     }
 
     /**

@@ -74,21 +74,21 @@ public class DataWriter extends DataConstants{
         }
     }
 
-    public static boolean saveCompanies(User user) {
-        ArrayList<Company> companies = user.getCompanies();
-        JSONArray jsonCompanies = new JSONArray();
-        for(int i=0; i< companies.size(); i++){
-            jsonCompanies.add(getCompanyJSON(companies.get(i)));
-        }
-        try (FileWriter file = new FileWriter(COMPANY_FILE_NAME)) {
-            file.write(jsonCompanies.toJSONString());
-            file.flush();
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+    // public static boolean saveCompanies(User user) {
+    //     ArrayList<Company> companies = user.getCompanies();
+    //     JSONArray jsonCompanies = new JSONArray();
+    //     for(int i=0; i< companies.size(); i++){
+    //         jsonCompanies.add(getCompanyJSON(companies.get(i)));
+    //     }
+    //     try (FileWriter file = new FileWriter(COMPANY_FILE_NAME)) {
+    //         file.write(jsonCompanies.toJSONString());
+    //         file.flush();
+    //         return true;
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //         return false;
+    //     }
+    // }
 
     public static JSONObject getUserJSON(User user) {
         JSONObject userDetails = new JSONObject();
@@ -126,9 +126,10 @@ public class DataWriter extends DataConstants{
         companyDetails.put(COMPANY_USERS, userList);
 
         JSONArray boardList = new JSONArray();
-        /*for (Board board : company.getBoards()) {
+        for (Board board : company.getBoards()) {
+            boardList.add(getBoardObject(board));
             
-        }*/
+        }
         companyDetails.put(COMPANY_BOARDS, boardList);
 
         return companyDetails;
@@ -177,7 +178,7 @@ public class DataWriter extends DataConstants{
                 JSONObject company_JSON = (JSONObject)companyJSON.get(i);
                 UUID id = UUID.fromString((String)company_JSON.get(COMPANY_ID));
                 String companyName = (String)company_JSON.get(COMPANY_NAME);
-                Company newCompany = new Company(companyName, id);
+                Company newCompany = new Company(companyName);
                 JSONArray userIDs = (JSONArray)company_JSON.get(COMPANY_USERS);
                 JSONArray boardIDs = (JSONArray)company_JSON.get(COMPANY_BOARDS);
                 JSONArray adminIDs = (JSONArray)company_JSON.get(COMPANY_ADMINS);
@@ -193,6 +194,9 @@ public class DataWriter extends DataConstants{
                     newCompany.addAdmin(LoginManager.getInstance().getUser(UUID.fromString((String)adminID)));
                 }
             }   
+            return companies;
+        } catch(Exception e) {
+            return companies;
         }
     }
     public static ArrayList<Task> getTasks() {
@@ -269,13 +273,18 @@ public class DataWriter extends DataConstants{
         return commentDetails;
     }
 
-    /*private static JSONObject getBoardObject(Board board) {
+    private static JSONObject getBoardObject(Board board) {
         JSONObject boardDetails = new JSONObject();
         boardDetails.put(BOARD_TITLE, board.getTitle());
         boardDetails.put(BOARD_DESCRIPTION, board.getDescription());
-        JSONArray comments = new JSONArray();
+        JSONArray columns = new JSONArray();
+        for(Column column : board.getColumns()) {
+            columns.add(getColumnObject(column));
+        }
+        boardDetails.put(BOARD_COLUMNS, columns);
+        return boardDetails;
         
-    }*/
+    }
 
     private static JSONObject getColumnObject(Column column) {
         JSONObject columnDetails = new JSONObject();
@@ -291,31 +300,30 @@ public class DataWriter extends DataConstants{
     public static void main(String[] args) {
         // AppFacade.signUp("sherry", "begay", "sherry@gmail.com", "12345678910");
         // AppFacade.logOut();
-        // if(AppFacade.login("sherry@gmail.com", "12345678910")) {
-        //     System.out.println("Successfully logged in");
-        // } else {
-        //     System.out.println("Not able to login");
-        // }
+        if(AppFacade.getInstance().login("sherry@gmail.com", "12345678910")) {
+            System.out.println("Successfully logged in");
+        } else {
+            System.out.println("Not able to login");
+        }
         //System.out.println(DataWriter.getTasks().get(0).getName());
 
     //    ArrayList<Task> taskList = new ArrayList<>();
-    //    User user1 = new User("Josh", "Dietrich", "jdd@email.com", "password1");
-    //     User user2 = new User("Sherry", "begay", "shb@email.com", "password2");
-    //     Category cat =Category.FRONTEND;
-    //     Task t1 = new Task(UUID.randomUUID(), "taskname", "taskdescription", LocalDateTime.now(), user1, user2, cat, false, 1, 1);
-    //     Column column = new Column("Todo", "Tasks that need to be done");
-    //     column.addTask(t1);
-    //     Board board = new Board("Test Board", false);
-    //     ArrayList<User> users = new ArrayList<User>();
-    //     users.add(user1); users.add(user2);
+       User user1 = new User("Josh", "Dietrich", "jdd@email.com", "password1");
+        User user2 = new User("Sherry", "begay", "shb@email.com", "password2");
+        Category cat =Category.FRONTEND;
+        Task t1 = new Task(UUID.randomUUID(), "taskname", "taskdescription", LocalDateTime.now(), user1, user2, cat, false, 1, 1);
+        Column column = new Column("Todo", "Tasks that need to be done");
+        column.addTask(t1);
+        Board board = new Board("Test Board", "description",true);
+        ArrayList<User> users = new ArrayList<User>();
+        users.add(user1); users.add(user2);
+        board.getColumn("Todo").addTask(t1);
 
-    //     board.addColumn(column);
-
-    //     Company company = new Company("Test Company", user1, users, UUID.randomUUID());
+        Company company = new Company("Test Company", user1, users, UUID.randomUUID());
         
-    //     company.addBoard(board);
-    //     CompanyManager companyManager = CompanyManager.getInstance();
-    //     companyManager.addCompany(company);
+        company.addBoard(board);
+        CompanyManager companyManager = CompanyManager.getInstance();
+        companyManager.addCompany(company);
 
     //     Date currentDate = new Date();
     //    History h1 = new History(currentDate, user2, "change");
@@ -327,10 +335,10 @@ public class DataWriter extends DataConstants{
     //    JSONArray jsonTasks = new JSONArray();
     //     taskList.add(t1);
     //     DataWriter.saveTasks();
-        
+        DataWriter.saveCompanies();
      
-    //     User admin1 = new User("admin", "person", "admin@email.com", "coolpassword");
-    //     Company company1 = new Company("first", admin1, users, UUID.randomUUID());
+        // User admin1 = new User("admin", "person", "admin@email.com", "coolpassword");
+        // Company company1 = new Company("first", admin1, users, UUID.randomUUID());
     //     ArrayList<User> users2 = new ArrayList<User>();
     //     User bbgorl = new User("baby", "girl", "bbg@gmail.com", "waaaaawoooooo");
     //     users2.add(bbgorl);

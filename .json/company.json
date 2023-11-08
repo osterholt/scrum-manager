@@ -1,1 +1,1 @@
-[]
+[{"name":"Test Company","boards":[{"columns":[{"description":null,"title":"Todo","tasks":["e643943d-d2c7-4f31-965a-299361aa9aef"]},{"description":null,"title":"Doing","tasks":[]},{"description":null,"title":"Done","tasks":[]}],"description":"description","title":"Test Board"}],"id":"6aa4e73c-4ef9-462a-a4ec-b41bb0f70781","admins":["136e483f-64ca-4024-8841-03d95c411a43"],"users":["136e483f-64ca-4024-8841-03d95c411a43","dcf7d625-342f-46f1-925b-7d5eda4f7295"]}]
