@@ -26,16 +26,20 @@ public class LoginManager {
     }
 
     public boolean checkEmail(String email) {
+        if(email == null){
+            return false;
+        }
         // check if email is already in user list
         if(userList!=null){
         for (User user : userList) {
-            if(user.getEmail().equals(email)){
+            if(user.getEmail().equals(email.toLowerCase())){
                 return false;
             }    
         }
         }
         // check if email is valid
-        String emailRegex = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
+        //String emailRegex = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9-_]+.[a-zA-Z0-9+-._]+$";
+        String emailRegex = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
         Pattern pattern = Pattern.compile(emailRegex);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
