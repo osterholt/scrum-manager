@@ -24,7 +24,6 @@ class LoginManagerTest {
 	
 	@BeforeEach
 	public void setup() {
-		LoginManager.getInstance();
 		//runs before each test
 	}
 	
@@ -66,6 +65,9 @@ class LoginManagerTest {
 		// multiple dots in mail server
 		boolean multiDotMail = LoginManager.getInstance().checkEmail("ee13@mailbox.sc.edu");
 		assertEquals(true, multiDotMail, "ee13@mailbox.sc.edu STRING EMAIL IS TRUE");
+		// invalid character
+		boolean invalidCharMail = LoginManager.getInstance().checkEmail("$$$$$$$$@GMAIL.COM");
+		assertEquals(false, invalidCharMail, "$$$$$$$$@GMAIL.COM STRING EMAIL IS FALSE");
 		// testing email which is already in the list, same capitalization
 		LoginManager.getInstance().addUser(new User("Evie", "Ellis", "evie.ellis11@gmail.com", "password"));
 		boolean userAlreadyExistsMail = LoginManager.getInstance().checkEmail("evie.ellis11@gmail.com");
@@ -74,18 +76,32 @@ class LoginManagerTest {
 		boolean userAlreadyExistsCapitalMail = LoginManager.getInstance().checkEmail("EVIE.ELLIS11@GMAIL.COM");
 		assertEquals(false, userAlreadyExistsCapitalMail, "EVIE.ELLIS11@GMAIL.COMSTRING EMAIL IS FALSE");
 
-
-
-		// TODO
 	}
 
     @Test
 	public void testCheckPassword() {
-		// TODO
+		// testing null
+		boolean nullPass = LoginManager.getInstance().checkPassword(null);
+		assertEquals(false, nullPass, "NULL PASSWORD IS FALSE");
+		// testing string null
+		boolean nullStringPass = LoginManager.getInstance().checkPassword("null");
+		assertEquals(false, nullStringPass, "NULL PASSWORD IS FALSE");
+		// seven character password
+		boolean sevenPass = LoginManager.getInstance().checkPassword("passwor");
+		assertEquals(false, sevenPass, "passwor PASSWORD IS FALSE");
+		// eight character password
+		boolean eightPass = LoginManager.getInstance().checkPassword("password");
+		assertEquals(true, eightPass, "password PASSWORD IS TRUE");
+		// special & regular character password
+		boolean mixedCharPass = LoginManager.getInstance().checkPassword("1L0v3P1$$");
+		assertEquals(true, mixedCharPass, "1L0v3P1$$ PASSWORD IS TRUE");
 	}
 
     @Test
 	public void testGetUser() {
+		LoginManager.getInstance().addUser(new User("Evie", "Ellis", "evie.ellis11@gmail.com", "password"));
+		User user = LoginManager.getInstance().getUser("evie.ellis11@gmail.com", "password");
+		//assertEquals(true, eightPass, "password PASSWORD IS TRUE");
 		// TODO
 	}
 
