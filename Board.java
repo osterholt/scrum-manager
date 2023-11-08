@@ -67,6 +67,15 @@ public class Board {
         return null;
     }
 
+    /**
+     * Creates new task in Todo Column
+     * @param name String representing task's name
+     * @return completion if true
+     */
+    public boolean createTask(String name) {
+        return createTask(DEF_COLUMNS[0], null, name, null, null, AppFacade.getInstance().getActiveUser(), null, null, false, 3, 0);
+    }
+
     public boolean createTask(String column, UUID id, String name, String description, LocalDateTime time, User author, User assignee, Category category, boolean resolved, int priority, float timeRequired) {
         Column temp = getColumn(column);
         if(temp != null) 
