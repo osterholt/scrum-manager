@@ -1,4 +1,7 @@
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.UUID;
+
 /**
  * @author Evelyn Ellis
  * @version v1.0
@@ -9,18 +12,12 @@ import org.junit.BeforeClass;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 class LoginManagerTest {
-	
-	@BeforeClass
-	public void oneTimeSetup() {
-		
-	}
-	
-	@AfterClass
-	public void oneTimeTearDown() {
-		
-	}
+	private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+	private final PrintStream standardOut = System.out;
 	
 	@BeforeEach
 	public void setup() {
@@ -98,16 +95,26 @@ class LoginManagerTest {
 	}
 
     @Test
-	public void testGetUser() {
-		LoginManager.getInstance().addUser(new User("Evie", "Ellis", "evie.ellis11@gmail.com", "password"));
-		User user = LoginManager.getInstance().getUser("evie.ellis11@gmail.com", "password");
-		//assertEquals(true, eightPass, "password PASSWORD IS TRUE");
-		// TODO
-	}
+	public void testGetUserByUUID() {
+        // create a user and add it to the LoginManager
+        User newUser = new User("Test", "User", "test@example.com", "testPass");
+        assertTrue(LoginManager.getInstance().addUser(newUser));
 
-    @Test
-	public void testPrintUsers() {
-		// TODO
-	}
+        // retrieve the user by UUID and check if it matches the created user
+        UUID userId = newUser.getId();
+        User retrievedUser = LoginManager.getInstance().getUser(userId);
+        assertNotNull(retrievedUser);
+        assertEquals("test@example.com", retrievedUser.getEmail());
+        assertEquals("Test", retrievedUser.getFirstName());
+        assertEquals("User", retrievedUser.getLastName());
+        assertEquals("testPass", retrievedUser.getPassword());
+    }
+	
+	@Test
+    public void testGetUserByEmailAndPassword() {
+        User newUser = new User("Test", "User", "test@example.com", "testPass");
+        assertTrue(LoginManager.getInstance().addUser(newUser));
+        assertNotNull(LoginManager.getInstance().getUser("test@example.com", "testPass"));
+    }
 	
 }
