@@ -10,19 +10,26 @@ public class UI {
         UI ui  = new UI();
         ui.run();
     }
+    /*Your name is Atticus Madden.
+    - You currently work for Code Mission Possible - A company who works on creating software solutions for clean energy.
+    - You are the SCRUM Manager for 3 different projects (Electric Missiles, Soap Free Washers, and Air Computers)
+    - Open Electric Missiles
+    - Add a new task "Initialize super algorithm to detonate at warp speed". Assign the task to Jeff Goldblum.
+    - Add a comment to the task "Avoid civilians Jeff!"
+    - Move the existing task of "Curve the metal to make a cylindrical shape" to the 'Doing' column. 
+    - This task has the existing comments of "Not cylindrical enough" - by Jeff, 
+    - and "What's a cylinder" by Atticus Finch.  
+    - Reply to Jeff's comment and say "How about you do it jeff", and re-assign the task from yourself to Jeff.
+    - Add a new column called "Abandoned"
+    - Move an existing task "Make impossible burger possible" which doesn't really relate to the project purpose to "Abandoned"
+    - Now print the scrum board to a txt file.... make it pretty.*/
     public void run() {
         
 
-        // AppFacade.signUp("Portia", "Plante", "plante@gmail.com", "passwordpaswwrod");
-        // AppFacade.logOut();
-        AppFacade.getInstance().signUp("joshua", "dietrich", "jdd10@gmail.com", "123456789");
-        AppFacade.getInstance().logOut();
-        if(AppFacade.getInstance().login("plante@gmail.com", "passwordpaswwrod")) {
-            System.out.println("Successfully logged in");
-            System.out.println(AppFacade.getInstance().getCurrentUser().getFirstName());
-        } else {
-            System.out.println("Not able to login");
-        }
+        
+
+        Task curveMetal = new Task("Curve the metal to make a cylindrical shape");
+
       
         //TODO:
         //ADD USER with data above

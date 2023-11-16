@@ -1,4 +1,7 @@
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.UUID;
+
 /**
  * @author Evelyn Ellis
  * @version v1.0
@@ -9,22 +12,15 @@ import org.junit.BeforeClass;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 class LoginManagerTest {
-	
-	@BeforeClass
-	public void oneTimeSetup() {
-		
-	}
-	
-	@AfterClass
-	public void oneTimeTearDown() {
-		
-	}
+	private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+	private final PrintStream standardOut = System.out;
 	
 	@BeforeEach
 	public void setup() {
-		LoginManager.getInstance();
 		//runs before each test
 	}
 	
@@ -66,6 +62,9 @@ class LoginManagerTest {
 		// multiple dots in mail server
 		boolean multiDotMail = LoginManager.getInstance().checkEmail("ee13@mailbox.sc.edu");
 		assertEquals(true, multiDotMail, "ee13@mailbox.sc.edu STRING EMAIL IS TRUE");
+		// invalid character
+		boolean invalidCharMail = LoginManager.getInstance().checkEmail("$$$$$$$$@GMAIL.COM");
+		assertEquals(false, invalidCharMail, "$$$$$$$$@GMAIL.COM STRING EMAIL IS FALSE");
 		// testing email which is already in the list, same capitalization
 		LoginManager.getInstance().addUser(new User("Evie", "Ellis", "evie.ellis11@gmail.com", "password"));
 		boolean userAlreadyExistsMail = LoginManager.getInstance().checkEmail("evie.ellis11@gmail.com");
@@ -74,24 +73,48 @@ class LoginManagerTest {
 		boolean userAlreadyExistsCapitalMail = LoginManager.getInstance().checkEmail("EVIE.ELLIS11@GMAIL.COM");
 		assertEquals(false, userAlreadyExistsCapitalMail, "EVIE.ELLIS11@GMAIL.COMSTRING EMAIL IS FALSE");
 
-
-
-		// TODO
 	}
 
     @Test
 	public void testCheckPassword() {
-		// TODO
+		// testing null
+		boolean nullPass = LoginManager.getInstance().checkPassword(null);
+		assertEquals(false, nullPass, "NULL PASSWORD IS FALSE");
+		// testing string null
+		boolean nullStringPass = LoginManager.getInstance().checkPassword("null");
+		assertEquals(false, nullStringPass, "NULL PASSWORD IS FALSE");
+		// seven character password
+		boolean sevenPass = LoginManager.getInstance().checkPassword("passwor");
+		assertEquals(false, sevenPass, "passwor PASSWORD IS FALSE");
+		// eight character password
+		boolean eightPass = LoginManager.getInstance().checkPassword("password");
+		assertEquals(true, eightPass, "password PASSWORD IS TRUE");
+		// special & regular character password
+		boolean mixedCharPass = LoginManager.getInstance().checkPassword("1L0v3P1$$");
+		assertEquals(true, mixedCharPass, "1L0v3P1$$ PASSWORD IS TRUE");
 	}
 
     @Test
-	public void testGetUser() {
-		// TODO
-	}
+	public void testGetUserByUUID() {
+        // create a user and add it to the LoginManager
+        User newUser = new User("Test", "User", "test@example.com", "testPass");
+        assertTrue(LoginManager.getInstance().addUser(newUser));
 
-    @Test
-	public void testPrintUsers() {
-		// TODO
-	}
+        // retrieve the user by UUID and check if it matches the created user
+        UUID userId = newUser.getId();
+        User retrievedUser = LoginManager.getInstance().getUser(userId);
+        assertNotNull(retrievedUser);
+        assertEquals("test@example.com", retrievedUser.getEmail());
+        assertEquals("Test", retrievedUser.getFirstName());
+        assertEquals("User", retrievedUser.getLastName());
+        assertEquals("testPass", retrievedUser.getPassword());
+    }
+	
+	@Test
+    public void testGetUserByEmailAndPassword() {
+        User newUser = new User("Test", "User", "test@example.com", "testPass");
+        assertTrue(LoginManager.getInstance().addUser(newUser));
+        assertNotNull(LoginManager.getInstance().getUser("test@example.com", "testPass"));
+    }
 	
 }

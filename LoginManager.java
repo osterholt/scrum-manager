@@ -51,6 +51,8 @@ public class LoginManager {
      * @return boolean if correct size
      */
     public boolean checkPassword(String password) {
+        if(password == null)
+            return false;
         return password.length() > 7;
     }
 
@@ -100,6 +102,9 @@ public class LoginManager {
 
     public void printUsers() {
         System.out.println("");
+        if(userList == null){
+            return;
+        }
         for(User user : userList) 
             System.out.println(user);
         System.out.println("");
