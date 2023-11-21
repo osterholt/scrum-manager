@@ -78,7 +78,7 @@ public class Company {
     public UUID getID() {
         return id;
     }
-
+    // refactor - same as admin
     public boolean addUser(User user){
         if(user!=null){
             users.add(user);
@@ -86,8 +86,9 @@ public class Company {
         }
         return false;
     }
-    
+    // refactor - same as admin
     public boolean removeUser(User user){
+        // refactor - returning false twice
         if(user==null){
             return false;
         }
@@ -99,7 +100,7 @@ public class Company {
         }
         return false;
     }
-
+    // refactor - same as admin
     public boolean addBoard(Board board){
         if(board!=null){
             boards.add(board);
@@ -107,7 +108,7 @@ public class Company {
         }
         return false;
     }
-
+    // refactor - same as admin
     public boolean removeBoard(Board board){
         for(int i = 0; i<boards.size(); i++){
             if(boards.get(i).equals(board)){
@@ -117,7 +118,7 @@ public class Company {
         }
         return false;
     }
-
+    // refactor - same as remove except need to keep check for null
     public boolean addAdmin(User user){
          if(user!=null){
             admins.add(user);
@@ -126,6 +127,8 @@ public class Company {
         return false;
     }
 
+    // refactor - arraylist.remove does exactly this
+    // either delete method entirely or make it just call remove if needed for access in other classes/app functionality
     public boolean removeAdmin(User user){
         for(int i = 0; i<admins.size(); i++){
             if(admins.get(i).equals(user)){
@@ -135,7 +138,8 @@ public class Company {
         }
         return false;
     }
-
+    // refactor to admins.contains(user) 
+    // do we even need the method at all ??
     public boolean isAdmin(User user){
         for(int i = 0; i<admins.size(); i++){
             if(admins.get(i).equals(user)){
@@ -162,6 +166,7 @@ public class Company {
         "\nBoards: " + boards;
     }
 
+    // refactor - delete
     /**
      * Checks that all data members are properly initialized
      * @return boolean

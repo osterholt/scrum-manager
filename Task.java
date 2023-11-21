@@ -23,7 +23,7 @@ public class Task {
     private ArrayList<History> history;
 
     private final int DEF_PRIORITY = 3;
-  
+    // refactor for default values in init ?
     public Task(String name, User author) {
         //genrate a unique ID for task
         this.id = UUID.randomUUID(); 
@@ -145,6 +145,7 @@ public class Task {
     public User getAuthor() {
         return author;
     }
+    // refactor? would there be a need for this to return false?
     private boolean setAuthor(User author) {
         if(author == null)
             author = AppFacade.getInstance().getActiveUser();
@@ -226,6 +227,7 @@ public class Task {
         this.history = history;
     }
 
+    // refactor maybe ?? this seems crazy complex, might be necessary might not be :)
     public String toString(){
         String toReturn = "\nTask: "+ name;
         try {
