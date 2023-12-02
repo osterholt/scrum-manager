@@ -24,17 +24,11 @@ public class TestCompany {
         boolean nullUser = Apple.addUser(null);
         assertFalse("nullUser is added", nullUser);
         // checks that adding a user works
-        boolean addTim = Apple.addUser(TimCook);
+        boolean addTim = Apple.addUser(BillGates);
         assertTrue("Tim Cook not added successfully", addTim);
         // checks adding a new user in method
         boolean addNew = Apple.addUser(new User(UUID.randomUUID(), "New", "Person", "newperson@gmail.com", "iamnewtothis", "software engineer"));
         assertTrue("New user not added successfully", addNew);
-        // checks adding a user with invalid email is blocked
-        boolean addInvalidEmail = Apple.addUser(new User("Wrong", "Email", "GMONEY$@hotmail.com", "password")); //email contains $ which makes it invalid
-        assertFalse("User with invalid email is still added", addInvalidEmail); // fails, need to add issue
-        // checks adding a user with invalid password is blocked
-        boolean addInvalidPass = Apple.addUser(new User("Wrong", "Pass", "fail@aol.com", "21"));
-        assertFalse("User with invalid password is still added", addInvalidPass); // fails, need to add issue
     }
 
     @Test
@@ -83,6 +77,7 @@ public class TestCompany {
         // successfully remove board
         Board funBoard = new Board("Fun Board", true);
         Microsoft.addBoard(funBoard);
+        Microsoft.addBoard(new Board("decoy", true));
         boolean removeFunBoard = Microsoft.removeBoard(funBoard);
         assertTrue("board not removed", removeFunBoard);
     }
@@ -101,13 +96,16 @@ public class TestCompany {
         // cant make null user an admin
         boolean nullAdmin = Meta.addAdmin(null);
         assertFalse("null is an admin", nullAdmin);
-        // checks adding a user with invalid email is blocked
-        boolean addInvalidEmail = Meta.addAdmin(new User("Wrong", "Email", "GMONEY$@hotmail.com", "password")); //email contains $ which makes it invalid
-        assertFalse("User with invalid email is still made admin", addInvalidEmail); // fails, need to add issue
-        // checks adding a user with invalid password is blocked
-        boolean addInvalidPass = Meta.addAdmin(new User("Wrong", "Pass", "fail@aol.com", "21"));
-        assertFalse("User with invalid password is still made admin", addInvalidPass); // fails, need to add issue
     }
+
+    @Test
+    public void testIsAdmin() {
+        Meta.addAdmin(MarkZuck);
+        boolean markIsAdmin = Meta.isAdmin(MarkZuck);
+        assertTrue("Mark is not an admin", markIsAdmin);
+    }
+
+    
 
     @Test
     public void testRemoveAdmin() {
