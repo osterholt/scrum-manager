@@ -98,8 +98,7 @@ public class Task {
         return this.priority;
     }
     public boolean addComment(Comment comment) {
-        comments.add(comment);
-        return false;
+        return comments.add(comment);
     }
 
     public boolean setPriority(int priority) {
@@ -247,9 +246,9 @@ public class Task {
             toReturn += "\n  Category: null";
         }
         if(resolved)
-        toReturn += " (RESOLVED)";
+            toReturn += " (RESOLVED)";
         else
-        toReturn += " (NOT RESOLVED)";
+            toReturn += " (NOT RESOLVED)";
         toReturn += "\n  Author: "+ author.getFirstName() + " " + author.getLastName();
         try {
             toReturn += "\n  Assignee: " + assignee.getFirstName() + " " + assignee.getLastName();

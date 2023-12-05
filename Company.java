@@ -80,11 +80,8 @@ public class Company {
     }
     
     public boolean addUser(User user){
-        if(user == null || users.contains(user)) {
-            System.out.println("in if");
-            System.out.println(users);
+        if(user == null || users.contains(user))
             return false;
-        }
         return users.add(user);
     }
     
